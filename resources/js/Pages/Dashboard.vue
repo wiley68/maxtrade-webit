@@ -1,8 +1,13 @@
 <template>
   <h1>dashboard</h1>
-  <Link :href="route('logout')" method="post" as="button"> logout </Link>
+  <a :href="route('index')" @click="logout()"> logout </a>
 </template>
 
 <script setup>
-import { Link } from '@inertiajs/inertia-vue3'
+import { useForm } from '@inertiajs/inertia-vue3'
+
+const form = useForm({})
+const logout = () => {
+  form.post(route('logout'))
+}
 </script>
