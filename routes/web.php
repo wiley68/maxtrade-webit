@@ -3,7 +3,6 @@
 use App\Http\Controllers\AppController;
 use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
 //web routes
 Route::get('/', [PageController::class, 'index'])->name('index');
