@@ -1,14 +1,15 @@
 <?php
 
+use App\Http\Controllers\AppController;
+use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//web routes
+Route::get('/', [PageController::class, 'index']);
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth'])->name('dashboard');
+//app routes
+Route::get('/dashboard', [AppController::class, 'dashboard'])->middleware(['auth'])->name('dashboard');
 
+//auth routes
 require __DIR__.'/auth.php';
