@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 
 //web routes
 Route::get('/', [PageController::class, 'index'])->name('index');
+Route::get('/documentation', [PageController::class, 'documentation'])->name('documentation');
 
 //app routes
 Route::get('/dashboard', [AppController::class, 'dashboard'])->middleware(['auth'])->name('dashboard');

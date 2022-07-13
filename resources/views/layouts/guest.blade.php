@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>{{ $title ?? env('APP_NAME', 'Maxtrade Webit') }}</title>
+    <title>{{ $title ?? '' }} - {{ env('APP_NAME', 'Maxtrade Webit') }}</title>
     <meta name="description" content="{{ $description ?? 'Simple web wysiwyg editor' }} | {{ env('APP_NAME') }}">
     <meta name="keywords" content="{{ $keywords ?? 'web, wysiwyg, editor, html5' }}">
 
@@ -17,7 +17,7 @@
 
 <body>
     <div class="font-sans text-gray-900 antialiased">
-        {{ $slot }}
+        @yield('content')
     </div>
 </body>
 
