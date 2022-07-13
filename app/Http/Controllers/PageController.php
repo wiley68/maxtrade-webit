@@ -21,4 +21,12 @@ class PageController extends Controller
             'keywords' => 'help, web, wysiwyg, editor, html5'
         ]);
     }
+
+    public function projects(){
+        return view('projects')->with([
+            'title' => 'Public projects',
+            'description' => 'Simple web wysiwyg editor, Public projects',
+            'keywords' => 'projects, public, web, wysiwyg, editor, html5'
+        ]);
+    }
 }
