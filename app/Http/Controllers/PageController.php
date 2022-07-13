@@ -29,4 +29,12 @@ class PageController extends Controller
             'keywords' => 'projects, public, web, wysiwyg, editor, html5'
         ]);
     }
+
+    public function news(){
+        return view('news')->with([
+            'title' => 'News',
+            'description' => 'Simple web wysiwyg editor, News and information about Maxtrade Webit',
+            'keywords' => 'newse, info, public, web, wysiwyg, editor, html5'
+        ]);
+    }
 }
