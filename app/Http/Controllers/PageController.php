@@ -37,4 +37,12 @@ class PageController extends Controller
             'keywords' => 'newse, info, public, web, wysiwyg, editor, html5'
         ]);
     }
+
+    public function donate(){
+        return view('donate')->with([
+            'title' => 'Donate',
+            'description' => 'Simple web wysiwyg editor, donate',
+            'keywords' => 'donate, public, web, wysiwyg, editor, html5'
+        ]);
+    }
 }
