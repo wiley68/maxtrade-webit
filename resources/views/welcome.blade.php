@@ -6,9 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>{{ env('APP_NAME') }}</title>
+    <meta name="description" content="Simple web wysiwyg editor - {{ env('APP_NAME') }}">
+    <meta name="keywords" content="web, wysiwyg, editor, html5">
 
-    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
     @vite('resources/css/app.css')
 </head>
 
