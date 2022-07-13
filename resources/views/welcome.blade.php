@@ -147,7 +147,10 @@
                 </div>
 
                 <div class="ml-4 text-center text-sm text-gray-500 sm:text-right sm:ml-0">
-                    Maxtrade Webit v{{ env('APP_VERSION', '0.0.1') }}
+                    Maxtrade Webit v{{ env('APP_VERSION', '0.0.1') }}&nbsp;&nbsp;|&nbsp;<a
+                        href="https://github.com/wiley68/maxtrade-webit
+                        " target="_blanc"
+                        class="ml-1 underline">GitHub</a>
                 </div>
             </div>
         </div>
