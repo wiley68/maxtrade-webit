@@ -45,4 +45,12 @@ class PageController extends Controller
             'keywords' => 'donate, public, web, wysiwyg, editor, html5'
         ]);
     }
+
+    public function sponsors(){
+        return view('sponsors')->with([
+            'title' => 'Sponsors',
+            'description' => 'Simple web wysiwyg editor, sponsors',
+            'keywords' => 'sponsors, public, web, wysiwyg, editor, html5'
+        ]);
+    }
 }

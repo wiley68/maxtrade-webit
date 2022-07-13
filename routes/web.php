@@ -10,6 +10,7 @@ Route::get('/documentation', [PageController::class, 'documentation'])->name('do
 Route::get('/projects', [PageController::class, 'projects'])->name('projects');
 Route::get('/news', [PageController::class, 'news'])->name('news');
 Route::get('/donate', [PageController::class, 'donate'])->name('donate');
+Route::get('/sponsors', [PageController::class, 'sponsors'])->name('sponsors');
 
 //app routes
 Route::get('/dashboard', [AppController::class, 'dashboard'])->middleware(['auth'])->name('dashboard');
