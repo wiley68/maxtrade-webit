@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>{{ $title ?? '' }} - {{ env('APP_NAME', 'Maxtrade Webit') }}</title>
+    <title>{{ $title ?? Route::current()->getName() }} - {{ env('APP_NAME', 'Maxtrade Webit') }}</title>
     <meta name="description" content="{{ $description ?? 'Simple web wysiwyg editor' }} | {{ env('APP_NAME') }}">
     <meta name="keywords" content="{{ $keywords ?? 'web, wysiwyg, editor, html5' }}">
 
