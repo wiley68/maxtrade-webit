@@ -2,16 +2,19 @@
     <div
         class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
         @if (Route::has('login'))
-            <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
+            <div class="fixed top-0 right-0 px-6 py-4">
                 @auth
                     <a href="{{ url('/dashboard') }}"
                         class="text-sm text-gray-700 dark:text-gray-500 underline">Dashboard</a>
                 @else
-                    <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</a>
+                    <a href="{{ route('login') }}"
+                        class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        Log in
+                    </a>
 
                     @if (Route::has('register'))
                         <a href="{{ route('register') }}"
-                            class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a>
+                            class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Register</a>
                     @endif
                 @endauth
             </div>
