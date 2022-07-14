@@ -6,41 +6,17 @@
       <div id="container" class="hidden md:block">
         <ul id="menu">
           <li>
-            <a href="#">About Me</a>
+            <a href="#">File</a>
             <ul>
-              <li><a href="#">Lorem ipsum dolor</a></li>
-              <li><a href="#">Maecenas lacinia sem</a></li>
-              <li><a href="#">Suspendisse fringilla</a></li>
+              <li><a href="#">Exit</a></li>
             </ul>
           </li>
           <li>
-            <a href="#">Portfolio</a>
+            <a href="#">Help</a>
             <ul>
-              <li><a href="#">Lorem ipsum dolor</a></li>
-              <li><a href="#">Maecenas dignissim fermentum luctus</a></li>
-              <li><a href="#">Suspendisse fringilla</a></li>
-              <li><a href="#">Lorem ipsum dolor</a></li>
-              <li><a href="#">Maecenas lacinia sem</a></li>
-              <li><a href="#">Suspendisse fringilla</a></li>
+              <li><a href="#">About</a></li>
             </ul>
           </li>
-          <li>
-            <a href="#">Clients</a>
-            <ul>
-              <li><a href="#">Lorem ipsum dolor</a></li>
-              <li><a href="#">Maecenas lacinia sem</a></li>
-              <li><a href="#">Suspendisse fringilla</a></li>
-            </ul>
-          </li>
-          <li>
-            <a href="#">Contact Me</a>
-            <ul>
-              <li><a href="#">Lorem ipsum dolor</a></li>
-              <li><a href="#">Maecenas dignissim fermentum luctus</a></li>
-              <li><a href="#">Suspendisse fringilla</a></li>
-            </ul>
-          </li>
-          <li><a href="#">Support</a></li>
         </ul>
       </div>
     </div>
@@ -125,18 +101,15 @@ import { Head } from '@inertiajs/inertia-vue3'
   z-index: 10;
   padding: 8px;
   text-decoration: none;
-  color: #6b7280;
+  color: #4b5563;
   line-height: 1;
-  font-weight: 600;
   font-size: 14px;
   letter-spacing: -0.05em;
   background: transparent;
   transition: all 0.25s ease-in-out;
 }
 #menu > li:hover > a {
-  background: #9ca3af;
-  color: rgba(0, 223, 252, 1);
-  text-shadow: none;
+  background: #d1d5db;
 }
 #menu li ul {
   position: absolute;
@@ -153,8 +126,8 @@ import { Head } from '@inertiajs/inertia-vue3'
   transform-origin: 50% 0%;
 }
 #menu li:hover ul {
-  padding: 15px 0;
-  background: #333;
+  padding: 5px 0;
+  background: #d1d5db;
   opacity: 1;
   visibility: visible;
   box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.5);
@@ -183,16 +156,14 @@ import { Head } from '@inertiajs/inertia-vue3'
 #menu li li a {
   padding-left: 15px;
   font-weight: 400;
-  color: #ddd;
-  text-shadow: none;
+  color: #4b5563;
   border-top: dotted 1px transparent;
   border-bottom: dotted 1px transparent;
   transition: all 0.15s linear;
 }
 #menu li li a:hover {
-  color: rgba(0, 223, 252, 1);
-  border-top: dotted 1px rgba(255, 255, 255, 0.15);
-  border-bottom: dotted 1px rgba(255, 255, 255, 0.15);
-  background: rgba(0, 223, 252, 0.02);
+  border-top: dotted 1px #f3f4f6;
+  border-bottom: dotted 1px #f3f4f6;
+  background: #e5e5e5;
 }
 </style>
