@@ -5,7 +5,12 @@
     <div
       class="flex flex-col items-center flex-grow border-r border-r-gray-200 pt-2"
     >
-      lsc
+      <div class="">lang</div>
+      <div class="">charset</div>
+      <div class="">viewport</div>
+      <div class="">title</div>
+      <div class="">description</div>
+      <div class="">keywords</div>
     </div>
   </div>
 </template>
