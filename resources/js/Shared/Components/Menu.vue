@@ -5,7 +5,7 @@
         <li>
           <a href="#">File</a>
           <ul>
-            <li><a href="#">Exit</a></li>
+            <li><a :href="route('index')" @click="logout()">Exit</a></li>
           </ul>
         </li>
         <li>
@@ -19,7 +19,14 @@
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { useForm } from '@inertiajs/inertia-vue3'
+
+const form = useForm({})
+const logout = () => {
+  form.post(route('logout'))
+}
+</script>
 
 <style scoped>
 #container {

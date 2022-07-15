@@ -16,7 +16,9 @@
         <!-- work panel menu -->
         <div class="bg-g-100 h-8">work panel menu</div>
         <!-- work panel body -->
-        <div class="flex-grow">work panel body</div>
+        <div class="flex-grow">
+          <slot></slot>
+        </div>
       </div>
       <!-- right sidebar -->
       <div class="bg-g-100 hidden md:flex flex-col w-64 h-full">
