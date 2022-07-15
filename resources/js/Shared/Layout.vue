@@ -7,7 +7,9 @@
       <!-- left sidebar -->
       <div class="bg-g-100 hidden md:flex w-48 h-full">
         <!-- left sidebar menu -->
-        <div class="bg-g-300 w-12">lsm</div>
+        <div class="bg-g-300 w-12">
+          <div class=""></div>
+        </div>
         <!-- left sidebar component -->
         <div class="flex-grow">lsc</div>
       </div>
