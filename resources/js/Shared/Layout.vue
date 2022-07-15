@@ -13,10 +13,7 @@
           <slot></slot>
         </div>
       </div>
-      <!-- right sidebar -->
-      <div class="bg-gray-100 hidden md:flex flex-col w-64 h-full">
-        right sidebar
-      </div>
+      <RightSidebar></RightSidebar>
     </div>
   </div>
 
@@ -27,4 +24,5 @@
 import { Head } from '@inertiajs/inertia-vue3'
 import Menu from './Components/Menu.vue'
 import LeftSidebar from './Components/LeftSidebar.vue'
+import RightSidebar from './Components/RightSidebar.vue'
 </script>
