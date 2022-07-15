@@ -4,10 +4,8 @@
     <Menu></Menu>
     <div class="flex items-center w-full flex-grow">
       <LeftSidebar></LeftSidebar>
-      <!-- work panel -->
       <div class="flex-grow flex flex-col h-full">
-        <!-- work panel menu -->
-        <div class="bg-gray-100 h-8">work panel menu</div>
+        <WorkPanelMenu></WorkPanelMenu>
         <!-- work panel body -->
         <div class="flex-grow">
           <slot></slot>
@@ -25,4 +23,5 @@ import { Head } from '@inertiajs/inertia-vue3'
 import Menu from './Components/Menu.vue'
 import LeftSidebar from './Components/LeftSidebar.vue'
 import RightSidebar from './Components/RightSidebar.vue'
+import WorkPanelMenu from './Components/WorkPanelMenu.vue'
 </script>
