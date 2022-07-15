@@ -7,9 +7,7 @@
       <!-- left sidebar -->
       <div class="bg-g-100 hidden md:flex w-48 h-full">
         <!-- left sidebar menu -->
-        <div class="bg-g-300 w-12">
-          <div class=""></div>
-        </div>
+        <div class="bg-g-300 w-12">lsm</div>
         <!-- left sidebar component -->
         <div class="flex-grow">lsc</div>
       </div>
@@ -37,7 +35,7 @@ import { Head } from '@inertiajs/inertia-vue3'
 import Menu from './Components/Menu.vue'
 </script>
 
-<style scoped>
+<style>
 .bg-g-300 {
   background-color: #e5e5e5;
 }
