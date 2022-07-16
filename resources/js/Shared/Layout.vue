@@ -6,7 +6,6 @@
       <LeftSidebar></LeftSidebar>
       <div class="flex-grow flex flex-col h-full">
         <WorkPanelMenu></WorkPanelMenu>
-        <!-- work panel body -->
         <div class="flex-grow">
           <slot></slot>
         </div>
@@ -19,9 +18,13 @@
 </template>
 
 <script setup>
+import { ref, provide } from 'vue'
 import { Head } from '@inertiajs/inertia-vue3'
 import Menu from './Components/Menu.vue'
 import LeftSidebar from './Components/LeftSidebar.vue'
 import RightSidebar from './Components/RightSidebar.vue'
 import WorkPanelMenu from './Components/WorkPanelMenu.vue'
+
+const project = ref({})
+provide('project', project)
 </script>
