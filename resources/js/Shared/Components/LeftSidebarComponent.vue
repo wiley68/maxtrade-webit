@@ -1,5 +1,6 @@
 <template>
   <div
+    v-if="state.pallete == 'head'"
     class="flex flex-col items-center flex-grow border-r border-r-gray-200 pt-2 px-1 space-y-1"
   >
     <button
@@ -75,6 +76,14 @@
       <div>keywords</div>
     </button>
   </div>
+  <div
+    v-if="state.pallete == 'layouts'"
+    class="flex flex-col items-center flex-grow border-r border-r-gray-200 pt-2 px-1 space-y-1"
+  ></div>
 </template>
 
-<script setup></script>
+<script setup>
+import { inject } from 'vue'
+
+const state = inject('state')
+</script>

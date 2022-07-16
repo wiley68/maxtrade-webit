@@ -3,7 +3,7 @@
   <div class="w-full h-screen flex flex-col">
     <Menu></Menu>
     <div class="flex items-center w-full flex-grow">
-      <LeftSidebar></LeftSidebar>
+      <LeftSidebar v-if="state.show_pallete"></LeftSidebar>
       <div class="flex-grow flex flex-col h-full">
         <WorkPanelMenu></WorkPanelMenu>
         <div class="flex-grow">
@@ -25,6 +25,14 @@ import LeftSidebar from './Components/LeftSidebar.vue'
 import RightSidebar from './Components/RightSidebar.vue'
 import WorkPanelMenu from './Components/WorkPanelMenu.vue'
 
-const project = ref({})
+const state = ref({
+  show_pallete: true,
+  pallete: 'head',
+})
+const project = ref({
+  name: 'Project 1',
+  description: 'Description of project 1',
+})
+provide('state', state)
 provide('project', project)
 </script>

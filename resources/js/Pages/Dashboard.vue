@@ -1,13 +1,10 @@
 <template>
-  <h1>dashboard</h1>
-  <a :href="route('index')" @click="logout()"> logout </a>
+  <pre>{{ JSON.stringify(project, null, '\t') }}</pre>
 </template>
 
 <script setup>
-import { useForm } from '@inertiajs/inertia-vue3'
+import { inject } from 'vue'
 
-const form = useForm({})
-const logout = () => {
-  form.post(route('logout'))
-}
+const state = inject('state')
+const project = inject('project')
 </script>
