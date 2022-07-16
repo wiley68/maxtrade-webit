@@ -1,6 +1,29 @@
 <template>
-  <div v-if="state.window == 'file'">
-    <pre>{{ JSON.stringify(project, null, '\t') }}</pre>
+  <div v-if="state.window == 'file'" class="flex flex-col justify-center p-2">
+    <div>{</div>
+    <div
+      class="ml-4 cursor-pointer hover:border hover:border-blue-100 mb-1"
+      :class="
+        project.name.status
+          ? 'bg-blue-50 border border-blue-100'
+          : 'bg-white border border-white'
+      "
+      @click.stop="project.name.status = !project.name.status"
+    >
+      "name": "{{ project.name.value }}",
+    </div>
+    <div
+      class="ml-4 cursor-pointer hover:border hover:border-blue-100 mb-1"
+      :class="
+        project.description.status
+          ? 'bg-blue-50 border border-blue-100'
+          : 'bg-white border border-white'
+      "
+      @click.stop="project.description.status = !project.description.status"
+    >
+      "description": "{{ project.description.value }}",
+    </div>
+    <div>}</div>
   </div>
 </template>
 

@@ -32,8 +32,16 @@ const state = ref({
   window: 'file',
 })
 const project = ref({
-  name: 'Project 1',
-  description: 'Description of project 1',
+  name: {
+    id: 'project.name',
+    status: false,
+    value: 'Project 1',
+  },
+  description: {
+    id: 'project.description',
+    status: false,
+    value: 'Description of project 1',
+  },
   html: {
     lang: 'en',
     elements: {
