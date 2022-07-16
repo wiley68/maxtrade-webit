@@ -1,16 +1,16 @@
 <template>
   <Head :title="$page.component"></Head>
-  <div class="w-full h-screen flex flex-col">
+  <div class="w-full h-screen flex flex-col overflow-hidden">
     <Menu></Menu>
-    <div class="flex items-center w-full flex-grow">
-      <LeftSidebar v-if="state.show_pallete"></LeftSidebar>
-      <div class="flex-grow flex flex-col h-full">
-        <WorkPanelMenu></WorkPanelMenu>
-        <div class="bg-red-300 flex-grow max-w-full max-h-full overflow-hidden">
+    <div class="flex items-center w-full flex-grow overflow-hidden">
+      <LeftSidebar class="flex-none" v-if="state.show_pallete"></LeftSidebar>
+      <div class="flex-grow flex flex-col h-full overflow-hidden">
+        <WorkPanelMenu class="flex-none"></WorkPanelMenu>
+        <div class="flex-grow overflow-auto">
           <slot></slot>
         </div>
       </div>
-      <RightSidebar></RightSidebar>
+      <RightSidebar class="flex-none" v-if="state.show_settings"></RightSidebar>
     </div>
   </div>
 
@@ -28,6 +28,8 @@ import WorkPanelMenu from './Components/WorkPanelMenu.vue'
 const state = ref({
   show_pallete: true,
   pallete: 'head',
+  show_settings: true,
+  window: 'file',
 })
 const project = ref({
   name: 'Project 1',

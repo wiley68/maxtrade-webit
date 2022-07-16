@@ -1,15 +1,7 @@
 <template>
-  afvasdfgsadfg<br />
-  afvasdfgsadfg<br />
-  afvasdfgsadfg<br />
-  afvasdfgsadfg<br />
-  afvasdfgsadfg<br />
-  afvasdfgsadfg<br />
-  afvasdfgsadfg<br />
-  afvasdfgsadfg<br />
-  afvasdfgsadfg<br />
-  afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />afvasdfgsadfg<br />
-  <!-- <pre>{{ JSON.stringify(project, null, '\t') }}</pre> -->
+  <div v-if="state.window == 'file'">
+    <pre>{{ JSON.stringify(project, null, '\t') }}</pre>
+  </div>
 </template>
 
 <script setup>
