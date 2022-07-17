@@ -1,39 +1,26 @@
 <template>
   <div v-if="state.window == 'file'" class="flex flex-col justify-center p-2">
-    <div
-      class="cursor-pointer hover:border hover:border-blue-100 mb-1"
-      :class="
-        project.status
-          ? 'bg-blue-50 border border-blue-100'
-          : 'bg-white border border-white'
-      "
-      @click.stop="project.status = !project.status"
-    >
-      {
+    <div class="flex justify-between w-full">
+      <div class="w-8 border-r border-gray-100 mr-1 text-cyan-500">1</div>
+      <div class="flex-grow">{</div>
     </div>
     <div
-      class="ml-4 cursor-pointer hover:border hover:border-blue-100 mb-1"
-      :class="
-        project.name.status
-          ? 'bg-blue-50 border border-blue-100'
-          : 'bg-white border border-white'
-      "
-      @click.stop="project.name.status = !project.name.status"
+      v-for="([key, value], index) in Object.entries(project)"
+      :key="key"
+      class="flex justify-between w-full"
     >
-      "name": "{{ project.name.value }}",
+      <div class="w-8 border-r border-gray-100 mr-1 text-cyan-500">
+        {{ index + 2 }}
+      </div>
+      <div class="flex-grow pl-4">
+        "{{ key }}": {{ typeof value === 'object' ? '' : '"' }}{{ value
+        }}{{ typeof value === 'object' ? '' : '"' }},
+      </div>
     </div>
-    <div
-      class="ml-4 cursor-pointer hover:border hover:border-blue-100 mb-1"
-      :class="
-        project.description.status
-          ? 'bg-blue-50 border border-blue-100'
-          : 'bg-white border border-white'
-      "
-      @click.stop="project.description.status = !project.description.status"
-    >
-      "description": "{{ project.description.value }}",
+    <div class="flex justify-between w-full">
+      <div class="w-8 border-r border-gray-100 mr-1 text-cyan-500">2</div>
+      <div class="flex-grow">}</div>
     </div>
-    <div>}</div>
   </div>
 </template>
 
