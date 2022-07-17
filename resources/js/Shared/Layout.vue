@@ -32,55 +32,14 @@ const state = ref({
   window: 'file',
 })
 const project = ref({
+  status: false,
   name: {
-    id: 'project.name',
     status: false,
     value: 'Project 1',
   },
   description: {
-    id: 'project.description',
     status: false,
     value: 'Description of project 1',
-  },
-  html: {
-    lang: 'en',
-    elements: {
-      head: {
-        title: 'Project 1',
-        meta: [
-          {
-            charset: 'utf-8',
-          },
-          {
-            name: 'description',
-            content: 'Description of project 1',
-          },
-          {
-            name: 'keywords',
-            content: 'key1, key2',
-          },
-        ],
-        link: [
-          {
-            href: 'https://fonts.googleapis.com/css?family=Exo+2:400,400i,500,500i,600,700,700i,900,900i&display=swap',
-            rel: 'stylesheet',
-          },
-          {
-            href: 'favicon.ico',
-            rel: 'shortcut icon',
-            type: 'image/x-icon',
-          },
-        ],
-      },
-      body: [
-        {
-          el_id: 'el_1',
-          el_type: 'div',
-          class: 'font-sans text-gray-900 antialiased',
-          html: 'div dody',
-        },
-      ],
-    },
   },
 })
 provide('state', state)
