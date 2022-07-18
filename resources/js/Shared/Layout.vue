@@ -33,37 +33,66 @@ const state = ref({
 })
 
 const project = ref({
+  uid: 'project',
+  parentUid: '',
+  level: 0,
   status: false,
   name: {
+    uid: 'project.name',
+    parentUid: 'project',
+    level: 1,
     status: false,
     value: 'Project 1',
   },
   description: {
+    uid: 'project.description',
+    parentUid: 'project',
+    level: 1,
     status: false,
     value: 'Description of project 1',
   },
   html: {
+    uid: 'project.html',
+    parentUid: 'project',
+    level: 1,
     status: false,
     lang: 'en',
     head: {
+      uid: 'project.html.head',
+      parentUid: 'project.html',
+      level: 2,
       status: false,
       title: '',
       meta: [
         {
+          uid: 'project.html.head.meta[0]',
+          parentUid: 'project.html.head',
+          level: 3,
           status: false,
           charset: 'utf-8',
         },
         {
+          uid: 'project.html.head.meta[1]',
+          parentUid: 'project.html.head',
+          level: 3,
           status: false,
           name: 'viewport',
           content: 'width=device-width, initial-scale=1',
         },
         {
+          uid: 'project.html.head.meta[2]',
+          parentUid: 'project.html.head',
+          level: 3,
+          status: false,
           status: false,
           name: 'description',
           content: '',
         },
         {
+          uid: 'project.html.head.meta[3]',
+          parentUid: 'project.html.head',
+          level: 3,
+          status: false,
           status: false,
           name: 'keywords',
           content: '',
@@ -71,11 +100,18 @@ const project = ref({
       ],
       link: [
         {
+          uid: 'project.html.head.link[0]',
+          parentUid: 'project.html.head',
+          level: 3,
+          status: false,
           status: false,
           href: 'https://fonts.googleapis.com/css?family=Exo+2:400,400i,500,500i,600,700,700i,900,900i&display=swap',
           rel: 'stylesheet',
         },
         {
+          uid: 'project.html.head.link[1]',
+          parentUid: 'project.html.head',
+          level: 3,
           status: false,
           href: 'favicon.ico',
           rel: 'shortcut icon',
@@ -85,6 +121,9 @@ const project = ref({
     },
     body: [
       {
+        uid: 'project.html.body[0]',
+        parentUid: 'project.html',
+        level: 2,
         status: false,
         el: 'div',
         class: 'font-sans text-gray-900 antialiased',

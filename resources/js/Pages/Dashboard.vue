@@ -4,18 +4,8 @@
       <div class="w-8 border-r border-gray-100 mr-1 text-cyan-500">1</div>
       <div class="flex-grow">{</div>
     </div>
-    <div
-      v-for="([key, value], index) in Object.entries(project)"
-      :key="key"
-      class="flex justify-between w-full"
-    >
-      <div class="w-8 border-r border-gray-100 mr-1 text-cyan-500">
-        {{ index + 2 }}
-      </div>
-      <div class="flex-grow pl-4">
-        "{{ key }}": {{ typeof value === 'object' ? '' : '"' }}{{ value
-        }}{{ typeof value === 'object' ? '' : '"' }},
-      </div>
+    <div>
+      {{ result() }}
     </div>
     <div class="flex justify-between w-full">
       <div class="w-8 border-r border-gray-100 mr-1 text-cyan-500">2</div>
@@ -29,4 +19,17 @@ import { inject } from 'vue'
 
 const state = inject('state')
 const project = inject('project')
+
+const project_arr = (projecttemp) => {
+  let result = []
+  for (const [key, value] of Object.entries(projecttemp)) {
+    result[key] = value
+  }
+  console.log(result)
+  return result
+}
+
+const result = () => {
+  console.log(project_arr(project))
+}
 </script>
