@@ -24,6 +24,7 @@ import Menu from './Components/Menu.vue'
 import LeftSidebar from './Components/LeftSidebar.vue'
 import RightSidebar from './Components/RightSidebar.vue'
 import WorkPanelMenu from './Components/WorkPanelMenu.vue'
+import { Tree, TreeNode } from '@/Components/project'
 
 const state = ref({
   show_pallete: true,
@@ -32,39 +33,23 @@ const state = ref({
   window: 'file',
 })
 
-const project = ref({
-  status: false,
-  name: {
-    status: false,
-    value: 'Project 1',
-  },
-  description: {
-    status: false,
-    value: 'Description of project 1',
-  },
-  html: {
-    tag: 'parent',
-    attributes: [
-      {
-        name: 'attr1',
-        value: 'val1',
-      },
-    ],
-    children: [
-      'Some text',
-      {
-        tag: 'child',
-        attributes: [
-          {
-            name: 'attr2',
-            value: 'val2',
-          },
-        ],
-        children: [{ tag: 'grandchild' }],
-      },
-    ],
-  },
-})
+const project = ref(new Tree())
+project.value.insert('project', 'project.name', 'Project 1')
+project.value.insert(
+  'project',
+  'project.description',
+  'Description of Project 1'
+)
+project.value.insert('project', 'project.html')
+project.value.insert('project.html', 'project.html.title', 'Title of Project 1')
+project.value.insert('project.html', 'project.html.head')
+project.value.insert('project.html.head', 'project.html.head.meta')
+project.value.insert(
+  'project.html.head.meta',
+  'project.html.head.meta.charset',
+  'utf-8'
+)
+project.value.insert('project.html', 'project.html.head1')
 
 const current_el = ref({})
 
