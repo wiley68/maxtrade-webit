@@ -43,6 +43,11 @@ project.value.insertTitleNode(
   'project.html.head.title',
   'Title project 1'
 )
+project.value.insertMetaNode('project.html.head', 'project.html.head.meta[0]')
+let node_meta = []
+node_meta[0] = project.value.find('project.html.head.meta[0]').attributes = {
+  charset: 'utf-8',
+}
 
 provide('state', state)
 provide('project', project)

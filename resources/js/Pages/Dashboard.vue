@@ -32,6 +32,20 @@
         {{ project.root.children[0].children[0].children[0].key }}
       </div>
     </div>
+    <div
+      class="flex ml-12 bg-indigo-800 hover:bg-indigo-500 w-64 cursor-pointer px-2 py-1 rounded border-2 border-indigo-800 hover:border-orange-500"
+    >
+      <div class="text-sm text-gray-100 truncate">
+        {{ project.root.children[0].children[0].children[1].key }}
+      </div>
+    </div>
+    <div
+      class="flex ml-16 bg-violet-800 hover:bg-violet-500 w-64 cursor-pointer px-2 py-1 rounded border-2 border-violet-800 hover:border-orange-500"
+    >
+      <div class="text-sm text-gray-100 truncate">
+        {{ project.root.children[0].children[0].children[1].attributes }}
+      </div>
+    </div>
   </div>
 </template>
 

@@ -48,6 +48,14 @@ class TitleNode extends TreeNode {
   }
 }
 
+//meta node
+class MetaNode extends TreeNode {
+  constructor(key) {
+    super(key)
+    this.attributes = []
+  }
+}
+
 class Tree {
   constructor(key, name = '', description = '') {
     this.root = new ProjectNode(key, name, description)
@@ -95,6 +103,16 @@ class Tree {
     for (let node of this.preOrderTraversal()) {
       if (node.key === parentNodeKey) {
         node.children.push(new TitleNode(key, title))
+        return true
+      }
+    }
+    return false
+  }
+
+  insertMetaNode(parentNodeKey, key) {
+    for (let node of this.preOrderTraversal()) {
+      if (node.key === parentNodeKey) {
+        node.children.push(new MetaNode(key))
         return true
       }
     }
