@@ -33,6 +33,13 @@ class HtmlNode extends TreeNode {
   }
 }
 
+//head node
+class HeadNode extends TreeNode {
+  constructor(key) {
+    super(key)
+  }
+}
+
 class Tree {
   constructor(key, name = '', description = '') {
     this.root = new ProjectNode(key, name, description)
@@ -60,6 +67,16 @@ class Tree {
     for (let node of this.preOrderTraversal()) {
       if (node.key === parentNodeKey) {
         node.children.push(new HtmlNode(key, lang))
+        return true
+      }
+    }
+    return false
+  }
+
+  insertHeadNode(parentNodeKey, key) {
+    for (let node of this.preOrderTraversal()) {
+      if (node.key === parentNodeKey) {
+        node.children.push(new HeadNode(key))
         return true
       }
     }

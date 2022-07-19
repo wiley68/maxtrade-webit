@@ -37,6 +37,7 @@ const project = ref(
   new Tree('project', 'Project 1', 'Description of Project 1')
 )
 project.value.insertHtmlNode('project', 'project.html', 'en')
+project.value.insertHeadNode('project.html', 'project.html.head')
 
 provide('state', state)
 provide('project', project)
