@@ -18,16 +18,24 @@ class TreeNode {
 
 //project node
 class ProjectNode extends TreeNode {
-  constructor(name, description) {
-    super('project', 'project', null)
+  constructor(key, name, description) {
+    super(key)
     this.name = name
     this.description = description
   }
 }
 
+//html node
+class HtmlNode extends TreeNode {
+  constructor(key, lang) {
+    super(key)
+    this.lang = lang
+  }
+}
+
 class Tree {
-  constructor(name = '', description = '') {
-    this.root = new ProjectNode(name, description)
+  constructor(key, name = '', description = '') {
+    this.root = new ProjectNode(key, name, description)
   }
 
   *preOrderTraversal(node = this.root) {
@@ -48,10 +56,10 @@ class Tree {
     yield node
   }
 
-  insert(parentNodeKey, key, value = key) {
+  insertHtmlNode(parentNodeKey, key, lang = 'en') {
     for (let node of this.preOrderTraversal()) {
       if (node.key === parentNodeKey) {
-        node.children.push(new TreeNode(key, value, node))
+        node.children.push(new HtmlNode(key, lang))
         return true
       }
     }
@@ -77,4 +85,4 @@ class Tree {
   }
 }
 
-export { Tree, TreeNode }
+export { Tree }

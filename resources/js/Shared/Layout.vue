@@ -24,7 +24,7 @@ import Menu from './Components/Menu.vue'
 import LeftSidebar from './Components/LeftSidebar.vue'
 import RightSidebar from './Components/RightSidebar.vue'
 import WorkPanelMenu from './Components/WorkPanelMenu.vue'
-import { Tree, TreeNode } from '@/Components/project'
+import { Tree } from '@/Components/project'
 
 const state = ref({
   show_pallete: true,
@@ -33,7 +33,10 @@ const state = ref({
   window: 'file',
 })
 
-const project = ref(new Tree('Project 1', 'Description of Project 1'))
+const project = ref(
+  new Tree('project', 'Project 1', 'Description of Project 1')
+)
+project.value.insertHtmlNode('project', 'project.html', 'en')
 
 provide('state', state)
 provide('project', project)
