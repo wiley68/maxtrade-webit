@@ -38,6 +38,11 @@ const project = ref(
 )
 project.value.insertHtmlNode('project', 'project.html', 'en')
 project.value.insertHeadNode('project.html', 'project.html.head')
+project.value.insertTitleNode(
+  'project.html.head',
+  'project.html.head.title',
+  'Title project 1'
+)
 
 provide('state', state)
 provide('project', project)

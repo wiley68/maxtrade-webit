@@ -25,6 +25,13 @@
         {{ project.root.children[0].children[0].key }}
       </div>
     </div>
+    <div
+      class="flex ml-12 bg-blue-800 hover:bg-blue-500 w-64 cursor-pointer px-2 py-1 rounded border-2 border-blue-800 hover:border-orange-500"
+    >
+      <div class="text-sm text-gray-100 truncate">
+        {{ project.root.children[0].children[0].children[0].key }}
+      </div>
+    </div>
   </div>
 </template>
 

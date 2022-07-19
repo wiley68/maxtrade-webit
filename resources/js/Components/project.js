@@ -40,6 +40,14 @@ class HeadNode extends TreeNode {
   }
 }
 
+//title node
+class TitleNode extends TreeNode {
+  constructor(key, title) {
+    super(key)
+    this.title = title
+  }
+}
+
 class Tree {
   constructor(key, name = '', description = '') {
     this.root = new ProjectNode(key, name, description)
@@ -77,6 +85,16 @@ class Tree {
     for (let node of this.preOrderTraversal()) {
       if (node.key === parentNodeKey) {
         node.children.push(new HeadNode(key))
+        return true
+      }
+    }
+    return false
+  }
+
+  insertTitleNode(parentNodeKey, key, title) {
+    for (let node of this.preOrderTraversal()) {
+      if (node.key === parentNodeKey) {
+        node.children.push(new TitleNode(key, title))
         return true
       }
     }
