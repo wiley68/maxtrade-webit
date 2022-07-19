@@ -1,3 +1,4 @@
+//default node
 class TreeNode {
   constructor(key, value = key, parent = null) {
     this.key = key

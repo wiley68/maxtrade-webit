@@ -34,22 +34,6 @@ const state = ref({
 })
 
 const project = ref(new Tree())
-project.value.insert('project', 'project.name', 'Project 1')
-project.value.insert(
-  'project',
-  'project.description',
-  'Description of Project 1'
-)
-project.value.insert('project', 'project.html')
-project.value.insert('project.html', 'project.html.title', 'Title of Project 1')
-project.value.insert('project.html', 'project.html.head')
-project.value.insert('project.html.head', 'project.html.head.meta')
-project.value.insert(
-  'project.html.head.meta',
-  'project.html.head.meta.charset',
-  'utf-8'
-)
-project.value.insert('project.html', 'project.html.head1')
 
 const current_el = ref({})
 
