@@ -33,21 +33,21 @@ const state = ref({
   window: 'file',
 })
 
-const project = ref(
-  new Tree('project', 'Project 1', 'Description of Project 1')
-)
-project.value.insertHtmlNode('project', 'project.html', 'en')
-project.value.insertHeadNode('project.html', 'project.html.head')
-project.value.insertTitleNode(
-  'project.html.head',
-  'project.html.head.title',
-  'Title project 1'
-)
-project.value.insertMetaNode('project.html.head', 'project.html.head.meta[0]')
-let node_meta = []
-node_meta[0] = project.value.find('project.html.head.meta[0]').attributes = {
-  charset: 'utf-8',
-}
+const project = ref(new Tree('project', 'Project 1'))
+
+project.value.insertNode('project', 'html', 'HTML')
+project.value.find('html').attributes = { lang: 'en' }
+
+project.value.insertNode('html', 'head', 'HEAD')
+project.value.insertNode('head', 'title', 'TITLE')
+project.value.insertNode('head', 'meta.charset', 'CHARSET')
+project.value.insertNode('head', 'meta.viewport', 'viewport')
+project.value.insertNode('head', 'meta.description', 'description')
+project.value.insertNode('head', 'meta.keywords', 'keywords')
+project.value.insertNode('head', 'link.font', 'font')
+project.value.insertNode('head', 'link.icon', 'icon')
+
+project.value.insertNode('project', 'body', 'BODY')
 
 provide('state', state)
 provide('project', project)

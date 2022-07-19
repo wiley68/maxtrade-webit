@@ -5,6 +5,8 @@ class TreeNode {
     this.value = value
     this.parent = parent
     this.children = []
+    this.attributes = []
+    this.type = ''
   }
 
   get isLeaf() {
@@ -16,49 +18,9 @@ class TreeNode {
   }
 }
 
-//project node
-class ProjectNode extends TreeNode {
-  constructor(key, name, description) {
-    super(key)
-    this.name = name
-    this.description = description
-  }
-}
-
-//html node
-class HtmlNode extends TreeNode {
-  constructor(key, lang) {
-    super(key)
-    this.lang = lang
-  }
-}
-
-//head node
-class HeadNode extends TreeNode {
-  constructor(key) {
-    super(key)
-  }
-}
-
-//title node
-class TitleNode extends TreeNode {
-  constructor(key, title) {
-    super(key)
-    this.title = title
-  }
-}
-
-//meta node
-class MetaNode extends TreeNode {
-  constructor(key) {
-    super(key)
-    this.attributes = []
-  }
-}
-
 class Tree {
-  constructor(key, name = '', description = '') {
-    this.root = new ProjectNode(key, name, description)
+  constructor(key, value) {
+    this.root = new TreeNode(key, value)
   }
 
   *preOrderTraversal(node = this.root) {
@@ -79,40 +41,10 @@ class Tree {
     yield node
   }
 
-  insertHtmlNode(parentNodeKey, key, lang = 'en') {
+  insertNode(parentNodeKey, key, value) {
     for (let node of this.preOrderTraversal()) {
       if (node.key === parentNodeKey) {
-        node.children.push(new HtmlNode(key, lang))
-        return true
-      }
-    }
-    return false
-  }
-
-  insertHeadNode(parentNodeKey, key) {
-    for (let node of this.preOrderTraversal()) {
-      if (node.key === parentNodeKey) {
-        node.children.push(new HeadNode(key))
-        return true
-      }
-    }
-    return false
-  }
-
-  insertTitleNode(parentNodeKey, key, title) {
-    for (let node of this.preOrderTraversal()) {
-      if (node.key === parentNodeKey) {
-        node.children.push(new TitleNode(key, title))
-        return true
-      }
-    }
-    return false
-  }
-
-  insertMetaNode(parentNodeKey, key) {
-    for (let node of this.preOrderTraversal()) {
-      if (node.key === parentNodeKey) {
-        node.children.push(new MetaNode(key))
+        node.children.push(new TreeNode(key, value))
         return true
       }
     }
