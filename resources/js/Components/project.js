@@ -16,9 +16,18 @@ class TreeNode {
   }
 }
 
+//project node
+class ProjectNode extends TreeNode {
+  constructor(name, description) {
+    super('project', 'project', null)
+    this.name = name
+    this.description = description
+  }
+}
+
 class Tree {
-  constructor() {
-    this.root = new TreeNode('project')
+  constructor(name = '', description = '') {
+    this.root = new ProjectNode(name, description)
   }
 
   *preOrderTraversal(node = this.root) {

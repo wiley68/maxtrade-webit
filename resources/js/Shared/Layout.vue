@@ -33,9 +33,7 @@ const state = ref({
   window: 'file',
 })
 
-const project = ref(new Tree())
-
-const current_el = ref({})
+const project = ref(new Tree('Project 1', 'Description of Project 1'))
 
 provide('state', state)
 provide('project', project)
