@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-1 flex items-center w-full h-10 mb-0.5">
+  <div class="bg-1 flex justify-between items-center w-full h-10 mb-0.5">
     <div id="menu_container">
       <ul id="menu">
         <li>
@@ -24,6 +24,10 @@
         </li>
       </ul>
     </div>
+    <div class="w-1/3 text-center text-sm font-medium text-gray-600">
+      Project 1 - Maxtrade Webit
+    </div>
+    <div class="w-1/3 text-right">controls</div>
   </div>
 </template>
 
@@ -46,7 +50,7 @@ const logout = () => {
 #menu_container {
   position: relative;
   height: 100%;
-  width: 100%;
+  width: 33.333333%;
 }
 #menu_container:after {
   content: '';
