@@ -4,9 +4,9 @@
     <Menu></Menu>
     <div class="flex items-center w-full flex-grow overflow-hidden">
       <Explorer class="flex-none" v-if="state.show_explorer"></Explorer>
-      <div class="flex-grow flex flex-col h-full overflow-hidden">
+      <div class="flex-grow flex flex-col h-full overflow-hidden mx-0.5">
         <WorkPanelMenu class="flex-none"></WorkPanelMenu>
-        <div class="flex-grow overflow-auto">
+        <div class="flex-grow overflow-auto mt-0.5">
           <slot></slot>
         </div>
       </div>
