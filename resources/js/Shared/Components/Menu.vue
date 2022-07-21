@@ -1,7 +1,6 @@
 <template>
   <div class="bg-1 flex items-center w-full h-10 mb-0.5">
-    menu
-    <!-- <div id="menu_container">
+    <div id="menu_container">
       <ul id="menu">
         <li>
           <svg id="logo" viewBox="0 0 24 24">
@@ -24,7 +23,7 @@
           </ul>
         </li>
       </ul>
-    </div> -->
+    </div>
   </div>
 </template>
 
@@ -41,8 +40,8 @@ const logout = () => {
 #logo {
   width: 24px;
   height: 24px;
-  margin: 3px 12px 0px 11px;
-  color: #1e40af;
+  margin: 8px 12px 0px 11px;
+  color: #0284c7;
 }
 #menu_container {
   position: relative;
@@ -59,9 +58,8 @@ const logout = () => {
   position: relative;
   float: left;
   width: 100%;
+  height: 100%;
   padding: 0px;
-  background: #e5e7eb;
-  border-bottom: 1px solid #d1d5db;
 }
 #menu,
 #menu ul {
@@ -78,7 +76,7 @@ const logout = () => {
   display: block;
   position: relative;
   z-index: 10;
-  padding: 8px;
+  padding: 13px;
   text-decoration: none;
   color: #4b5563;
   line-height: 1;
