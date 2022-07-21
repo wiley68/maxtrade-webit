@@ -29,7 +29,6 @@ import { Tree } from '@/Components/project'
 const state = ref({
   show_explorer: true,
   show_properties: true,
-  window: 'file',
 })
 
 const project = ref(new Tree('project', 'Project 1'))
