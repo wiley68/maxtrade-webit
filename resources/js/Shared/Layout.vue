@@ -10,7 +10,7 @@
           <slot></slot>
         </div>
       </div>
-      <RightSidebar class="flex-none" v-if="state.show_settings"></RightSidebar>
+      <Properties class="flex-none" v-if="state.show_properties"></Properties>
     </div>
   </div>
 
@@ -22,14 +22,13 @@ import { ref, provide } from 'vue'
 import { Head } from '@inertiajs/inertia-vue3'
 import Menu from './Components/Menu.vue'
 import Explorer from './Components/Explorer.vue'
-import RightSidebar from './Components/RightSidebar.vue'
+import Properties from './Components/Properties.vue'
 import WorkPanelMenu from './Components/WorkPanelMenu.vue'
 import { Tree } from '@/Components/project'
 
 const state = ref({
   show_explorer: true,
-  pallete: 'head',
-  show_settings: true,
+  show_properties: true,
   window: 'file',
 })
 
