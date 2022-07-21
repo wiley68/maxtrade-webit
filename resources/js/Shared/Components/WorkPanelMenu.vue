@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-green-300 h-8 flex">workpanelmenu</div>
+  <div class="bg-1 h-8 flex">workpanelmenu</div>
 </template>
 
 <script setup>

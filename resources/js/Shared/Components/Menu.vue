@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-gray-300 flex items-center w-full h-7">
+  <div class="bg-1 flex items-center w-full h-10 mb-0.5">
     menu
     <!-- <div id="menu_container">
       <ul id="menu">
