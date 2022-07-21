@@ -70,7 +70,7 @@ const logout = () => {
   position: relative;
 }
 #menu > li:nth-child(2) {
-  border-left: 1px solid #d1d5db;
+  border-left: 1px solid #e4e4e4;
 }
 #menu a {
   display: block;
@@ -78,15 +78,15 @@ const logout = () => {
   z-index: 10;
   padding: 13px;
   text-decoration: none;
-  color: #4b5563;
+  color: #6b7280;
   line-height: 1;
   font-size: 14px;
   letter-spacing: -0.05em;
   background: transparent;
-  transition: all 0.25s ease-in-out;
 }
 #menu > li:hover > a {
-  background: #f3f4f6;
+  background: #e4e4e4;
+  color: #1f2937;
 }
 #menu li ul {
   position: absolute;
@@ -117,12 +117,15 @@ const logout = () => {
   color: #4b5563;
   border-top: dotted 1px transparent;
   border-bottom: dotted 1px #e5e7eb;
-  transition: all 0.15s linear;
+  margin-left: 1px;
+  margin-right: 1px;
 }
 #menu li li a:hover {
   border-top: dotted 1px #2563eb;
   border-bottom: dotted 1px #2563eb;
-  background: #1d4ed8;
+  background: #0284c7;
+  margin-left: 1px;
+  margin-right: 1px;
   color: #f3f4f6;
 }
 </style>
