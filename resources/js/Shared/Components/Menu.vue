@@ -1,6 +1,7 @@
 <template>
-  <div class="flex items-center w-full h-7">
-    <div id="menu_container">
+  <div class="bg-gray-300 flex items-center w-full h-7">
+    menu
+    <!-- <div id="menu_container">
       <ul id="menu">
         <li>
           <svg id="logo" viewBox="0 0 24 24">
@@ -23,7 +24,7 @@
           </ul>
         </li>
       </ul>
-    </div>
+    </div> -->
   </div>
 </template>
 
