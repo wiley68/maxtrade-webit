@@ -3,6 +3,7 @@ class TreeNode {
   constructor(key, value = key, parent = null) {
     this.key = key
     this.value = value
+    this.description = ''
     this.parent = parent
     this.children = []
     this.attributes = []
