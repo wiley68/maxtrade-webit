@@ -11,6 +11,4 @@ import { inject } from 'vue'
 
 const state = inject('state')
 const project = inject('project')
-
-console.log(project.value)
 </script>
