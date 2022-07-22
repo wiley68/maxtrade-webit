@@ -17,6 +17,57 @@
           </ul>
         </li>
         <li>
+          <a href="#">View</a>
+          <ul>
+            <li>
+              <a
+                href="#"
+                @click.stop="state.show_explorer = !state.show_explorer"
+              >
+                <div
+                  class="flex items-center text-gray-600 hover:text-gray-100"
+                >
+                  <svg
+                    v-if="state.show_explorer"
+                    class="w-4 h-4"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"
+                    />
+                  </svg>
+                  <div v-else class="w-4 h-4"></div>
+                  <span class="ml-1">Explorer</span>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                @click.stop="state.show_properties = !state.show_properties"
+              >
+                <div
+                  class="flex items-center text-gray-600 hover:text-gray-100"
+                >
+                  <svg
+                    v-if="state.show_properties"
+                    class="w-4 h-4"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"
+                    />
+                  </svg>
+                  <div v-else class="w-4 h-4"></div>
+                  <span class="ml-1">Properties</span>
+                </div>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li>
           <a href="#">Help</a>
           <ul>
             <li><a href="#">About</a></li>
@@ -26,7 +77,7 @@
     </div>
     <div class="w-1/3 flex flex-col">
       <div class="w-full text-sm font-medium text-gray-600 text-center">
-        Project 1 - Maxtrade Webit
+        Untitled-1 - Maxtrade Webit
       </div>
       <div class="w-full text-xs text-gray-500 text-center">
         {{ project.find('project').description }}
