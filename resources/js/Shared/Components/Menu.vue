@@ -20,10 +20,7 @@
           <a href="#">View</a>
           <ul>
             <li>
-              <a
-                href="#"
-                @click.stop="state.show_explorer = !state.show_explorer"
-              >
+              <a href="#" @click.stop="toggleExplorer">
                 <div
                   class="flex items-center text-gray-600 hover:text-gray-100"
                 >
@@ -85,7 +82,7 @@
     </div>
     <div class="w-1/3 flex justify-end items-center">
       <button
-        @click.stop="state.show_explorer = !state.show_explorer"
+        @click.stop="toggleExplorer"
         class="cursor-pointer mr-0.5"
         title="Toggle explorer bar"
       >
@@ -129,6 +126,10 @@ const project = inject('project')
 const form = useForm({})
 const logout = () => {
   form.post(route('logout'))
+}
+
+const toggleExplorer = () => {
+  state.value.show_explorer = !state.value.show_explorer
 }
 </script>
 

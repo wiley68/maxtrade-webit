@@ -44,7 +44,7 @@
           </svg>
         </button>
       </div>
-      <div class="flex-grow bg-1">libraries content</div>
+      <div class="flex-grow bg-1"></div>
     </div>
     <div id="separator" ref="separator">
       <svg class="h-4 text-gray-400" viewBox="0 0 24 24">
@@ -96,7 +96,7 @@
           </svg>
         </button>
       </div>
-      <div class="flex-grow bg-1">elements tree content</div>
+      <div class="flex-grow bg-1"></div>
     </div>
   </div>
 </template>

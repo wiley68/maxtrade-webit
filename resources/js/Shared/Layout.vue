@@ -4,7 +4,7 @@
     <Menu></Menu>
     <div class="flex items-center w-full flex-grow overflow-hidden">
       <div id="explorer" ref="explorer">
-        <Explorer v-if="state.show_explorer"></Explorer>
+        <Explorer></Explorer>
       </div>
       <div id="separator" ref="separator">
         <div class="bg-gray-400 w-0.5 h-0.5 rounded-full mb-0.5"></div>
@@ -25,7 +25,7 @@
 </template>
 
 <script setup>
-import { ref, provide, onMounted } from 'vue'
+import { ref, provide, onMounted, watch } from 'vue'
 import { Head } from '@inertiajs/inertia-vue3'
 import Menu from './Components/Menu.vue'
 import Explorer from './Components/Explorer.vue'
@@ -86,6 +86,13 @@ function dragElement(element) {
 
     element.style.left = md.offsetLeft + delta.x + 'px'
     explorer.value.style.width = md.firstWidth + delta.x + 'px'
+    if (md.firstWidth + delta.x == 0) {
+      state.value.show_explorer = false
+    } else {
+      if (!state.value.show_explorer) {
+        state.value.show_explorer = true
+      }
+    }
     work.value.style.width = md.secondWidth - delta.x + 'px'
   }
 }
@@ -93,6 +100,19 @@ function dragElement(element) {
 onMounted(() => {
   dragElement(separator.value)
 })
+
+watch(
+  () => state.value.show_explorer,
+  () => {
+    if (state.value.show_explorer) {
+      explorer.value.style.width = '15%'
+      work.value.style.width = '85%'
+    } else {
+      explorer.value.style.width = '0px'
+      work.value.style.width = '100%'
+    }
+  }
+)
 
 provide('state', state)
 provide('project', project)
