@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-1 hidden md:flex md:flex-col md:justify-between w-64 h-full text-gray-500"
+    class="bg-1 hidden md:flex md:flex-col md:justify-between w-full h-full text-gray-500"
   >
     <div id="libraries" ref="libraries">
       <div
@@ -14,7 +14,9 @@
             />
           </svg>
         </div>
-        <div class="flex-grow font-medium text-sm user-select-none select-none">
+        <div
+          class="flex-grow font-medium text-sm user-select-none select-none truncate"
+        >
           LIBRARIES
         </div>
         <button
@@ -64,7 +66,9 @@
             />
           </svg>
         </div>
-        <div class="flex-grow font-medium text-sm user-select-none select-none">
+        <div
+          class="flex-grow font-medium text-sm user-select-none select-none truncate"
+        >
           ELEMENTS TREE
         </div>
         <button
