@@ -2,12 +2,19 @@
   <div class="bg-1 hidden md:flex md:flex-col md:justify-between w-64 h-full">
     <div id="libraries" ref="libraries">
       <div class="h-6">libraries</div>
-      <div class="bg-red-200 flex-grow">libraries content</div>
+      <div class="flex-grow">libraries content</div>
     </div>
-    <div id="separator" ref="separator"></div>
+    <div id="separator" ref="separator">
+      <svg class="h-4 text-gray-400" viewBox="0 0 24 24">
+        <path
+          fill="currentColor"
+          d="M16,12A2,2 0 0,1 18,10A2,2 0 0,1 20,12A2,2 0 0,1 18,14A2,2 0 0,1 16,12M10,12A2,2 0 0,1 12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12M4,12A2,2 0 0,1 6,10A2,2 0 0,1 8,12A2,2 0 0,1 6,14A2,2 0 0,1 4,12Z"
+        />
+      </svg>
+    </div>
     <div id="elements" ref="elements">
       <div class="">elements tree</div>
-      <div class="bg-green-200 flex-grow">elements tree content</div>
+      <div class="flex-grow">elements tree content</div>
     </div>
   </div>
 </template>
@@ -58,26 +65,24 @@ onMounted(() => {
 
 <style scoped>
 #libraries {
-  background-color: red;
   display: flex;
   flex-direction: column;
   height: 50%;
   min-height: 24px;
 }
 #separator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: row-resize;
-  background-color: #aaa;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='30'><path d='M2 0 v30 M5 0 v30 M8 0 v30' fill='none' stroke='black'/></svg>");
-  background-repeat: no-repeat;
-  background-position: center;
+  background-color: #e4e4e4;
   width: 100%;
-  height: 10px;
+  height: 6px;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
 }
 #elements {
-  background-color: green;
   display: flex;
   flex-direction: column;
   height: 50%;
