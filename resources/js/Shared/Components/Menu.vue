@@ -45,56 +45,6 @@
             <li>
               <a
                 href="#"
-                @click.stop="
-                  state.show_explorer_libraries = !state.show_explorer_libraries
-                "
-              >
-                <div
-                  class="flex items-center text-gray-600 hover:text-gray-100"
-                >
-                  <svg
-                    v-if="state.show_explorer_libraries"
-                    class="w-4 h-4"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      fill="currentColor"
-                      d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"
-                    />
-                  </svg>
-                  <div v-else class="w-4 h-4"></div>
-                  <span class="ml-1">Explorer libraries</span>
-                </div>
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                @click.stop="
-                  state.show_explorer_elements = !state.show_explorer_elements
-                "
-              >
-                <div
-                  class="flex items-center text-gray-600 hover:text-gray-100"
-                >
-                  <svg
-                    v-if="state.show_explorer_elements"
-                    class="w-4 h-4"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      fill="currentColor"
-                      d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"
-                    />
-                  </svg>
-                  <div v-else class="w-4 h-4"></div>
-                  <span class="ml-1">Explorer elements tree</span>
-                </div>
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
                 @click.stop="state.show_properties = !state.show_properties"
               >
                 <div
@@ -150,48 +100,6 @@
           />
         </svg>
       </button>
-      <div class="h-4 border-l border-gray-300"></div>
-      <button
-        @click.stop="
-          state.show_explorer_libraries = !state.show_explorer_libraries
-        "
-        class="cursor-pointer ml-0.5"
-        title="Toggle explorer libraries bar"
-      >
-        <svg
-          class="w-4 h-4 hover:text-gray-500"
-          :class="
-            state.show_explorer_libraries ? 'text-gray-500' : 'text-gray-300'
-          "
-          viewBox="0 0 24 24"
-        >
-          <path
-            fill="currentColor"
-            d="M14.6,16.6L19.2,12L14.6,7.4L16,6L22,12L16,18L14.6,16.6M9.4,16.6L4.8,12L9.4,7.4L8,6L2,12L8,18L9.4,16.6Z"
-          />
-        </svg>
-      </button>
-      <button
-        @click.stop="
-          state.show_explorer_elements = !state.show_explorer_elements
-        "
-        class="cursor-pointer ml-0.5"
-        title="Toggle explorer elements tree bar"
-      >
-        <svg
-          class="w-4 h-4 hover:text-gray-500"
-          :class="
-            state.show_explorer_elements ? 'text-gray-500' : 'text-gray-300'
-          "
-          viewBox="0 0 24 24"
-        >
-          <path
-            fill="currentColor"
-            d="M3,3H9V7H3V3M15,10H21V14H15V10M15,17H21V21H15V17M13,13H7V18H13V20H7L5,20V9H7V11H13V13Z"
-          />
-        </svg>
-      </button>
-      <div class="h-4 ml-0.5 border-l border-gray-300"></div>
       <button
         @click.stop="state.show_properties = !state.show_properties"
         class="ml-2 mr-2 cursor-pointer"

@@ -26,8 +26,6 @@ import { Tree } from '@/Components/project'
 
 const state = ref({
   show_explorer: true,
-  show_explorer_libraries: true,
-  show_explorer_elements: true,
   show_properties: true,
 })
 
