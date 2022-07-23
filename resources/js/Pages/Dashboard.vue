@@ -1,8 +1,6 @@
 <template>
-  <div class="bg-1 w-full h-full flex justify-center items-center">
-    <div class="w-full mx-48 h-64 flex justify-center items-center bg-white">
-      element
-    </div>
+  <div class="w-full h-full">
+    <pre>{{ JSON.stringify(project, null, 2) }}</pre>
   </div>
 </template>
 
