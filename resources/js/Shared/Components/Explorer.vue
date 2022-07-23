@@ -4,7 +4,7 @@
   >
     <div id="libraries" ref="libraries">
       <div
-        class="h-6 flex items-center justify-between p-1 border-b border-b-gray-200"
+        class="bg-1 h-6 flex items-center justify-between p-1 border-b border-b-gray-200"
       >
         <div class="mr-1 user-select-none">
           <svg class="w-4 h-4" viewBox="0 0 24 24">
@@ -20,6 +20,7 @@
         <button
           @click.stop="librariesFullScreen"
           class="hover:bg-gray-200 cursor-pointer"
+          title="Full screen libraries panel"
         >
           <svg class="w-5 h-5" viewBox="0 0 24 24">
             <path
@@ -29,8 +30,9 @@
           </svg>
         </button>
         <button
-          @click.stop="elementsFullScreen"
+          @click.stop="librariesRestoreScreen"
           class="hover:bg-gray-200 cursor-pointer"
+          title="Restore size libraries panel"
         >
           <svg class="w-5 h-5" viewBox="0 0 24 24">
             <path
@@ -40,7 +42,7 @@
           </svg>
         </button>
       </div>
-      <div class="flex-grow">libraries content</div>
+      <div class="flex-grow bg-1">libraries content</div>
     </div>
     <div id="separator" ref="separator">
       <svg class="h-4 text-gray-400" viewBox="0 0 24 24">
@@ -51,8 +53,46 @@
       </svg>
     </div>
     <div id="elements" ref="elements">
-      <div class="">elements tree</div>
-      <div class="flex-grow">elements tree content</div>
+      <div
+        class="bg-1 h-6 flex items-center justify-between p-1 border-b border-b-gray-200"
+      >
+        <div class="mr-1 user-select-none">
+          <svg class="w-4 h-4" viewBox="0 0 24 24">
+            <path
+              fill="currentColor"
+              d="M14.6,16.6L19.2,12L14.6,7.4L16,6L22,12L16,18L14.6,16.6M9.4,16.6L4.8,12L9.4,7.4L8,6L2,12L8,18L9.4,16.6Z"
+            />
+          </svg>
+        </div>
+        <div class="flex-grow font-medium text-sm user-select-none select-none">
+          ELEMENTS TREE
+        </div>
+        <button
+          @click.stop="elementsFullScreen"
+          class="hover:bg-gray-200 cursor-pointer"
+          title="Full screen elements tree panel"
+        >
+          <svg class="w-5 h-5" viewBox="0 0 24 24">
+            <path
+              fill="currentColor"
+              d="M5,5H10V7H7V10H5V5M14,5H19V10H17V7H14V5M17,14H19V19H14V17H17V14M10,17V19H5V14H7V17H10Z"
+            />
+          </svg>
+        </button>
+        <button
+          @click.stop="elementsRestoreScreen"
+          class="hover:bg-gray-200 cursor-pointer"
+          title="Restore size elements tree panel"
+        >
+          <svg class="w-5 h-5" viewBox="0 0 24 24">
+            <path
+              fill="currentColor"
+              d="M14,14H19V16H16V19H14V14M5,14H10V19H8V16H5V14M8,5H10V10H5V8H8V5M19,8V10H14V5H16V8H19Z"
+            />
+          </svg>
+        </button>
+      </div>
+      <div class="flex-grow bg-1">elements tree content</div>
     </div>
   </div>
 </template>
@@ -101,7 +141,17 @@ const librariesFullScreen = () => {
   elements.value.style.height = '24px'
 }
 
+const librariesRestoreScreen = () => {
+  libraries.value.style.height = '50%'
+  elements.value.style.height = '50%'
+}
+
 const elementsFullScreen = () => {
+  elements.value.style.height = '100%'
+  libraries.value.style.height = '24px'
+}
+
+const elementsRestoreScreen = () => {
   libraries.value.style.height = '50%'
   elements.value.style.height = '50%'
 }
@@ -113,6 +163,7 @@ onMounted(() => {
 
 <style scoped>
 #libraries {
+  background-color: #f5f5f5;
   display: flex;
   flex-direction: column;
   height: 50%;
@@ -131,6 +182,7 @@ onMounted(() => {
   user-select: none;
 }
 #elements {
+  background-color: #f5f5f5;
   display: flex;
   flex-direction: column;
   height: 50%;
