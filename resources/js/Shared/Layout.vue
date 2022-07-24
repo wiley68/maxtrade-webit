@@ -61,8 +61,11 @@ project.value.insertNode('head', 'link.icon', 'icon')
 project.value.insertNode('project', 'body', 'BODY')
 
 const explorer = ref(null)
-const work = ref(null)
 const separator = ref(null)
+const work = ref(null)
+const work_panel = ref(null)
+const separator_properties = ref(null)
+const properties = ref(null)
 
 function dragElement(element) {
   var md
@@ -102,8 +105,47 @@ function dragElement(element) {
   }
 }
 
+function dragProperties(element) {
+  var md
+
+  element.onmousedown = onMouseDown
+
+  function onMouseDown(e) {
+    md = {
+      e,
+      offsetLeft: element.offsetLeft,
+      offsetTop: element.offsetTop,
+      firstWidth: work_panel.value.offsetWidth,
+      secondWidth: properties.value.offsetWidth,
+    }
+
+    document.onmousemove = onMouseMove
+    document.onmouseup = () => {
+      document.onmousemove = document.onmouseup = null
+    }
+  }
+
+  function onMouseMove(e) {
+    var delta = { x: e.clientX - md.e.clientX, y: e.clientY - md.e.clientY }
+
+    delta.x = Math.min(Math.max(delta.x, -md.firstWidth), md.secondWidth)
+
+    element.style.left = md.offsetLeft + delta.x + 'px'
+    work_panel.value.style.width = md.firstWidth + delta.x + 'px'
+    if (md.firstWidth + delta.x == 0) {
+      state.value.show_properties = false
+    } else {
+      if (!state.value.show_properties) {
+        state.value.show_properties = true
+      }
+    }
+    properties.value.style.width = md.secondWidth - delta.x + 'px'
+  }
+}
+
 onMounted(() => {
   dragElement(separator.value)
+  dragProperties(separator_properties.value)
 })
 
 watch(
@@ -115,6 +157,19 @@ watch(
     } else {
       explorer.value.style.width = '0px'
       work.value.style.width = '100%'
+    }
+  }
+)
+
+watch(
+  () => state.value.show_properties,
+  () => {
+    if (state.value.show_properties) {
+      work_panel.value.style.width = '85%'
+      properties.value.style.width = '15%'
+    } else {
+      work_panel.value.style.width = '100%'
+      properties.value.style.width = '0px'
     }
   }
 )
