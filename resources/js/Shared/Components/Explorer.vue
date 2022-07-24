@@ -105,6 +105,7 @@
 import { inject, onMounted, ref } from 'vue'
 
 const state = inject('state')
+const project = inject('project')
 const libraries = ref(null)
 const elements = ref(null)
 const separator = ref(null)

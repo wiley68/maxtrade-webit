@@ -59,7 +59,7 @@ project.value.insertNode('head', 'meta.keywords', 'keywords')
 project.value.insertNode('head', 'link.font', 'font')
 project.value.insertNode('head', 'link.icon', 'icon')
 
-project.value.insertNode('project', 'body', 'BODY')
+project.value.insertNode('html', 'body', 'BODY')
 
 const explorer = ref(null)
 const separator = ref(null)
