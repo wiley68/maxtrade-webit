@@ -62,7 +62,7 @@
           <svg class="w-4 h-4" viewBox="0 0 24 24">
             <path
               fill="currentColor"
-              d="M14.6,16.6L19.2,12L14.6,7.4L16,6L22,12L16,18L14.6,16.6M9.4,16.6L4.8,12L9.4,7.4L8,6L2,12L8,18L9.4,16.6Z"
+              d="M3,3H9V7H3V3M15,10H21V14H15V10M15,17H21V21H15V17M13,13H7V18H13V20H7L5,20V9H7V11H13V13Z"
             />
           </svg>
         </div>

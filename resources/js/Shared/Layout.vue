@@ -12,13 +12,18 @@
         <div class="bg-gray-400 w-0.5 h-0.5 rounded-full"></div>
       </div>
       <div id="work" ref="work">
-        <div class="flex-grow flex flex-col h-full overflow-hidden">
+        <div id="work_panel" ref="work_panel">
           <WorkPanelMenu class="flex-none"></WorkPanelMenu>
           <div class="bg-1 flex-grow overflow-auto mt-0.5">
             <slot></slot>
           </div>
         </div>
-        <Properties class="flex-none" v-if="state.show_properties"></Properties>
+        <div id="separator_properties" ref="separator_properties">
+          <div class="bg-gray-400 w-0.5 h-0.5 rounded-full mb-0.5"></div>
+          <div class="bg-gray-400 w-0.5 h-0.5 rounded-full mb-0.5"></div>
+          <div class="bg-gray-400 w-0.5 h-0.5 rounded-full"></div>
+        </div>
+        <div id="properties" ref="properties"><Properties></Properties></div>
       </div>
     </div>
   </div>
@@ -148,6 +153,30 @@ provide('project', project)
 }
 #work {
   display: flex;
+  height: 100%;
+  width: 85%;
+}
+#properties {
+  flex: none;
+  height: 100%;
+  width: 15%;
+}
+#separator_properties {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: col-resize;
+  background-color: #e4e4e4;
+  width: 6px;
+  height: 100%;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+#work_panel {
+  display: flex;
+  flex-direction: column;
   height: 100%;
   width: 85%;
 }
