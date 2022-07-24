@@ -164,16 +164,18 @@ const elementsRestoreScreen = () => {
 onMounted(() => {
   dragElement(separator.value)
   const tree = toHtml(project.value.root)
+  console.log(tree)
   document.getElementById('elements_tree').appendChild(tree)
 })
 
 function toHtml(data, isRoot = true) {
   console.log(data)
   const ul = document.createElement('ul')
-  ul.id = 'myUL'
 
-  if (!isRoot) {
-    ul.classList.add('hide')
+  if (isRoot) {
+    ul.classList.add('list-none', 'm-0', 'p-0', 'bg-red-300')
+  } else {
+    ul.classList.add('nested', 'bg-green-300')
   }
 
   let isVisible = isRoot
@@ -182,12 +184,12 @@ function toHtml(data, isRoot = true) {
   const button = document.createElement('button')
 
   if (data.hasChildren) {
-    button.textContent = '+'
-    li.appendChild(button)
+    text.textContent = data.value
+    text.classList.add('cursor-pointer', 'select-none', 'bg-blue-300')
+    li.appendChild(text)
+  } else {
+    li.innerText = data.value
   }
-
-  text.textContent = data.value
-  li.appendChild(text)
 
   if (data.hasChildren) {
     data.children.forEach((element) => {
@@ -242,11 +244,27 @@ function toHtml(data, isRoot = true) {
   height: 50%;
   min-height: 24px;
 }
-.hide {
+
+/* Create the caret/arrow with a unicode, and style it */
+.caret::before {
+  content: '\25B6';
+  color: black;
+  display: inline-block;
+  margin-right: 6px;
+}
+
+/* Rotate the caret/arrow icon when clicked on (using JavaScript) */
+.caret-down::before {
+  transform: rotate(90deg);
+}
+
+/* Hide the nested list */
+.nested {
   display: none;
 }
 
-button {
-  margin-right: 10px;
+/* Show the nested list when the user clicks on the caret/arrow (with JavaScript) */
+.active {
+  display: block;
 }
 </style>
