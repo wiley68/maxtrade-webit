@@ -96,7 +96,7 @@
           </svg>
         </button>
       </div>
-      <div class="flex-grow bg-1"></div>
+      <div id="elements_tree" class="flex-grow bg-1"></div>
     </div>
   </div>
 </template>
@@ -163,7 +163,54 @@ const elementsRestoreScreen = () => {
 
 onMounted(() => {
   dragElement(separator.value)
+  const tree = toHtml(project.value.root)
+  document.getElementById('elements_tree').appendChild(tree)
+  console.log(tree)
 })
+
+function toHtml(dataObj, isRoot = true) {
+  const data = Object.entries(dataObj)
+  const ul = document.createElement('ul')
+
+  if (!isRoot) {
+    ul.classList.add('hide')
+  }
+
+  let isVisible = isRoot
+  const li = document.createElement('li')
+  const text = document.createElement('span')
+  const button = document.createElement('button')
+
+  if (data.children) {
+    button.textContent = '+'
+    li.appendChild(button)
+  }
+
+  text.textContent = data.value
+  li.appendChild(text)
+
+  if (data.children) {
+    const children = toHtml(data.children, false)
+    li.appendChild(children)
+
+    button.addEventListener('click', function () {
+      if (isRoot) {
+        isVisible = !isVisible
+      }
+
+      button.textContent = isVisible ? '+' : '-'
+      children.classList.toggle('hide')
+
+      if (!isRoot) {
+        isVisible = !isVisible
+      }
+    })
+  }
+
+  ul.appendChild(li)
+
+  return ul
+}
 </script>
 
 <style scoped>
