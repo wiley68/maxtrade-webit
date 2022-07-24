@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-full">
+  <div class="w-full h-full text-sm">
     <pre>{{ JSON.stringify(project, null, 2) }}</pre>
   </div>
 </template>

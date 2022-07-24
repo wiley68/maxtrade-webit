@@ -14,7 +14,7 @@
       <div id="work" ref="work">
         <div id="work_panel" ref="work_panel">
           <WorkPanelMenu class="flex-none"></WorkPanelMenu>
-          <div class="bg-1 flex-grow overflow-auto mt-0.5">
+          <div class="bg-white flex-grow overflow-auto">
             <slot></slot>
           </div>
         </div>
