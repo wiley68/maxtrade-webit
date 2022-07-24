@@ -41,6 +41,7 @@ import { Tree } from '@/Components/project'
 const state = ref({
   show_explorer: true,
   show_properties: true,
+  work_panel: 'PROJECT',
 })
 
 const project = ref(new Tree('project', 'Untitled-1'))
