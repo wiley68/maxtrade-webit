@@ -165,12 +165,12 @@ onMounted(() => {
   dragElement(separator.value)
   const tree = toHtml(project.value.root)
   document.getElementById('elements_tree').appendChild(tree)
-  console.log(tree)
 })
 
-function toHtml(dataObj, isRoot = true) {
-  const data = Object.entries(dataObj)
+function toHtml(data, isRoot = true) {
+  console.log(data)
   const ul = document.createElement('ul')
+  ul.id = 'myUL'
 
   if (!isRoot) {
     ul.classList.add('hide')
@@ -181,7 +181,7 @@ function toHtml(dataObj, isRoot = true) {
   const text = document.createElement('span')
   const button = document.createElement('button')
 
-  if (data.children) {
+  if (data.hasChildren) {
     button.textContent = '+'
     li.appendChild(button)
   }
@@ -189,21 +189,23 @@ function toHtml(dataObj, isRoot = true) {
   text.textContent = data.value
   li.appendChild(text)
 
-  if (data.children) {
-    const children = toHtml(data.children, false)
-    li.appendChild(children)
+  if (data.hasChildren) {
+    data.children.forEach((element) => {
+      const children = toHtml(element, false)
+      li.appendChild(children)
 
-    button.addEventListener('click', function () {
-      if (isRoot) {
-        isVisible = !isVisible
-      }
+      button.addEventListener('click', function () {
+        if (isRoot) {
+          isVisible = !isVisible
+        }
 
-      button.textContent = isVisible ? '+' : '-'
-      children.classList.toggle('hide')
+        button.textContent = isVisible ? '+' : '-'
+        children.classList.toggle('hide')
 
-      if (!isRoot) {
-        isVisible = !isVisible
-      }
+        if (!isRoot) {
+          isVisible = !isVisible
+        }
+      })
     })
   }
 
@@ -239,5 +241,12 @@ function toHtml(dataObj, isRoot = true) {
   flex-direction: column;
   height: 50%;
   min-height: 24px;
+}
+.hide {
+  display: none;
+}
+
+button {
+  margin-right: 10px;
 }
 </style>
