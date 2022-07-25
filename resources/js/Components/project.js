@@ -6,6 +6,8 @@ class TreeNode {
     this.description = ''
     this.parent = parent
     this.type = ''
+    this.innerText = ''
+    this.innerHTML = ''
     this.children = []
     this.attributes = []
   }
@@ -45,7 +47,7 @@ class Tree {
   insertNode(parentNodeKey, key, value) {
     for (let node of this.preOrderTraversal()) {
       if (node.key === parentNodeKey) {
-        node.children.push(new TreeNode(key, value))
+        node.children.push(new TreeNode(key, value, parentNodeKey))
         return true
       }
     }

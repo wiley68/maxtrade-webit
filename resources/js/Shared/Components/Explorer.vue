@@ -284,7 +284,6 @@ ul,
 }
 .elements-selected {
   color: #0284c7;
-  font-weight: 600;
 }
 </style>
 

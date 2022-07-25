@@ -42,7 +42,7 @@ const state = ref({
   show_explorer: true,
   show_properties: true,
   work_panel: 'PROJECT',
-  current_element: 'project',
+  current_element: '',
 })
 
 const project = ref(new Tree('project', 'Untitled-1'))
@@ -52,7 +52,8 @@ project.value.insertNode('project', 'html', 'HTML')
 project.value.find('html').attributes = { lang: 'en' }
 
 project.value.insertNode('html', 'head', 'HEAD')
-project.value.insertNode('head', 'title', 'TITLE')
+project.value.insertNode('head', 'title', 'title')
+project.value.find('title').innerText = 'Title of project 1'
 project.value.insertNode('head', 'meta.charset', 'CHARSET')
 project.value.insertNode('head', 'meta.viewport', 'viewport')
 project.value.insertNode('head', 'meta.description', 'description')

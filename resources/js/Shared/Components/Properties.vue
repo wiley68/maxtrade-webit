@@ -19,8 +19,34 @@
         PROPERTIES
       </div>
     </div>
-    <div class="flex-grow bg-1"></div>
+    <div
+      v-if="state.current_element !== ''"
+      class="flex flex-col items-center flex-grow bg-1 px-1"
+    >
+      <div
+        class="font-medium border-b border-dotted border-b-gray-200 w-full text-center truncate"
+      >
+        {{ element.value }}
+      </div>
+      <div class="flex flex-col w-full">
+        <div class="text-sm font-light">Id:</div>
+        <input
+          type="text"
+          v-model="element.key"
+          class="text-sm px-0.5 py-0 font-medium focus:outline-none"
+        />
+      </div>
+    </div>
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { computed, inject } from 'vue'
+
+const state = inject('state')
+const project = inject('project')
+
+const element = computed(() => {
+  return project.value.find(state.value.current_element)
+})
+</script>
