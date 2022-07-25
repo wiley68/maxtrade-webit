@@ -33,8 +33,54 @@
         <input
           type="text"
           v-model="element.key"
-          class="text-sm px-0.5 py-0 font-medium focus:outline-none"
+          class="ring-0 focus:ring-0 focus:outline-none w-full px-1 py-0 text-sm rounded-sm border border-gray-400 focus:border-sky-600 hover:border-sky-600"
         />
+      </div>
+      <div class="flex flex-col w-full">
+        <div class="text-sm font-light">Name:</div>
+        <input
+          type="text"
+          v-model="element.value"
+          class="ring-0 focus:ring-0 focus:outline-none w-full px-1 py-0 text-sm rounded-sm border border-gray-400 focus:border-sky-600 hover:border-sky-600"
+        />
+      </div>
+      <div class="flex flex-col w-full">
+        <div class="text-sm font-light">Description:</div>
+        <textarea
+          v-model="element.description"
+          class="ring-0 focus:ring-0 focus:outline-none w-full px-1 py-0 text-sm rounded-sm border border-gray-400 focus:border-sky-600 hover:border-sky-600"
+        ></textarea>
+      </div>
+      <div class="flex flex-col w-full">
+        <div class="text-sm font-light">Parent:{{ element.parent }}</div>
+      </div>
+      <div class="flex flex-col w-full">
+        <div class="text-sm font-light">Type:</div>
+        <select
+          class="ring-0 focus:ring-0 focus:outline-none w-full px-1 py-0 text-sm rounded-sm border border-gray-400 focus:border-sky-600 hover:border-sky-600"
+          v-model="element.type"
+        >
+          <option value="project">Root Project</option>
+        </select>
+      </div>
+      <div class="flex flex-col w-full">
+        <div class="text-sm font-light">InnerText:</div>
+        <textarea
+          v-model="element.innerText"
+          class="ring-0 focus:ring-0 focus:outline-none w-full px-1 py-0 text-sm rounded-sm border border-gray-400 focus:border-sky-600 hover:border-sky-600"
+        ></textarea>
+      </div>
+      <div class="flex flex-col w-full">
+        <div class="text-sm font-light">InnerHTML:</div>
+        <textarea
+          v-model="element.innerHTML"
+          class="ring-0 focus:ring-0 focus:outline-none w-full px-1 py-0 text-sm rounded-sm border border-gray-400 focus:border-sky-600 hover:border-sky-600"
+        ></textarea>
+      </div>
+      <div
+        class="mt-2 text-sm font-medium border-b border-dotted border-b-gray-200 w-full text-center"
+      >
+        children elements
       </div>
     </div>
   </div>

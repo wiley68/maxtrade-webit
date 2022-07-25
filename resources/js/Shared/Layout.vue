@@ -47,6 +47,7 @@ const state = ref({
 
 const project = ref(new Tree('project', 'Untitled-1'))
 project.value.find('project').description = 'Description of Untitled-1'
+project.value.find('project').type = 'project'
 
 project.value.insertNode('project', 'html', 'HTML')
 project.value.find('html').attributes = { lang: 'en' }
