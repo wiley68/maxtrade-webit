@@ -1,13 +1,14 @@
 //default node
 class TreeNode {
-  constructor(key, value = key, parent = null) {
+  constructor(key, value = key, parent = null, level = 0) {
     this.key = key
     this.value = value
     this.description = ''
     this.parent = parent
-    this.children = []
-    this.attributes = []
     this.type = ''
+    this.level = level
+    this.attributes = []
+    this.children = []
   }
 
   get isLeaf() {
@@ -45,7 +46,9 @@ class Tree {
   insertNode(parentNodeKey, key, value) {
     for (let node of this.preOrderTraversal()) {
       if (node.key === parentNodeKey) {
-        node.children.push(new TreeNode(key, value))
+        node.children.push(
+          new TreeNode(key, value, parentNodeKey, node.level + 1)
+        )
         return true
       }
     }

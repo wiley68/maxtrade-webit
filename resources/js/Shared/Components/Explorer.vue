@@ -96,7 +96,7 @@
           </svg>
         </button>
       </div>
-      <div id="elements_tree" class="flex-grow bg-1"></div>
+      <div id="elements_tree" class="p-1"></div>
     </div>
   </div>
 </template>
@@ -163,19 +163,8 @@ const elementsRestoreScreen = () => {
 
 onMounted(() => {
   dragElement(separator.value)
-  const tree = toHtml(project.value.root)
-  console.log(tree)
+  const tree = toHtml(project.value.root, true)
   document.getElementById('elements_tree').appendChild(tree)
-
-  var toggler = document.getElementsByClassName('caret')
-  var i
-
-  for (i = 0; i < toggler.length; i++) {
-    toggler[i].addEventListener('click', function () {
-      this.parentElement.querySelector('.nested').classList.toggle('active')
-      this.classList.toggle('caret-down')
-    })
-  }
 })
 
 function toHtml(data, isRoot = true) {
@@ -190,12 +179,20 @@ function toHtml(data, isRoot = true) {
   let isVisible = isRoot
   const li = document.createElement('li')
   const text = document.createElement('span')
-  const button = document.createElement('button')
 
   if (data.hasChildren) {
     text.textContent = data.value
     text.classList.add('caret')
     li.appendChild(text)
+    text.addEventListener('click', function () {
+      var nestedul = text.parentElement.childNodes
+      nestedul.forEach(function (element) {
+        if (element.classList.contains('nested')) {
+          element.classList.toggle('active')
+        }
+      })
+      text.classList.toggle('caret-down')
+    })
   } else {
     li.innerText = data.value
   }
@@ -207,6 +204,7 @@ function toHtml(data, isRoot = true) {
     })
   }
 
+  li.style.paddingLeft = data.level * 10 + 'px'
   ul.appendChild(li)
 
   return ul
@@ -223,23 +221,39 @@ ul,
   padding: 0;
 }
 .caret {
+  font-size: 14px;
+  line-height: 20px;
+  display: flex;
+  align-items: center;
   cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
   user-select: none;
 }
 .caret::before {
-  content: '\25B6';
-  color: black;
-  display: inline-block;
-  margin-right: 6px;
+  content: '';
+  filter: invert(45%) sepia(6%) saturate(856%) hue-rotate(182deg)
+    brightness(95%) contrast(89%);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' style='width:24px;height:24px;' viewBox='0 0 24 24'%3E%3Cpath fill='currentColor' d='M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M13,7H11V11H7V13H11V17H13V13H17V11H13V7Z' /%3E%3C/svg%3E");
+  display: inline-flex;
+  background-size: 16px 16px;
+  height: 16px;
+  width: 16px;
+  margin-right: 3px;
 }
 .nested {
   display: none;
 }
 .caret-down::before {
-  transform: rotate(90deg);
+  content: '';
+  filter: invert(45%) sepia(6%) saturate(856%) hue-rotate(182deg)
+    brightness(95%) contrast(89%);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' style='width:24px;height:24px' viewBox='0 0 24 24'%3E%3Cpath fill='currentColor' d='M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M7,13H17V11H7' /%3E%3C/svg%3E");
 }
 .active {
-  display: block;
+  display: flex;
+  align-items: center;
 }
 </style>
 
