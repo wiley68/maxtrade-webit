@@ -24,7 +24,7 @@
       class="flex flex-col items-center flex-grow bg-1 px-1"
     >
       <div
-        class="font-medium border-b border-dotted border-b-gray-200 w-full text-center truncate"
+        class="font-medium border-b border-dotted border-b-sky-200 w-full text-center truncate text-sky-600"
       >
         {{ element.value }}
       </div>
@@ -82,6 +82,14 @@
       >
         children elements
       </div>
+      <button
+        class="w-full truncate cursor-pointer text-left hover:underline"
+        v-for="child in element.children"
+        :key="child.key"
+        @click.stop="changeElement(child.key)"
+      >
+        {{ child.value }}
+      </button>
     </div>
   </div>
 </template>
@@ -95,4 +103,8 @@ const project = inject('project')
 const element = computed(() => {
   return project.value.find(state.value.current_element)
 })
+
+const changeElement = (key) => {
+  state.value.current_element = key
+}
 </script>

@@ -102,7 +102,7 @@
 </template>
 
 <script setup>
-import { inject, onMounted, ref } from 'vue'
+import { inject, onMounted, ref, watch } from 'vue'
 
 const state = inject('state')
 const project = inject('project')
@@ -199,6 +199,7 @@ function toHtml(data, isRoot = true) {
 
   if (data.hasChildren) {
     text.textContent = data.value
+    text.id = data.key
     text.classList.add('elements-caret')
     li.appendChild(text)
     text.addEventListener('click', function () {
@@ -210,13 +211,12 @@ function toHtml(data, isRoot = true) {
       })
       text.classList.toggle('elements-caret-down')
       state.value.current_element = data.key
-      toggleElement(text)
     })
   } else {
     li.innerText = data.value
+    li.id = data.key
     li.addEventListener('click', function () {
       state.value.current_element = data.key
-      toggleElement(li)
     })
   }
 
@@ -237,6 +237,13 @@ function toHtml(data, isRoot = true) {
 
   return ul
 }
+
+watch(
+  () => state.value.current_element,
+  () => {
+    toggleElement(document.getElementById(state.value.current_element))
+  }
+)
 </script>
 
 <style>
