@@ -166,16 +166,25 @@ onMounted(() => {
   const tree = toHtml(project.value.root)
   console.log(tree)
   document.getElementById('elements_tree').appendChild(tree)
+
+  var toggler = document.getElementsByClassName('caret')
+  var i
+
+  for (i = 0; i < toggler.length; i++) {
+    toggler[i].addEventListener('click', function () {
+      this.parentElement.querySelector('.nested').classList.toggle('active')
+      this.classList.toggle('caret-down')
+    })
+  }
 })
 
 function toHtml(data, isRoot = true) {
-  console.log(data)
   const ul = document.createElement('ul')
 
   if (isRoot) {
-    ul.classList.add('list-none', 'm-0', 'p-0', 'bg-red-300')
+    ul.id = 'myUL'
   } else {
-    ul.classList.add('nested', 'bg-green-300')
+    ul.classList.add('nested')
   }
 
   let isVisible = isRoot
@@ -185,7 +194,7 @@ function toHtml(data, isRoot = true) {
 
   if (data.hasChildren) {
     text.textContent = data.value
-    text.classList.add('cursor-pointer', 'select-none', 'bg-blue-300')
+    text.classList.add('caret')
     li.appendChild(text)
   } else {
     li.innerText = data.value
@@ -195,19 +204,6 @@ function toHtml(data, isRoot = true) {
     data.children.forEach((element) => {
       const children = toHtml(element, false)
       li.appendChild(children)
-
-      button.addEventListener('click', function () {
-        if (isRoot) {
-          isVisible = !isVisible
-        }
-
-        button.textContent = isVisible ? '+' : '-'
-        children.classList.toggle('hide')
-
-        if (!isRoot) {
-          isVisible = !isVisible
-        }
-      })
     })
   }
 
@@ -216,6 +212,36 @@ function toHtml(data, isRoot = true) {
   return ul
 }
 </script>
+
+<style>
+ul,
+#myUL {
+  list-style-type: none;
+}
+#myUL {
+  margin: 0;
+  padding: 0;
+}
+.caret {
+  cursor: pointer;
+  user-select: none;
+}
+.caret::before {
+  content: '\25B6';
+  color: black;
+  display: inline-block;
+  margin-right: 6px;
+}
+.nested {
+  display: none;
+}
+.caret-down::before {
+  transform: rotate(90deg);
+}
+.active {
+  display: block;
+}
+</style>
 
 <style scoped>
 #libraries {
@@ -243,28 +269,5 @@ function toHtml(data, isRoot = true) {
   flex-direction: column;
   height: 50%;
   min-height: 24px;
-}
-
-/* Create the caret/arrow with a unicode, and style it */
-.caret::before {
-  content: '\25B6';
-  color: black;
-  display: inline-block;
-  margin-right: 6px;
-}
-
-/* Rotate the caret/arrow icon when clicked on (using JavaScript) */
-.caret-down::before {
-  transform: rotate(90deg);
-}
-
-/* Hide the nested list */
-.nested {
-  display: none;
-}
-
-/* Show the nested list when the user clicks on the caret/arrow (with JavaScript) */
-.active {
-  display: block;
 }
 </style>
