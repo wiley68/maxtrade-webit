@@ -167,34 +167,57 @@ onMounted(() => {
   document.getElementById('elements_tree').appendChild(tree)
 })
 
+const toggleElement = (element) => {
+  document
+    .getElementById('elements-ul')
+    .querySelectorAll('span')
+    .forEach((el) => {
+      el.classList.remove('elements-selected')
+    })
+  document
+    .getElementById('elements-ul')
+    .querySelectorAll('li')
+    .forEach((el) => {
+      el.classList.remove('elements-selected')
+    })
+  element.classList.toggle('elements-selected')
+}
+
 function toHtml(data, isRoot = true) {
   const ul = document.createElement('ul')
 
   if (isRoot) {
-    ul.id = 'myUL'
+    ul.id = 'elements-ul'
   } else {
-    ul.classList.add('nested')
+    ul.classList.add('elements-nested')
   }
 
   let isVisible = isRoot
   const li = document.createElement('li')
+  li.classList.add('cursor-pointer')
   const text = document.createElement('span')
 
   if (data.hasChildren) {
     text.textContent = data.value
-    text.classList.add('caret')
+    text.classList.add('elements-caret')
     li.appendChild(text)
     text.addEventListener('click', function () {
       var nestedul = text.parentElement.childNodes
       nestedul.forEach(function (element) {
-        if (element.classList.contains('nested')) {
-          element.classList.toggle('active')
+        if (element.classList.contains('elements-nested')) {
+          element.classList.toggle('elements-active')
         }
       })
-      text.classList.toggle('caret-down')
+      text.classList.toggle('elements-caret-down')
+      state.value.current_element = data.key
+      toggleElement(text)
     })
   } else {
     li.innerText = data.value
+    li.addEventListener('click', function () {
+      state.value.current_element = data.key
+      toggleElement(li)
+    })
   }
 
   if (data.hasChildren) {
@@ -204,7 +227,12 @@ function toHtml(data, isRoot = true) {
     })
   }
 
-  li.style.paddingLeft = data.level * 10 + 'px'
+  if (isRoot) {
+    li.style.paddingLeft = '0px'
+  } else {
+    li.style.paddingLeft = '10px'
+  }
+
   ul.appendChild(li)
 
   return ul
@@ -213,25 +241,24 @@ function toHtml(data, isRoot = true) {
 
 <style>
 ul,
-#myUL {
+#elements-ul {
   list-style-type: none;
 }
-#myUL {
+#elements-ul {
   margin: 0;
   padding: 0;
 }
-.caret {
+.elements-caret {
   font-size: 14px;
   line-height: 20px;
   display: flex;
   align-items: center;
-  cursor: pointer;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
 }
-.caret::before {
+.elements-caret::before {
   content: '';
   filter: invert(45%) sepia(6%) saturate(856%) hue-rotate(182deg)
     brightness(95%) contrast(89%);
@@ -242,18 +269,22 @@ ul,
   width: 16px;
   margin-right: 3px;
 }
-.nested {
+.elements-nested {
   display: none;
 }
-.caret-down::before {
+.elements-caret-down::before {
   content: '';
   filter: invert(45%) sepia(6%) saturate(856%) hue-rotate(182deg)
     brightness(95%) contrast(89%);
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' style='width:24px;height:24px' viewBox='0 0 24 24'%3E%3Cpath fill='currentColor' d='M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M7,13H17V11H7' /%3E%3C/svg%3E");
 }
-.active {
+.elements-active {
   display: flex;
   align-items: center;
+}
+.elements-selected {
+  color: #0284c7;
+  font-weight: 600;
 }
 </style>
 

@@ -42,6 +42,7 @@ const state = ref({
   show_explorer: true,
   show_properties: true,
   work_panel: 'PROJECT',
+  current_element: 'project',
 })
 
 const project = ref(new Tree('project', 'Untitled-1'))
