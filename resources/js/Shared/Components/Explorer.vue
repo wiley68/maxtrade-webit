@@ -99,6 +99,7 @@
       <div id="elements_tree" class="p-1">
         <tree-menu
           :key_tree="project.root.key"
+          :value="project.root.value"
           :children="project.root.children"
           :depth="0"
         ></tree-menu>
