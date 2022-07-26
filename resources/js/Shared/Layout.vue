@@ -2,7 +2,10 @@
   <Head :title="$page.component"></Head>
   <div class="bg-2 w-full h-screen flex flex-col overflow-hidden">
     <Menu></Menu>
-    <div class="flex items-center w-full flex-grow overflow-hidden">
+    <div
+      v-if="state.show_work"
+      class="flex items-center w-full flex-grow overflow-hidden"
+    >
       <div id="explorer" ref="explorer">
         <Explorer></Explorer>
       </div>
@@ -26,6 +29,7 @@
         <div id="properties" ref="properties"><Properties></Properties></div>
       </div>
     </div>
+    <div v-if="state.show_projects" class="">111</div>
   </div>
 </template>
 
@@ -39,6 +43,8 @@ import WorkPanelMenu from './Components/WorkPanelMenu.vue'
 import { Tree } from '@/Components/project'
 
 const state = ref({
+  show_work: false,
+  show_projects: true,
   show_explorer: true,
   show_properties: true,
   work_panel: 'PROJECT',
@@ -148,8 +154,10 @@ function dragProperties(element) {
 }
 
 onMounted(() => {
-  dragElement(separator.value)
-  dragProperties(separator_properties.value)
+  if (state.value.show_work) {
+    dragElement(separator.value)
+    dragProperties(separator_properties.value)
+  }
 })
 
 watch(

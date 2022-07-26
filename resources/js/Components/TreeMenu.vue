@@ -83,7 +83,6 @@ const toggleChildren = () => {
 
 const changeElement = () => {
   state.value.current_element = props.key_tree
-  console.log(state.value.current_element)
 }
 </script>
 
