@@ -1,13 +1,16 @@
 <template>
   <div>
-    <div class="flex items-center text-sm" :style="indent">
+    <div
+      class="flex items-center justify-between text-sm"
+      :style="{ paddingLeft: depth * 10 + 'px' }"
+    >
       <div
         v-if="children.length > 0"
         :class="iconClasses"
         @click="toggleChildren"
       ></div>
       <button
-        class="cursor-help truncate hover:text-sky-600 border hover:border-sky-200 px-0.5 py-0 rounded hover:bg-white"
+        class="flex-grow cursor-help text-left truncate hover:text-sky-600 border hover:border-sky-200 px-0.5 py-0 rounded hover:bg-white"
         :class="
           key_tree === state.current_element
             ? 'text-sky-600 border-sky-200 bg-white'
@@ -17,6 +20,27 @@
       >
         {{ value }}
       </button>
+      <div
+        v-if="key_tree == 'project'"
+        class="flex justify-center items-center"
+      >
+        <button class="hover:bg-gray-200 cursor-pointer" title="Expand all">
+          <svg class="w-5 h-5" viewBox="0 0 24 24">
+            <path
+              fill="currentColor"
+              d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"
+            />
+          </svg>
+        </button>
+        <button class="hover:bg-gray-200 cursor-pointer" title="Shrink all">
+          <svg class="w-5 h-5" viewBox="0 0 24 24">
+            <path
+              fill="currentColor"
+              d="M7.41,15.41L12,10.83L16.59,15.41L18,14L12,8L6,14L7.41,15.41Z"
+            />
+          </svg>
+        </button>
+      </div>
     </div>
     <tree-menu
       v-if="showChildren"
@@ -56,10 +80,6 @@ const iconClasses = computed(() => {
     'elements-caret': !showChildren.value,
     'elements-caret-down': showChildren.value,
   }
-})
-
-const indent = computed(() => {
-  return { transform: `translate(${props.depth * 10}px)` }
 })
 
 const toggleChildren = () => {
