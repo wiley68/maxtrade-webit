@@ -24,15 +24,11 @@
         v-if="key_tree == 'project'"
         class="flex justify-center items-center"
       >
-        <button class="hover:bg-gray-200 cursor-pointer" title="Expand all">
-          <svg class="w-5 h-5" viewBox="0 0 24 24">
-            <path
-              fill="currentColor"
-              d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"
-            />
-          </svg>
-        </button>
-        <button class="hover:bg-gray-200 cursor-pointer" title="Shrink all">
+        <button
+          class="hover:bg-gray-200 cursor-pointer"
+          title="Shrink all"
+          @click.stop="showChildren = false"
+        >
           <svg class="w-5 h-5" viewBox="0 0 24 24">
             <path
               fill="currentColor"
@@ -64,7 +60,6 @@ export default {
 import { ref, computed, inject } from 'vue'
 
 const state = inject('state')
-const project = inject('project')
 
 const props = defineProps({
   key_tree: String,
