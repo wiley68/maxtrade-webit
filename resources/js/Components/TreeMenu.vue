@@ -9,7 +9,7 @@
       <button
         class="cursor-help truncate hover:text-sky-600 border hover:border-sky-200 px-0.5 py-0 rounded hover:bg-white"
         :class="
-          key_tree == state.current_element
+          key_tree === state.current_element
             ? 'text-sky-600 border-sky-200 bg-white'
             : 'text-gray-500 border-gray-100 bg-gray-100'
         "
