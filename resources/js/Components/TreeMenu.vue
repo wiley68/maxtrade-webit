@@ -6,8 +6,8 @@
         :class="iconClasses"
         @click="toggleChildren"
       ></div>
-      <div
-        class="cursor-help hover:text-sky-600 border hover:border-sky-200 px-0.5 py-0 rounded hover:bg-white"
+      <button
+        class="cursor-help truncate hover:text-sky-600 border hover:border-sky-200 px-0.5 py-0 rounded hover:bg-white"
         :class="
           key_tree == state.current_element
             ? 'text-sky-600 border-sky-200 bg-white'
@@ -16,7 +16,7 @@
         @click.stop="changeElement"
       >
         {{ value }}
-      </div>
+      </button>
     </div>
     <tree-menu
       v-if="showChildren"

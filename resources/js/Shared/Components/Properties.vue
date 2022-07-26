@@ -82,14 +82,16 @@
       >
         children elements
       </div>
-      <button
-        class="w-full truncate cursor-pointer text-left hover:underline"
-        v-for="child in element.children"
-        :key="child.key"
-        @click.stop="changeElement(child.key)"
-      >
-        {{ child.value }}
-      </button>
+      <div class="flex flex-col w-full">
+        <button
+          class="truncate text-sm text-left cursor-help hover:text-sky-600 border border-gray-100 hover:border-sky-200 px-0.5 py-0 mt-0.5 rounded hover:bg-white"
+          v-for="child in element.children"
+          :key="child.key"
+          @click.stop="changeElement(child.key)"
+        >
+          {{ child.value }}
+        </button>
+      </div>
     </div>
   </div>
 </template>
