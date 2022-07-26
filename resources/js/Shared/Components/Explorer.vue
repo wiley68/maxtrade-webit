@@ -109,7 +109,7 @@
 </template>
 
 <script setup>
-import { inject, onMounted, ref, watch } from 'vue'
+import { inject, onMounted, ref } from 'vue'
 import TreeMenu from '@/Components/TreeMenu.vue'
 
 const state = inject('state')
@@ -171,87 +171,7 @@ const elementsRestoreScreen = () => {
 
 onMounted(() => {
   dragElement(separator.value)
-  //const tree = toHtml(project.value.root, true)
-  //document.getElementById('elements_tree').appendChild(tree)
 })
-
-// const toggleElement = (element) => {
-//   document
-//     .getElementById('elements-ul')
-//     .querySelectorAll('span')
-//     .forEach((el) => {
-//       el.classList.remove('elements-selected')
-//     })
-//   document
-//     .getElementById('elements-ul')
-//     .querySelectorAll('li')
-//     .forEach((el) => {
-//       el.classList.remove('elements-selected')
-//     })
-//   element.classList.toggle('elements-selected')
-// }
-
-// function toHtml(data, isRoot = true) {
-//   const ul = document.createElement('ul')
-
-//   if (isRoot) {
-//     ul.id = 'elements-ul'
-//   } else {
-//     ul.classList.add('elements-nested')
-//   }
-
-//   let isVisible = isRoot
-//   const li = document.createElement('li')
-//   li.classList.add('cursor-pointer')
-//   const text = document.createElement('span')
-
-//   if (data.hasChildren) {
-//     text.textContent = data.value
-//     text.id = data.key
-//     text.classList.add('elements-caret')
-//     li.appendChild(text)
-//     text.addEventListener('click', function () {
-//       var nestedul = text.parentElement.childNodes
-//       nestedul.forEach(function (element) {
-//         if (element.classList.contains('elements-nested')) {
-//           element.classList.toggle('elements-active')
-//         }
-//       })
-//       text.classList.toggle('elements-caret-down')
-//       state.value.current_element = data.key
-//     })
-//   } else {
-//     li.innerText = data.value
-//     li.id = data.key
-//     li.addEventListener('click', function () {
-//       state.value.current_element = data.key
-//     })
-//   }
-
-//   if (data.hasChildren) {
-//     data.children.forEach((element) => {
-//       const children = toHtml(element, false)
-//       li.appendChild(children)
-//     })
-//   }
-
-//   if (isRoot) {
-//     li.style.paddingLeft = '0px'
-//   } else {
-//     li.style.paddingLeft = '10px'
-//   }
-
-//   ul.appendChild(li)
-
-//   return ul
-// }
-
-// watch(
-//   () => state.value.current_element,
-//   () => {
-//     toggleElement(document.getElementById(state.value.current_element))
-//   }
-// )
 </script>
 
 <style>

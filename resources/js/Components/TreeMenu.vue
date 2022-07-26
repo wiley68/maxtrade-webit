@@ -6,7 +6,17 @@
         :class="iconClasses"
         @click="toggleChildren"
       ></div>
-      <div class="cursor-help">{{ value }}</div>
+      <div
+        class="cursor-help hover:text-sky-600 border hover:border-sky-200 px-0.5 py-0 rounded hover:bg-white"
+        :class="
+          key_tree == state.current_element
+            ? 'text-sky-600 border-sky-200 bg-white'
+            : 'text-gray-500 border-gray-100 bg-gray-100'
+        "
+        @click.stop="changeElement"
+      >
+        {{ value }}
+      </div>
     </div>
     <tree-menu
       v-if="showChildren"
@@ -27,7 +37,10 @@ export default {
 </script>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, inject } from 'vue'
+
+const state = inject('state')
+const project = inject('project')
 
 const props = defineProps({
   key_tree: String,
@@ -51,6 +64,11 @@ const indent = computed(() => {
 
 const toggleChildren = () => {
   showChildren.value = !showChildren.value
+}
+
+const changeElement = () => {
+  state.value.current_element = props.key_tree
+  console.log(state.value.current_element)
 }
 </script>
 
