@@ -8,8 +8,8 @@ class TreeNode {
     this.type = ''
     this.innerText = ''
     this.innerHTML = ''
-    this.children = []
     this.attributes = []
+    this.children = []
   }
 
   get isLeaf() {

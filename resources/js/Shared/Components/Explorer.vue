@@ -98,8 +98,8 @@
       </div>
       <div id="elements_tree" class="p-1">
         <tree-menu
-          :key_tree="tree.key"
-          :children="tree.children"
+          :key_tree="project.root.key"
+          :children="project.root.children"
           :depth="0"
         ></tree-menu>
       </div>
@@ -251,31 +251,6 @@ onMounted(() => {
 //     toggleElement(document.getElementById(state.value.current_element))
 //   }
 // )
-
-let tree = {
-  key: 'root',
-  children: [
-    {
-      key: 'item1',
-      children: [
-        {
-          key: 'item1.1',
-        },
-        {
-          key: 'item1.2',
-          children: [
-            {
-              key: 'item1.2.1',
-            },
-          ],
-        },
-      ],
-    },
-    {
-      key: 'item2',
-    },
-  ],
-}
 </script>
 
 <style>
