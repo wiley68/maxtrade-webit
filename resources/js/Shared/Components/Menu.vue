@@ -115,7 +115,7 @@
     </div>
     <div class="w-1/3 flex flex-col">
       <div class="w-full text-sm font-medium text-gray-600 text-center">
-        Untitled-1 - Maxtrade Webit
+        {{ project.find('project').value }} - Maxtrade Webit
       </div>
       <div class="w-full text-xs text-gray-500 text-center">
         {{ project.find('project').description }}
