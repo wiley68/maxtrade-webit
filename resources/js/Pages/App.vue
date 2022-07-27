@@ -2,7 +2,7 @@
   <WorkPanelMenu class="flex-none"></WorkPanelMenu>
   <div class="bg-white flex-grow overflow-auto">
     <div class="w-full h-full text-sm">
-      <div v-if="state.work_panel == 'PROJECT'">
+      <div v-if="state.work_panel == 'PROJECT' && project.value">
         <pre>{{ JSON.stringify(project, null, 2) }}</pre>
       </div>
       <div v-if="state.work_panel == 'CONSTRUCTOR'">CONSTRUCTOR</div>
