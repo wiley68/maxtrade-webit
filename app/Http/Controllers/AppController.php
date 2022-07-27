@@ -7,7 +7,7 @@ use Inertia\Inertia;
 
 class AppController extends Controller
 {
-    public function dashboard(){
-        return Inertia::render('Dashboard');
+    public function app(){
+        return Inertia::render('app');
     }
 }

@@ -2,10 +2,7 @@
   <Head :title="$page.component"></Head>
   <div class="bg-2 w-full h-screen flex flex-col overflow-hidden">
     <Menu></Menu>
-    <div
-      v-if="state.show_work"
-      class="flex items-center w-full flex-grow overflow-hidden"
-    >
+    <div class="flex items-center w-full flex-grow overflow-hidden">
       <div id="explorer" ref="explorer">
         <Explorer></Explorer>
       </div>
@@ -16,10 +13,7 @@
       </div>
       <div id="work" ref="work">
         <div id="work_panel" ref="work_panel">
-          <WorkPanelMenu class="flex-none"></WorkPanelMenu>
-          <div class="bg-white flex-grow overflow-auto">
-            <slot></slot>
-          </div>
+          <slot></slot>
         </div>
         <div id="separator_properties" ref="separator_properties">
           <div class="bg-gray-400 w-0.5 h-0.5 rounded-full mb-0.5"></div>
@@ -29,22 +23,18 @@
         <div id="properties" ref="properties"><Properties></Properties></div>
       </div>
     </div>
-    <div v-if="state.show_projects" class="">111</div>
   </div>
 </template>
 
 <script setup>
 import { ref, provide, onMounted, watch } from 'vue'
-import { Head } from '@inertiajs/inertia-vue3'
+import { Head, usePage } from '@inertiajs/inertia-vue3'
 import Menu from './Components/Menu.vue'
 import Explorer from './Components/Explorer.vue'
 import Properties from './Components/Properties.vue'
-import WorkPanelMenu from './Components/WorkPanelMenu.vue'
 import { Tree } from '@/Components/project'
 
 const state = ref({
-  show_work: false,
-  show_projects: true,
   show_explorer: true,
   show_properties: true,
   work_panel: 'PROJECT',
@@ -154,7 +144,7 @@ function dragProperties(element) {
 }
 
 onMounted(() => {
-  if (state.value.show_work) {
+  if (usePage().component.value === 'Dashboard') {
     dragElement(separator.value)
     dragProperties(separator_properties.value)
   }

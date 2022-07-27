@@ -13,7 +13,7 @@ Route::get('/donate', [PageController::class, 'donate'])->name('donate');
 Route::get('/sponsors', [PageController::class, 'sponsors'])->name('sponsors');
 
 //app routes
-Route::get('/dashboard', [AppController::class, 'dashboard'])->middleware(['auth'])->name('dashboard');
+Route::get('/app', [AppController::class, 'app'])->middleware(['auth'])->name('app');
 Route::get('/community', [AppController::class, 'community'])->middleware(['auth'])->name('community');
 
 //auth routes
