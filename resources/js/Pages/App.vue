@@ -14,9 +14,14 @@
 </template>
 
 <script setup>
-import { inject } from 'vue'
+import { inject, onMounted } from 'vue'
 import WorkPanelMenu from '@/Shared/Components/WorkPanelMenu.vue'
 
 const state = inject('state')
 const project = inject('project')
+
+onMounted(() => {
+  state.value.show_explorer = true
+  state.value.show_properties = true
+})
 </script>

@@ -11,16 +11,20 @@
           </svg>
         </li>
         <li>
-          <a href="#">File</a>
+          <button>File</button>
           <ul>
-            <li><a :href="route('index')" @click="logout()">Exit</a></li>
+            <li>
+              <Link href="route('index')" as="button" @click="logout()"
+                >Exit</Link
+              >
+            </li>
           </ul>
         </li>
         <li>
-          <a href="#">View</a>
+          <button>View</button>
           <ul>
             <li v-if="$page.component === 'App'">
-              <a href="#" @click.stop="toggleExplorer">
+              <button @click.stop="toggleExplorer">
                 <div
                   class="flex items-center text-gray-600 hover:text-gray-100"
                 >
@@ -37,11 +41,10 @@
                   <div v-else class="w-4 h-4"></div>
                   <span class="ml-1">Explorer</span>
                 </div>
-              </a>
+              </button>
             </li>
             <li v-if="$page.component === 'App'">
-              <a
-                href="#"
+              <button
                 @click.stop="state.show_properties = !state.show_properties"
               >
                 <div
@@ -60,14 +63,54 @@
                   <div v-else class="w-4 h-4"></div>
                   <span class="ml-1">Properties</span>
                 </div>
-              </a>
+              </button>
+            </li>
+            <li>
+              <Link href="app" as="button">
+                <div
+                  class="flex items-center text-gray-600 hover:text-gray-100"
+                >
+                  <svg
+                    v-if="$page.component === 'App'"
+                    class="w-4 h-4"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"
+                    />
+                  </svg>
+                  <div v-else class="w-4 h-4"></div>
+                  <span class="ml-1">Application</span>
+                </div>
+              </Link>
+            </li>
+            <li>
+              <Link href="dashboard" as="button">
+                <div
+                  class="flex items-center text-gray-600 hover:text-gray-100"
+                >
+                  <svg
+                    v-if="$page.component === 'Dashboard'"
+                    class="w-4 h-4"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"
+                    />
+                  </svg>
+                  <div v-else class="w-4 h-4"></div>
+                  <span class="ml-1">Dashboard</span>
+                </div>
+              </Link>
             </li>
           </ul>
         </li>
         <li>
-          <a href="#">Help</a>
+          <button>Help</button>
           <ul>
-            <li><a href="#">About</a></li>
+            <li><button>About</button></li>
           </ul>
         </li>
       </ul>
@@ -120,7 +163,7 @@
 </template>
 
 <script setup>
-import { useForm } from '@inertiajs/inertia-vue3'
+import { useForm, Link } from '@inertiajs/inertia-vue3'
 import { inject } from 'vue'
 
 const state = inject('state')
@@ -171,7 +214,7 @@ const toggleExplorer = () => {
 #menu > li:nth-child(2) {
   border-left: 1px solid #e4e4e4;
 }
-#menu a {
+#menu button {
   display: block;
   position: relative;
   z-index: 10;
@@ -183,7 +226,7 @@ const toggleExplorer = () => {
   letter-spacing: -0.05em;
   background: transparent;
 }
-#menu > li:hover > a {
+#menu > li:hover > button {
   background: #e4e4e4;
   color: #1f2937;
 }
@@ -208,7 +251,7 @@ const toggleExplorer = () => {
   visibility: visible;
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
 }
-#menu li li a {
+#menu li li button {
   padding-left: 15px;
   padding-top: 6px;
   padding-bottom: 6px;
@@ -219,7 +262,9 @@ const toggleExplorer = () => {
   margin-left: 1px;
   margin-right: 1px;
 }
-#menu li li a:hover {
+#menu li li button:hover {
+  width: 100%;
+  text-align: left;
   border-top: dotted 1px #2563eb;
   border-bottom: dotted 1px #2563eb;
   background: #0284c7;

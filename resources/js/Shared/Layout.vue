@@ -41,6 +41,8 @@ const state = ref({
   current_element: '',
 })
 
+const page = usePage()
+
 const project = ref(new Tree('project', 'Untitled-1'))
 project.value.find('project').description = 'Description of Untitled-1'
 project.value.find('project').type = 'project'
@@ -144,13 +146,24 @@ function dragProperties(element) {
 }
 
 onMounted(() => {
-  if (usePage().component.value === 'App') {
+  if (page.component.value === 'App') {
     dragElement(separator.value)
     dragProperties(separator_properties.value)
   }
-  if (usePage().component.value === 'Dashboard') {
+})
+
+watch(page.component, async (newPage, oldPage) => {
+  if (page.component.value === 'App') {
+    console.log('App')
+    dragElement(separator.value)
+    dragProperties(separator_properties.value)
+  }
+  if (page.component.value === 'Dashboard') {
+    console.log('Dashboard')
     state.value.show_explorer = false
     state.value.show_properties = false
+    separator.value.onmousedown = null
+    separator_properties.value.onmousedown = null
   }
 })
 
