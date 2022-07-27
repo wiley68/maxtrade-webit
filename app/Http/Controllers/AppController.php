@@ -8,6 +8,10 @@ use Inertia\Inertia;
 class AppController extends Controller
 {
     public function app(){
-        return Inertia::render('app');
+        return Inertia::render('App');
+    }
+
+    public function dashboard(){
+        return Inertia::render('Dashboard');
     }
 }

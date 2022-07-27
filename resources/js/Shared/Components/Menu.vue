@@ -19,7 +19,7 @@
         <li>
           <a href="#">View</a>
           <ul>
-            <li>
+            <li v-if="$page.component === 'App'">
               <a href="#" @click.stop="toggleExplorer">
                 <div
                   class="flex items-center text-gray-600 hover:text-gray-100"
@@ -39,7 +39,7 @@
                 </div>
               </a>
             </li>
-            <li>
+            <li v-if="$page.component === 'App'">
               <a
                 href="#"
                 @click.stop="state.show_properties = !state.show_properties"
@@ -82,6 +82,7 @@
     </div>
     <div class="w-1/3 flex justify-end items-center">
       <button
+        v-if="$page.component === 'App'"
         @click.stop="toggleExplorer"
         class="cursor-pointer mr-0.5"
         title="Toggle explorer bar"
@@ -98,6 +99,7 @@
         </svg>
       </button>
       <button
+        v-if="$page.component === 'App'"
         @click.stop="state.show_properties = !state.show_properties"
         class="ml-2 mr-2 cursor-pointer"
         title="Toggle properties bar"

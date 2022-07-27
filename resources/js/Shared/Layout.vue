@@ -144,9 +144,13 @@ function dragProperties(element) {
 }
 
 onMounted(() => {
-  if (usePage().component.value === 'Dashboard') {
+  if (usePage().component.value === 'App') {
     dragElement(separator.value)
     dragProperties(separator_properties.value)
+  }
+  if (usePage().component.value === 'Dashboard') {
+    state.value.show_explorer = false
+    state.value.show_properties = false
   }
 })
 
