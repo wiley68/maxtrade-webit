@@ -14,9 +14,7 @@
           <button>File</button>
           <ul>
             <li>
-              <Link href="route('index')" as="button" @click="logout()"
-                >Exit</Link
-              >
+              <a :href="route('index')" as="button" @click="logout()">Exit</a>
             </li>
           </ul>
         </li>
@@ -226,7 +224,23 @@ const toggleExplorer = () => {
   letter-spacing: -0.05em;
   background: transparent;
 }
+#menu a {
+  display: block;
+  position: relative;
+  z-index: 10;
+  padding: 13px;
+  text-decoration: none;
+  color: #6b7280;
+  line-height: 1;
+  font-size: 14px;
+  letter-spacing: -0.05em;
+  background: transparent;
+}
 #menu > li:hover > button {
+  background: #e4e4e4;
+  color: #1f2937;
+}
+#menu > li:hover > a {
   background: #e4e4e4;
   color: #1f2937;
 }
@@ -262,7 +276,28 @@ const toggleExplorer = () => {
   margin-left: 1px;
   margin-right: 1px;
 }
+#menu li li a {
+  padding-left: 15px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  font-weight: 400;
+  color: #4b5563;
+  border-top: dotted 1px transparent;
+  border-bottom: dotted 1px #e5e7eb;
+  margin-left: 1px;
+  margin-right: 1px;
+}
 #menu li li button:hover {
+  width: 100%;
+  text-align: left;
+  border-top: dotted 1px #2563eb;
+  border-bottom: dotted 1px #2563eb;
+  background: #0284c7;
+  margin-left: 1px;
+  margin-right: 1px;
+  color: #f3f4f6;
+}
+#menu li li a:hover {
   width: 100%;
   text-align: left;
   border-top: dotted 1px #2563eb;
