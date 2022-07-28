@@ -18,6 +18,7 @@ return new class extends Migration
             $table->id();
             $table->string('name', 45);
             $table->longText('project');
+            $table->boolean('type')->default(true);
             $table->foreignIdFor(User::class, 'user_id');
             $table->timestamps();
         });
