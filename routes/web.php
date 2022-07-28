@@ -16,6 +16,7 @@ Route::get('/sponsors', [PageController::class, 'sponsors'])->name('sponsors');
 Route::get('/app', [AppController::class, 'app'])->middleware(['auth'])->name('app');
 Route::get('/dashboard', [AppController::class, 'dashboard'])->middleware(['auth'])->name('dashboard');
 Route::get('/community', [AppController::class, 'community'])->middleware(['auth'])->name('community');
+Route::post('/project/new', [AppController::class, 'newProject'])->middleware(['auth'])->name('project.new');
 
 //auth routes
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

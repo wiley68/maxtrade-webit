@@ -4,12 +4,15 @@
       <div
         class="h-10 bg-gray-100 border-b border-gray-200 flex items-center font-medium"
       >
-        <button
+        <Link
+          href="/project/new"
+          method="post"
+          as="button"
           type="button"
           class="ml-1 inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-sky-50 hover:bg-sky-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500"
         >
           New project
-        </button>
+        </Link>
         <div class="flex items-center flex-grow justify-center">
           <div>Own projects</div>
           <svg class="w-4 h-4 text-gray-400 mx-1" viewBox="0 0 24 24">
@@ -117,7 +120,8 @@
 </template>
 
 <script setup>
-import { inject, onMounted, defineProps, ref } from 'vue'
+import { inject, onMounted, ref } from 'vue'
+import { Link } from '@inertiajs/inertia-vue3'
 
 const state = inject('state')
 const props = defineProps({
