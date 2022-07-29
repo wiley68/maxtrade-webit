@@ -106,7 +106,7 @@
             </button>
             <Link
               :href="route('project.delete')"
-              method="post"
+              method="delete"
               as="button"
               :data="{ id: project.data.id }"
               class="ml-1 inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-red-50 hover:bg-red-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500"
@@ -126,9 +126,8 @@
 </template>
 
 <script setup>
-import { inject, onMounted, ref } from 'vue'
+import { inject, onMounted, watch } from 'vue'
 import { Link } from '@inertiajs/inertia-vue3'
-import { Tree } from '@/Components/project'
 
 const state = inject('state')
 const project = inject('project')
@@ -137,12 +136,16 @@ const props = defineProps({
   projects_others: Object,
 })
 
+watch(props, async (newProjects, oldProjects) => {
+  const last_project = newProjects.projects[newProjects.projects.length - 1]
+  changeProject(last_project)
+})
+
 const getProject = (new_project) => {
   return JSON.parse(new_project.project).root
 }
 
 const changeProject = (new_project) => {
-  project.value = new Tree('project', '')
   const project_info = getProject(new_project)
   project.value.data.id = new_project.id
   project.value.data.created_at = new_project.created_at

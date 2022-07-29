@@ -17,7 +17,7 @@ Route::get('/app', [AppController::class, 'app'])->middleware(['auth'])->name('a
 Route::get('/dashboard', [AppController::class, 'dashboard'])->middleware(['auth'])->name('dashboard');
 Route::get('/community', [AppController::class, 'community'])->middleware(['auth'])->name('community');
 Route::post('/project/new', [AppController::class, 'newProject'])->middleware(['auth'])->name('project.new');
-Route::post('/project/delete', [AppController::class, 'deleteProject'])->middleware(['auth'])->name('project.delete');
+Route::delete('/project/delete', [AppController::class, 'deleteProject'])->middleware(['auth'])->name('project.delete');
 
 //auth routes
 require __DIR__ . '/auth.php';
