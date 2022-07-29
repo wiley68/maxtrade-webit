@@ -92,12 +92,13 @@
             v-if="project.root.value.length !== 0"
             class="h-10 w-full border-t border-gray-300 flex items-center p-1"
           >
-            <button
-              type="button"
+            <Link
+              :href="route('app')"
+              as="button"
               class="inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500"
             >
               Edit project
-            </button>
+            </Link>
             <button
               type="button"
               class="ml-1 inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500"
