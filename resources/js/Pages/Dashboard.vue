@@ -128,6 +128,7 @@
 <script setup>
 import { inject, onMounted, watch } from 'vue'
 import { Link } from '@inertiajs/inertia-vue3'
+import { Tree } from '@/Components/project'
 
 const state = inject('state')
 const project = inject('project')
@@ -137,8 +138,12 @@ const props = defineProps({
 })
 
 watch(props, async (newProjects, oldProjects) => {
-  const last_project = newProjects.projects[newProjects.projects.length - 1]
-  changeProject(last_project)
+  if (newProjects.projects.length > 0) {
+    const last_project = newProjects.projects[0]
+    changeProject(last_project)
+  } else {
+    project.value = new Tree('project', '')
+  }
 })
 
 const getProject = (new_project) => {

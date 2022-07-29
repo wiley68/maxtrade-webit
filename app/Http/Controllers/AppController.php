@@ -17,8 +17,8 @@ class AppController extends Controller
     public function dashboard()
     {
         $user_id = Auth::user()->id;
-        $projects = Project::where('user_id', '=', $user_id)->get();
-        $projects_others = Project::where('user_id', '<>', $user_id)->get();
+        $projects = Project::where('user_id', '=', $user_id)->orderBy('id', 'DESC')->get();
+        $projects_others = Project::where('user_id', '<>', $user_id)->orderBy('id', 'DESC')->get();
         return Inertia::render('Dashboard')->with([
             'projects' => $projects,
             'projects_others' => $projects_others
