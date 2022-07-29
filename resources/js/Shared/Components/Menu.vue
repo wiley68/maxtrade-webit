@@ -64,7 +64,7 @@
               </button>
             </li>
             <li>
-              <Link href="app" as="button">
+              <Link :href="route('app')" as="button">
                 <div
                   class="flex items-center text-gray-600 hover:text-gray-100"
                 >
@@ -84,7 +84,7 @@
               </Link>
             </li>
             <li>
-              <Link href="dashboard" as="button">
+              <Link :href="route('dashboard')" as="button">
                 <div
                   class="flex items-center text-gray-600 hover:text-gray-100"
                 >

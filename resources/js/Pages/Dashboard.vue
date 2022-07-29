@@ -31,10 +31,10 @@
           <button
             v-for="project in projects"
             :key="project.id"
-            @click.stop="currentProject = getProject(project)"
+            @click.stop="changeProject(project)"
             class="group flex flex-col bg-gray-100 hover:border-sky-300 m-1 rounded border px-1 py-0.5"
             :class="
-              currentProject.key == getProject(project).key
+              state.currentProject.key == getProject(project).key
                 ? 'border-sky-300'
                 : 'border-gray-200'
             "
@@ -42,7 +42,7 @@
             <div
               class="text-sm font-medium text-gray-600 group-hover:text-sky-600 truncate"
               :class="
-                currentProject.key == getProject(project).key
+                state.currentProject.key == getProject(project).key
                   ? 'text-sky-600'
                   : 'text-gray-600'
               "
@@ -52,7 +52,7 @@
             <div
               class="text-xs text-gray-500 group-hover:text-sky-500 truncate"
               :class="
-                currentProject.key == getProject(project).key
+                state.currentProject.key == getProject(project).key
                   ? 'text-sky-500'
                   : 'text-gray-500'
               "
@@ -63,18 +63,20 @@
         </div>
         <div class="bg-gray-50 flex-grow flex flex-col text-sm pt-1">
           <div
-            v-if="Object.keys(currentProject).length !== 0"
+            v-if="Object.keys(state.currentProject).length !== 0"
             class="flex-grow px-1"
           >
             <div>
               Name:
               <span class="font-medium text-sky-600">{{
-                currentProject.value
+                state.currentProject.value
               }}</span>
             </div>
             <div>
               Description:
-              <span class="font-medium">{{ currentProject.description }}</span>
+              <span class="font-medium">{{
+                state.currentProject.description
+              }}</span>
             </div>
             <div>Created At:</div>
             <div>Updated At:</div>
@@ -86,7 +88,7 @@
             </div>
           </div>
           <div
-            v-if="Object.keys(currentProject).length !== 0"
+            v-if="Object.keys(state.currentProject).length !== 0"
             class="h-10 w-full border-t border-gray-300 flex items-center p-1"
           >
             <button
@@ -128,10 +130,13 @@ const props = defineProps({
   projects: Object,
   projects_others: Object,
 })
-const currentProject = ref({})
 
 const getProject = (project) => {
   return JSON.parse(project.project).root
+}
+
+const changeProject = (project) => {
+  state.value.currentProject = getProject(project)
 }
 
 onMounted(() => {

@@ -11,9 +11,7 @@ class AppController extends Controller
 {
     public function app()
     {
-        return Inertia::render('App')->with([
-            'new_project' => []
-        ]);
+        return Inertia::render('App');
     }
 
     public function dashboard()
@@ -31,11 +29,16 @@ class AppController extends Controller
     {
         $user_id = Auth::user()->id;
         $project = new Project();
-        $project_count = Project::where('user_id', '=', $user_id)->count();
-        $project->name = 'Untitled_' . $project_count;
+        $project->name = '';
         $project->project = '';
         $project->type = true;
         $project->user_id = $user_id;
         $project->save();
+        $project_name = 'Untitled_' . $project->id;
+        $project->name = $project_name;
+        $project->project = '{"root":{"key":"project","value":"'.$project_name.'","description":"","parent":null,"type":"project","innerText":"","innerHTML":"","attributes":[],"children":[]}}';
+        $project->save();
+
+        return back();
     }
 }

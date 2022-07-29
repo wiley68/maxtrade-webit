@@ -38,6 +38,7 @@ const state = ref({
   show_explorer: true,
   show_properties: true,
   work_panel: 'PROJECT',
+  currentProject: {},
   current_element: '',
 })
 

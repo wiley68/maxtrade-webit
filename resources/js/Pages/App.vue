@@ -19,9 +19,6 @@ import WorkPanelMenu from '@/Shared/Components/WorkPanelMenu.vue'
 
 const state = inject('state')
 const project = inject('project')
-const props = defineProps({
-  new_project: Object,
-})
 
 onMounted(() => {
   state.value.show_explorer = true
