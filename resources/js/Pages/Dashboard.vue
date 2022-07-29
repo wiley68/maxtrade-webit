@@ -5,10 +5,9 @@
         class="h-10 bg-gray-100 border-b border-gray-200 flex items-center font-medium"
       >
         <Link
-          href="/project/new"
+          :href="route('project.new')"
           method="post"
           as="button"
-          type="button"
           class="ml-1 inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-sky-50 hover:bg-sky-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500"
         >
           New project
@@ -105,12 +104,15 @@
             >
               Clone project
             </button>
-            <button
-              type="button"
+            <Link
+              :href="route('project.delete')"
+              method="post"
+              as="button"
+              :data="{ id: project.data.id }"
               class="ml-1 inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-red-50 hover:bg-red-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500"
             >
               Delete project
-            </button>
+            </Link>
           </div>
         </div>
       </div>
@@ -126,6 +128,7 @@
 <script setup>
 import { inject, onMounted, ref } from 'vue'
 import { Link } from '@inertiajs/inertia-vue3'
+import { Tree } from '@/Components/project'
 
 const state = inject('state')
 const project = inject('project')
@@ -139,6 +142,7 @@ const getProject = (new_project) => {
 }
 
 const changeProject = (new_project) => {
+  project.value = new Tree('project', '')
   const project_info = getProject(new_project)
   project.value.data.id = new_project.id
   project.value.data.created_at = new_project.created_at

@@ -41,4 +41,11 @@ class AppController extends Controller
 
         return back();
     }
+
+    public function deleteProject(Request $request)
+    {
+        $project = Project::find($request->id);
+        $project->delete();
+        return back();
+    }
 }
