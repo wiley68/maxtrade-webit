@@ -23,6 +23,7 @@ class TreeNode {
 
 class Tree {
   constructor(key, value) {
+    this.data = {}
     this.root = new TreeNode(key, value)
   }
 

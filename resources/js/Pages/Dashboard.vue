@@ -72,15 +72,15 @@
             <div>Description: {{ project.root.description }}</div>
             <div>
               Created At:
-              {{ createdAt() }}
+              {{ project.data.created_at }}
             </div>
             <div>
               Updated At:
-              {{ updatedAt() }}
+              {{ project.data.updated_at }}
             </div>
             <div>
               Type:
-              {{ projectType() }}
+              {{ project.data.type }}
             </div>
             <div
               class="flex justify-center items-center border border-gray-200 mt-2 rounded h-64 shadow-lg bg-white"
@@ -139,6 +139,10 @@ const getProject = (new_project) => {
 
 const changeProject = (new_project) => {
   const project_info = getProject(new_project)
+  project.value.data.id = new_project.id
+  project.value.data.created_at = new_project.created_at
+  project.value.data.updated_at = new_project.updated_at
+  project.value.data.type = new_project.type
   project.value.root.key = project_info.key
   project.value.root.value = project_info.value
   project.value.root.description = project_info.description
@@ -148,24 +152,6 @@ const changeProject = (new_project) => {
   project.value.root.innerHTML = project_info.innerHTML
   project.value.root.attributes = project_info.attributes
   project.value.root.children = project_info.children
-}
-
-const createdAt = () => {
-  return props.projects.find(
-    (element) => element.name == project.value.root.value
-  ).created_at
-}
-
-const updatedAt = () => {
-  return props.projects.find(
-    (element) => element.name == project.value.root.value
-  ).updated_at
-}
-
-const projectType = () => {
-  return props.projects.find(
-    (element) => element.name == project.value.root.value
-  ).type
 }
 
 onMounted(() => {
