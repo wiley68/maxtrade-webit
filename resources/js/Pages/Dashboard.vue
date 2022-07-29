@@ -29,12 +29,12 @@
           class="bg-gray-50 w-64 flex-none flex flex-col border-r border-r-gray-200 pt-1"
         >
           <button
-            v-for="project in projects"
-            :key="project.id"
-            @click.stop="changeProject(project)"
+            v-for="pr in projects"
+            :key="pr.id"
+            @click.stop="changeProject(pr)"
             class="group flex flex-col bg-gray-100 hover:border-sky-300 m-1 rounded border px-1 py-0.5"
             :class="
-              state.currentProject.key == getProject(project).key
+              project.root.value == getProject(pr).value
                 ? 'border-sky-300'
                 : 'border-gray-200'
             "
@@ -42,41 +42,36 @@
             <div
               class="text-sm font-medium text-gray-600 group-hover:text-sky-600 truncate"
               :class="
-                state.currentProject.key == getProject(project).key
+                project.root.value == getProject(pr).value
                   ? 'text-sky-600'
                   : 'text-gray-600'
               "
             >
-              {{ getProject(project).value }}
+              {{ getProject(pr).value }}
             </div>
             <div
               class="text-xs text-gray-500 group-hover:text-sky-500 truncate"
               :class="
-                state.currentProject.key == getProject(project).key
+                project.root.value == getProject(pr).value
                   ? 'text-sky-500'
                   : 'text-gray-500'
               "
             >
-              {{ getProject(project).description }}
+              {{ getProject(pr).description }}
             </div>
           </button>
         </div>
         <div class="bg-gray-50 flex-grow flex flex-col text-sm pt-1">
-          <div
-            v-if="Object.keys(state.currentProject).length !== 0"
-            class="flex-grow px-1"
-          >
+          <div v-if="project.root.value.length !== 0" class="flex-grow px-1">
             <div>
               Name:
               <span class="font-medium text-sky-600">{{
-                state.currentProject.value
+                project.root.value
               }}</span>
             </div>
             <div>
               Description:
-              <span class="font-medium">{{
-                state.currentProject.description
-              }}</span>
+              <span class="font-medium">{{ project.root.description }}</span>
             </div>
             <div>Created At:</div>
             <div>Updated At:</div>
@@ -88,7 +83,7 @@
             </div>
           </div>
           <div
-            v-if="Object.keys(state.currentProject).length !== 0"
+            v-if="project.root.value.length !== 0"
             class="h-10 w-full border-t border-gray-300 flex items-center p-1"
           >
             <button
@@ -126,17 +121,27 @@ import { inject, onMounted, ref } from 'vue'
 import { Link } from '@inertiajs/inertia-vue3'
 
 const state = inject('state')
+const project = inject('project')
 const props = defineProps({
   projects: Object,
   projects_others: Object,
 })
 
-const getProject = (project) => {
-  return JSON.parse(project.project).root
+const getProject = (new_project) => {
+  return JSON.parse(new_project.project).root
 }
 
-const changeProject = (project) => {
-  state.value.currentProject = getProject(project)
+const changeProject = (new_project) => {
+  const project_info = getProject(new_project)
+  project.value.root.key = project_info.key
+  project.value.root.value = project_info.value
+  project.value.root.description = project_info.description
+  project.value.root.parent = project_info.parent
+  project.value.root.type = project_info.type
+  project.value.root.innerText = project_info.innerText
+  project.value.root.innerHTML = project_info.innerHTML
+  project.value.root.attributes = project_info.attributes
+  project.value.root.children = project_info.children
 }
 
 onMounted(() => {
