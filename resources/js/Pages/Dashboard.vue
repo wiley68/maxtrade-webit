@@ -69,13 +69,19 @@
                 project.root.value
               }}</span>
             </div>
+            <div>Description: {{ project.root.description }}</div>
             <div>
-              Description:
-              <span class="font-medium">{{ project.root.description }}</span>
+              Created At:
+              {{ createdAt() }}
             </div>
-            <div>Created At:</div>
-            <div>Updated At:</div>
-            <div>Type:</div>
+            <div>
+              Updated At:
+              {{ updatedAt() }}
+            </div>
+            <div>
+              Type:
+              {{ projectType() }}
+            </div>
             <div
               class="flex justify-center items-center border border-gray-200 mt-2 rounded h-64 shadow-lg bg-white"
             >
@@ -142,6 +148,24 @@ const changeProject = (new_project) => {
   project.value.root.innerHTML = project_info.innerHTML
   project.value.root.attributes = project_info.attributes
   project.value.root.children = project_info.children
+}
+
+const createdAt = () => {
+  return props.projects.find(
+    (element) => element.name == project.value.root.value
+  ).created_at
+}
+
+const updatedAt = () => {
+  return props.projects.find(
+    (element) => element.name == project.value.root.value
+  ).updated_at
+}
+
+const projectType = () => {
+  return props.projects.find(
+    (element) => element.name == project.value.root.value
+  ).type
 }
 
 onMounted(() => {
