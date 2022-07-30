@@ -18,6 +18,7 @@ Route::get('/dashboard', [AppController::class, 'dashboard'])->middleware(['auth
 Route::get('/community', [AppController::class, 'community'])->middleware(['auth'])->name('community');
 Route::post('/project/new', [AppController::class, 'newProject'])->middleware(['auth'])->name('project.new');
 Route::post('/project/clone', [AppController::class, 'cloneProject'])->middleware(['auth'])->name('project.clone');
+Route::post('/project/save', [AppController::class, 'saveProject'])->middleware(['auth'])->name('project.save');
 Route::post('/project/delete', [AppController::class, 'deleteProject'])->middleware(['auth'])->name('project.delete');
 
 //auth routes

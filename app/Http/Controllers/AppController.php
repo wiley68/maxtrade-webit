@@ -66,4 +66,18 @@ class AppController extends Controller
         $project->delete();
         return back();
     }
+
+    public function saveProject(Request $request)
+    {
+        $project = Project::find($request->id);
+        $project->name = $request->name;
+        $project->user_id = $request->user_id;
+        $project->created_at = $request->created_at;
+        $project->updated_at = $request->updated_at;
+        $project->type = $request->type;
+        $project->project = $request->project;
+        $project->save();
+
+        return back();
+    }
 }
