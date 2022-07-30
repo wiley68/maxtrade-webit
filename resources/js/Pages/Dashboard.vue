@@ -68,15 +68,22 @@
             <div>Description: {{ project.root.description }}</div>
             <div>
               Created At:
-              {{ project.data.created_at }}
+              {{ formatDateTime(project.data.created_at) }}
             </div>
             <div>
               Updated At:
-              {{ project.data.updated_at }}
+              {{ formatDateTime(project.data.updated_at) }}
             </div>
             <div>
               Type:
-              {{ project.data.type }}
+              <span
+                :class="
+                  project.data.type == 1 ? 'text-green-600' : 'text-red-600'
+                "
+                >{{
+                  project.data.type == 1 ? 'Free for all' : 'Just for me'
+                }}</span
+              >
             </div>
             <div
               class="flex justify-center items-center border border-gray-200 mt-2 rounded h-64 shadow-lg bg-white"
@@ -176,6 +183,7 @@ import { inject, onMounted, watch, ref } from 'vue'
 import { Link, useForm } from '@inertiajs/inertia-vue3'
 import { Tree } from '@/Components/project'
 import ModalBlank from '@/Components/ModalBlank.vue'
+import moment from 'moment'
 
 const state = inject('state')
 const project = inject('project')
@@ -232,6 +240,12 @@ const changeProject = (new_project) => {
   project.value.root.innerHTML = project_info.innerHTML
   project.value.root.attributes = project_info.attributes
   project.value.root.children = project_info.children
+}
+
+const formatDateTime = (value) => {
+  if (value) {
+    return moment(String(value)).format('YYYY-MM-DD hh:mm')
+  }
 }
 
 onMounted(() => {
