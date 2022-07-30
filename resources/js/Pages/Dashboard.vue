@@ -237,6 +237,8 @@ const getProject = (new_project) => {
 const changeProject = (new_project) => {
   const project_info = getProject(new_project)
   project.value.data.id = new_project.id
+  project.value.data.name = new_project.name
+  project.value.data.user_id = new_project.user_id
   project.value.data.created_at = new_project.created_at
   project.value.data.updated_at = new_project.updated_at
   project.value.data.type = new_project.type

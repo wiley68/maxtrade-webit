@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\User;
 use Auth;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
@@ -43,7 +44,8 @@ class HandleInertiaRequests extends Middleware
                 'user' => [
                     'name' => $user->name
                 ]
-            ] : []
+            ] : [],
+            'users' => User::all()
         ]);
     }
 }
