@@ -92,19 +92,19 @@
         >
           {{ element.value }}
         </div>
-        <div class="flex flex-col w-full">
+        <div class="flex w-full items-center justify-start">
           <div class="text-sm font-light">Id:</div>
-          <input
-            type="text"
-            v-model="element.key"
-            class="ring-0 focus:ring-0 focus:outline-none w-full px-1 py-0 text-sm rounded-sm border border-gray-400 focus:border-sky-600 hover:border-sky-600"
-          />
+          <div class="flex-grow text-sm ml-1">
+            {{ element.key }}
+          </div>
         </div>
         <div class="flex flex-col w-full">
           <div class="text-sm font-light">Name:</div>
           <input
             type="text"
+            maxlength="45"
             v-model="element.value"
+            @keydown="checkKeyDownAlphaNumeric($event)"
             class="ring-0 focus:ring-0 focus:outline-none w-full px-1 py-0 text-sm rounded-sm border border-gray-400 focus:border-sky-600 hover:border-sky-600"
           />
         </div>
@@ -127,19 +127,33 @@
             <option value="project">Root Project</option>
           </select>
         </div>
-        <div class="flex flex-col w-full">
+        <div v-if="element.type !== 'project'" class="flex flex-col w-full">
           <div class="text-sm font-light">InnerText:</div>
           <textarea
             v-model="element.innerText"
             class="ring-0 focus:ring-0 focus:outline-none w-full px-1 py-0 text-sm rounded-sm border border-gray-400 focus:border-sky-600 hover:border-sky-600"
           ></textarea>
         </div>
-        <div class="flex flex-col w-full">
+        <div v-if="element.type !== 'project'" class="flex flex-col w-full">
           <div class="text-sm font-light">InnerHTML:</div>
           <textarea
             v-model="element.innerHTML"
             class="ring-0 focus:ring-0 focus:outline-none w-full px-1 py-0 text-sm rounded-sm border border-gray-400 focus:border-sky-600 hover:border-sky-600"
           ></textarea>
+        </div>
+        <div
+          class="mt-2 text-sm font-medium border-b border-dotted border-b-gray-200 w-full text-center"
+        >
+          attributes
+        </div>
+        <div class="flex flex-col w-full">
+          <button
+            class="truncate text-sm text-left cursor-help hover:text-sky-600 border border-gray-100 hover:border-sky-200 px-0.5 py-0 mt-0.5 rounded hover:bg-white"
+            v-for="attribut in element.attributes"
+            :key="attribut.name"
+          >
+            {{ attribut.name }}
+          </button>
         </div>
         <div
           class="mt-2 text-sm font-medium border-b border-dotted border-b-gray-200 w-full text-center"
@@ -162,7 +176,7 @@
 </template>
 
 <script setup>
-import { computed, inject } from 'vue'
+import { computed, inject, watch } from 'vue'
 import moment from 'moment'
 
 const state = inject('state')
@@ -175,6 +189,20 @@ const element = computed(() => {
 const changeElement = (key) => {
   state.value.current_element = key
 }
+
+const checkKeyDownAlphaNumeric = (event) => {
+  if (!/[a-zA-Z0-9_\s]/.test(event.key)) {
+    event.target.ignoredValue = event.key ? event.key : ''
+    event.preventDefault()
+  }
+}
+
+watch(
+  () => project.value.root.value,
+  () => {
+    project.value.data.name = project.value.root.value
+  }
+)
 
 const formatDateTime = (value) => {
   if (value) {

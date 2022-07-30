@@ -125,7 +125,11 @@ const saveProject = () => {
     type: project.value.data.type,
     project: '{"root":' + JSON.stringify(project.value.root, null, 2) + '}',
   })
-  form.post('/project/save')
+  form.post('/project/save', {
+    onSuccess: () => {
+      alert('You have successfully saved your changes.')
+    },
+  })
 }
 
 onMounted(() => {
