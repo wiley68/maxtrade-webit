@@ -42,6 +42,24 @@ class AppController extends Controller
         return back();
     }
 
+    public function cloneProject(Request $request)
+    {
+        $user_id = Auth::user()->id;
+        $project = Project::find($request->id);
+        $project_new = new Project();
+        $project_new->name = '';
+        $project_new->project = $project->project;
+        $project_new->type = $project->type;
+        $project_new->user_id = $user_id;
+        $project_new->save();
+        $project_name = 'Untitled_' . $project_new->id;
+        $project_new->name = $project_name;
+        $project_new->project = str_replace($project->name, $project_name, $project_new->project);
+        $project_new->save();
+
+        return back();
+    }
+
     public function deleteProject(Request $request)
     {
         $project = Project::find($request->id);

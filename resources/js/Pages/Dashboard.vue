@@ -96,6 +96,7 @@
               Edit project
             </Link>
             <button
+              @click.stop="cloneProject()"
               type="button"
               class="ml-1 inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500"
             >
@@ -186,6 +187,13 @@ const deleteProjectModal = ref(false)
 
 const deleteProjectCheck = () => {
   deleteProjectModal.value = true
+}
+
+const cloneProject = () => {
+  const form = useForm({
+    id: project.value.data.id,
+  })
+  form.post('/project/clone')
 }
 
 const deleteProject = () => {
