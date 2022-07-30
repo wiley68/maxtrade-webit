@@ -28,7 +28,7 @@
             v-for="pr in projects"
             :key="pr.id"
             @click.stop="changeProject(pr)"
-            class="group flex flex-col bg-gray-100 hover:border-sky-300 m-1 rounded border px-1 py-0.5"
+            class="group flex flex-col bg-gray-100 hover:border-sky-300 mx-1 mb-1 rounded border px-1 py-0.5"
             :class="
               project.root.value == getProject(pr).value
                 ? 'border-sky-300'
@@ -36,7 +36,7 @@
             "
           >
             <div
-              class="text-sm font-medium text-gray-600 group-hover:text-sky-600 truncate"
+              class="text-sm font-medium text-gray-600 group-hover:text-sky-600 w-full text-left truncate"
               :class="
                 project.root.value == getProject(pr).value
                   ? 'text-sky-600'
@@ -46,7 +46,7 @@
               {{ getProject(pr).value }}
             </div>
             <div
-              class="text-xs text-gray-500 group-hover:text-sky-500 truncate"
+              class="text-xs text-gray-500 group-hover:text-sky-500 w-full text-left truncate"
               :class="
                 project.root.value == getProject(pr).value
                   ? 'text-sky-500'
@@ -59,31 +59,40 @@
         </div>
         <div class="bg-gray-50 flex-grow flex flex-col text-sm pt-1">
           <div v-if="project.root.value.length !== 0" class="flex-grow px-1">
-            <div>
-              Name:
-              <span class="font-medium text-sky-600">{{
-                project.root.value
-              }}</span>
+            <div class="flex items-start w-full space-x-1">
+              <div class="font-medium w-20 flex-none">Name:</div>
+              <div class="flex-grow font-medium text-sky-600">
+                {{ project.root.value }}
+              </div>
             </div>
-            <div>Description: {{ project.root.description }}</div>
-            <div>
-              Created At:
-              {{ formatDateTime(project.data.created_at) }}
+            <div class="flex items-start w-full space-x-1">
+              <div class="font-medium w-20 flex-none">Description:</div>
+              <div class="flex-grow">
+                {{ project.root.description }}
+              </div>
             </div>
-            <div>
-              Updated At:
-              {{ formatDateTime(project.data.updated_at) }}
+            <div class="flex items-start w-full space-x-1">
+              <div class="font-medium w-20 flex-none">Created At:</div>
+              <div class="flex-grow">
+                {{ formatDateTime(project.data.created_at) }}
+              </div>
             </div>
-            <div>
-              Type:
-              <span
+            <div class="flex items-start w-full space-x-1">
+              <div class="font-medium w-20 flex-none">Updated At:</div>
+              <div class="flex-grow">
+                {{ formatDateTime(project.data.updated_at) }}
+              </div>
+            </div>
+            <div class="flex items-start w-full space-x-1">
+              <div class="font-medium w-20 flex-none">Type:</div>
+              <div
+                class="flex-grow"
                 :class="
                   project.data.type == 1 ? 'text-green-600' : 'text-red-600'
                 "
-                >{{
-                  project.data.type == 1 ? 'Free for all' : 'Just for me'
-                }}</span
               >
+                {{ project.data.type == 1 ? 'Free for all' : 'Just for me' }}
+              </div>
             </div>
             <div
               class="flex justify-center items-center border border-gray-200 mt-2 rounded h-64 shadow-lg bg-white"
