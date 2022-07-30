@@ -21,6 +21,7 @@
     "vue": "^3.2.36"
   },
   "dependencies": {
-    "moment": "^2.29.4"
+    "moment": "^2.29.4",
+    "vue-json-viewer": "^3.0.4"
   }
 }

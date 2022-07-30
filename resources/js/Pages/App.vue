@@ -3,7 +3,13 @@
   <div class="bg-white flex-grow overflow-auto">
     <div class="w-full h-full text-sm">
       <div v-if="state.work_panel == 'PROJECT' && project.root.value">
-        <pre>{{ JSON.stringify(project, null, 2) }}</pre>
+        <json-viewer
+          :value="project"
+          expanded
+          copyable
+          :expand-depth="5"
+          show-double-quotes
+        ></json-viewer>
       </div>
       <div v-if="state.work_panel == 'CONSTRUCTOR'">CONSTRUCTOR</div>
       <div v-if="state.work_panel == 'CODE'">CODE</div>
@@ -12,6 +18,7 @@
     </div>
   </div>
   <div
+    v-if="project.root.value"
     class="bg-1 h-10 flex-none w-full border-t border-gray-300 flex items-center p-1"
   >
     <button
@@ -85,6 +92,7 @@ import { useForm } from '@inertiajs/inertia-vue3'
 import { Inertia } from '@inertiajs/inertia'
 import ModalBlank from '@/Components/ModalBlank.vue'
 import { Tree } from '@/Components/project'
+import JsonViewer from 'vue-json-viewer'
 
 const state = inject('state')
 const project = inject('project')
