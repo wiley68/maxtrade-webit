@@ -210,7 +210,7 @@
             v-for="(value, key, index) in element.attributes"
             :key="`${key}-${index}`"
           >
-            {{ element.attributes[key] }}
+            {{ key }}
           </button>
         </div>
         <div
@@ -281,11 +281,7 @@ const addAttribute = () => {
       text: 'You must enter the fields: "name" and "value"!',
     })
   } else {
-    if (
-      element.value.attributes.some((obj) =>
-        obj.hasOwnProperty(attr_name.value)
-      )
-    ) {
+    if (false) {
       notify({
         type: 'error',
         title: 'Error',
@@ -299,7 +295,7 @@ const addAttribute = () => {
     } else {
       var obj = {}
       obj[attr_name.value] = attr_value.value
-      element.value.attributes.push(obj)
+      element.value.attributes = { ...element.value.attributes, ...obj }
       attr_name.value = ''
       attr_value.value = ''
       add_attr.value = false

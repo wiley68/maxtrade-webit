@@ -8,7 +8,7 @@ class TreeNode {
     this.type = ''
     this.innerText = ''
     this.innerHTML = ''
-    this.attributes = []
+    this.attributes = {}
     this.children = []
   }
 
