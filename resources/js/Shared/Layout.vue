@@ -39,6 +39,7 @@ const state = ref({
   show_properties: true,
   work_panel: 'PROJECT',
   current_element: '',
+  library: 'html5',
 })
 
 const page = usePage()

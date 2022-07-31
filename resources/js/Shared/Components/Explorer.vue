@@ -44,7 +44,52 @@
           </svg>
         </button>
       </div>
-      <div class="flex-grow bg-1"></div>
+      <div class="flex-grow bg-1 flex">
+        <div
+          class="w-12 h-full flex-none flex flex-col items-center border-r border-r-gray-200 p-1"
+        >
+          <div
+            class="cursor-pointer hover:text-sky-600"
+            :class="
+              state.library === 'html5' ? 'text-sky-600' : 'text-gray-500'
+            "
+          >
+            <svg class="w-8 h-8" viewBox="0 0 24 24">
+              <path
+                fill="currentColor"
+                d="M12,17.56L16.07,16.43L16.62,10.33H9.38L9.2,8.3H16.8L17,6.31H7L7.56,12.32H14.45L14.22,14.9L12,15.5L9.78,14.9L9.64,13.24H7.64L7.93,16.43L12,17.56M4.07,3H19.93L18.5,19.2L12,21L5.5,19.2L4.07,3Z"
+              />
+            </svg>
+          </div>
+        </div>
+        <div class="flex-grow flex flex-col p-1">
+          <div v-if="state.library === 'html5'">
+            <button
+              @click.stop="addHtml()"
+              :disabled="
+                state.current_element !== 'project' &&
+                project.find('html') === undefined
+              "
+              type="button"
+              :class="
+                state.current_element === 'project' &&
+                project.find('html') === undefined
+                  ? 'text-gray-500'
+                  : 'text-gray-300'
+              "
+              class="inline-flex w-full px-1 py-0.5 border border-gray-300 shadow-sm text-xs rounded bg-white hover:bg-gray-50 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+            >
+              <svg class="w-4 h-4" viewBox="0 0 24 24">
+                <path
+                  fill="currentColor"
+                  d="M12,17.56L16.07,16.43L16.62,10.33H9.38L9.2,8.3H16.8L17,6.31H7L7.56,12.32H14.45L14.22,14.9L12,15.5L9.78,14.9L9.64,13.24H7.64L7.93,16.43L12,17.56M4.07,3H19.93L18.5,19.2L12,21L5.5,19.2L4.07,3Z"
+                />
+              </svg>
+              <span class="ml-1">HTML</span>
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
     <div id="separator" ref="separator">
       <svg class="h-4 text-gray-400" viewBox="0 0 24 24">
@@ -167,6 +212,15 @@ const elementsFullScreen = () => {
 const elementsRestoreScreen = () => {
   libraries.value.style.height = '50%'
   elements.value.style.height = '50%'
+}
+
+const addHtml = () => {
+  if (state.value.current_element === 'project') {
+    const html = project.value.find('html')
+    if (html === undefined) {
+      project.value.insertNode('project', 'html', 'html')
+    }
+  }
 }
 
 onMounted(() => {
