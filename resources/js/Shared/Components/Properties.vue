@@ -146,26 +146,28 @@
         >
           attributes
           <button @click.stop="add_attr = !add_attr">
-            <svg
-              v-if="add_attr"
-              class="w-5 h-5 ml-1 cursor-pointer text-gray-500 hover:text-sky-600"
-              viewBox="0 0 24 24"
-            >
-              <path
-                fill="currentColor"
-                d="M12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22M12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20M17,14L12,9L7,14H17Z"
-              />
-            </svg>
-            <svg
-              v-else
-              class="w-5 h-5 ml-1 cursor-pointer text-gray-500 hover:text-sky-600"
-              viewBox="0 0 24 24"
-            >
-              <path
-                fill="currentColor"
-                d="M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M13,7H11V11H7V13H11V17H13V13H17V11H13V7Z"
-              />
-            </svg>
+            <div v-if="add_attr" title="Hide attributes panel">
+              <svg
+                class="w-5 h-5 ml-1 cursor-pointer text-gray-500 hover:text-sky-600"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill="currentColor"
+                  d="M12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22M12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20M17,14L12,9L7,14H17Z"
+                />
+              </svg>
+            </div>
+            <div v-else title="Add new attribute">
+              <svg
+                class="w-5 h-5 ml-1 cursor-pointer text-gray-500 hover:text-sky-600"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill="currentColor"
+                  d="M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M13,7H11V11H7V13H11V17H13V13H17V11H13V7Z"
+                />
+              </svg>
+            </div>
           </button>
         </div>
         <div
@@ -200,17 +202,30 @@
               type="button"
               class="inline-flex items-center px-1 py-0.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-sky-50 hover:bg-sky-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500"
             >
-              Add attribute
+              Save
+            </button>
+            <button
+              @click.stop="deleteAttribute()"
+              type="button"
+              class="ml-1 inline-flex items-center px-1 py-0.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-red-50 hover:bg-red-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500"
+            >
+              Delete
             </button>
           </div>
         </div>
         <div class="flex flex-col w-full">
           <button
             class="truncate text-sm text-left cursor-help hover:text-sky-600 border border-gray-100 hover:border-sky-200 px-0.5 py-0 mt-0.5 rounded hover:bg-white"
+            :class="
+              key === attr_name
+                ? 'text-sky-600 border-sky-200 bg-white'
+                : 'text-gray-500 border-gray-100 bg-gray-100'
+            "
             v-for="(value, key, index) in element.attributes"
             :key="`${key}-${index}`"
+            @click.stop="changeAttribute(key, value)"
           >
-            {{ key }}
+            {{ key }}={{ value }}
           </button>
         </div>
         <div
@@ -281,29 +296,37 @@ const addAttribute = () => {
       text: 'You must enter the fields: "name" and "value"!',
     })
   } else {
-    if (element.value.attributes.hasOwnProperty(attr_name.value)) {
-      notify({
-        type: 'error',
-        title: 'Error',
-        text:
-          'An attribute with this key (' +
-          attr_name.value +
-          ") already exists. You can't add it!!",
-      })
-      attr_name.value = ''
-      attr_value.value = ''
-    } else {
-      var obj = {}
-      obj[attr_name.value] = attr_value.value
-      element.value.attributes = { ...element.value.attributes, ...obj }
-      attr_name.value = ''
-      attr_value.value = ''
-      add_attr.value = false
-      state.value.work_panel = ''
-      setTimeout(() => {
-        state.value.work_panel = 'PROJECT'
-      }, 10)
-    }
+    var obj = {}
+    obj[attr_name.value] = attr_value.value
+    element.value.attributes = { ...element.value.attributes, ...obj }
+    attr_name.value = ''
+    attr_value.value = ''
+    add_attr.value = false
+    state.value.work_panel = ''
+    setTimeout(() => {
+      state.value.work_panel = 'PROJECT'
+    }, 10)
   }
+}
+
+const deleteAttribute = () => {
+  if (attr_name.value.length == 0) {
+    notify({
+      type: 'error',
+      title: 'Error',
+      text: 'You must enter the field: "name"!',
+    })
+  } else {
+    delete element.value.attributes[attr_name.value]
+    attr_name.value = ''
+    attr_value.value = ''
+    add_attr.value = false
+  }
+}
+
+const changeAttribute = (key, value) => {
+  add_attr.value = true
+  attr_name.value = key
+  attr_value.value = value
 }
 </script>
