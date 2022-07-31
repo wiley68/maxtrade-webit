@@ -281,7 +281,7 @@ const addAttribute = () => {
       text: 'You must enter the fields: "name" and "value"!',
     })
   } else {
-    if (false) {
+    if (element.value.attributes.hasOwnProperty(attr_name.value)) {
       notify({
         type: 'error',
         title: 'Error',
