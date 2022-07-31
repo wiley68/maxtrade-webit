@@ -18,7 +18,7 @@
         "
         @click.stop="changeElement"
       >
-        {{ value }}
+        {{ value }}{{ depth === 0 ? ' [root]' : '' }}
       </button>
       <div
         v-if="key_tree == 'project'"
@@ -38,15 +38,17 @@
         </button>
       </div>
     </div>
-    <tree-menu
-      v-if="showChildren"
-      v-for="element in children"
-      :key_tree="element.key"
-      :value="element.value"
-      :children="element.children"
-      :depth="depth + 1"
-    >
-    </tree-menu>
+    <div v-if="showChildren">
+      <tree-menu
+        v-for="element in children"
+        :key="element.key"
+        :key_tree="element.key"
+        :value="element.value"
+        :children="element.children"
+        :depth="depth + 1"
+      >
+      </tree-menu>
+    </div>
   </div>
 </template>
 
