@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="value">
     <div
       class="flex items-center justify-between text-sm"
       :style="{ paddingLeft: depth * 10 + 'px' }"

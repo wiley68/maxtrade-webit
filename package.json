@@ -21,6 +21,7 @@
     "vue": "^3.2.36"
   },
   "dependencies": {
+    "@kyvg/vue3-notification": "^2.3.6",
     "moment": "^2.29.4",
     "vue-json-viewer": "^3.0.4"
   }

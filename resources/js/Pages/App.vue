@@ -9,6 +9,7 @@
           copyable
           :expand-depth="5"
           show-double-quotes
+          show-array-index
         ></json-viewer>
       </div>
       <div v-if="state.work_panel == 'CONSTRUCTOR'">CONSTRUCTOR</div>

@@ -142,17 +142,75 @@
           ></textarea>
         </div>
         <div
-          class="mt-2 text-sm font-medium border-b border-dotted border-b-gray-200 w-full text-center"
+          class="flex items-center justify-center mt-2 text-sm font-medium border-b border-dotted border-b-gray-200 w-full text-center"
         >
           attributes
+          <button @click.stop="add_attr = !add_attr">
+            <svg
+              v-if="add_attr"
+              class="w-5 h-5 ml-1 cursor-pointer text-gray-500 hover:text-sky-600"
+              viewBox="0 0 24 24"
+            >
+              <path
+                fill="currentColor"
+                d="M12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22M12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20M17,14L12,9L7,14H17Z"
+              />
+            </svg>
+            <svg
+              v-else
+              class="w-5 h-5 ml-1 cursor-pointer text-gray-500 hover:text-sky-600"
+              viewBox="0 0 24 24"
+            >
+              <path
+                fill="currentColor"
+                d="M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M13,7H11V11H7V13H11V17H13V13H17V11H13V7Z"
+              />
+            </svg>
+          </button>
+        </div>
+        <div
+          v-if="add_attr"
+          class="w-full flex flex-col items-start text-sm border-b border-dotted border-b-gray-200"
+        >
+          <div class="w-full flex items-center justify-start mt-1">
+            <div class="w-12">name:</div>
+            <div class="flex-grow">
+              <input
+                v-model="attr_name"
+                type="text"
+                maxlength="45"
+                class="ring-0 focus:ring-0 focus:outline-none w-full px-1 py-0 text-sm rounded-sm border border-gray-400 focus:border-sky-600 hover:border-sky-600"
+              />
+            </div>
+          </div>
+          <div class="w-full flex items-center justify-start mt-1">
+            <div class="w-12">value:</div>
+            <div class="flex-grow">
+              <input
+                v-model="attr_value"
+                type="text"
+                maxlength="45"
+                class="ring-0 focus:ring-0 focus:outline-none w-full px-1 py-0 text-sm rounded-sm border border-gray-400 focus:border-sky-600 hover:border-sky-600"
+              />
+            </div>
+          </div>
+          <div class="w-full flex items-center justify-start my-1">
+            <button
+              @click.stop="addAttribute()"
+              type="button"
+              class="inline-flex items-center px-1 py-0.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-sky-50 hover:bg-sky-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500"
+            >
+              Add attribute
+            </button>
+          </div>
         </div>
         <div class="flex flex-col w-full">
           <button
             class="truncate text-sm text-left cursor-help hover:text-sky-600 border border-gray-100 hover:border-sky-200 px-0.5 py-0 mt-0.5 rounded hover:bg-white"
-            v-for="attribut in element.attributes"
-            :key="attribut.name"
+            v-for="(value, key, index) in element.attributes"
+            :key="`${key}-${index}`"
           >
-            {{ attribut.name }}
+            {{ element.attributes[key] }}
           </button>
         </div>
         <div
@@ -173,14 +231,19 @@
       </div>
     </div>
   </div>
+  <notifications position="top right" />
 </template>
 
 <script setup>
-import { computed, inject, watch } from 'vue'
+import { computed, inject, ref, watch } from 'vue'
 import moment from 'moment'
+import { notify } from '@kyvg/vue3-notification'
 
 const state = inject('state')
 const project = inject('project')
+const attr_name = ref('')
+const attr_value = ref('')
+const add_attr = ref(false)
 
 const element = computed(() => {
   return project.value.find(state.value.current_element)
@@ -207,6 +270,44 @@ watch(
 const formatDateTime = (value) => {
   if (value) {
     return moment(String(value)).format('YYYY-MM-DD hh:mm')
+  }
+}
+
+const addAttribute = () => {
+  if (attr_name.value.length == 0 || attr_value.value.length == 0) {
+    notify({
+      type: 'error',
+      title: 'Error',
+      text: 'You must enter the fields: "name" and "value"!',
+    })
+  } else {
+    if (
+      element.value.attributes.some((obj) =>
+        obj.hasOwnProperty(attr_name.value)
+      )
+    ) {
+      notify({
+        type: 'error',
+        title: 'Error',
+        text:
+          'An attribute with this key (' +
+          attr_name.value +
+          ") already exists. You can't add it!!",
+      })
+      attr_name.value = ''
+      attr_value.value = ''
+    } else {
+      var obj = {}
+      obj[attr_name.value] = attr_value.value
+      element.value.attributes.push(obj)
+      attr_name.value = ''
+      attr_value.value = ''
+      add_attr.value = false
+      state.value.work_panel = ''
+      setTimeout(() => {
+        state.value.work_panel = 'PROJECT'
+      }, 10)
+    }
   }
 }
 </script>
