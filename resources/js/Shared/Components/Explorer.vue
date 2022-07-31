@@ -219,6 +219,10 @@ const addHtml = () => {
     const html = project.value.find('html')
     if (html === undefined) {
       project.value.insertNode('project', 'html', 'html')
+      state.value.work_panel = ''
+      setTimeout(() => {
+        state.value.work_panel = 'PROJECT'
+      }, 10)
     }
   }
 }

@@ -88,9 +88,17 @@
         class="flex flex-col items-center flex-grow bg-1 px-1"
       >
         <div
-          class="font-medium border-b border-dotted border-b-sky-200 w-full text-center truncate text-sky-600"
+          class="flex items-center font-medium border-b border-dotted border-b-sky-200 w-full truncate text-sky-600"
         >
-          {{ element.value }}
+          <div class="flex-grow">{{ element.value }}</div>
+          <button
+            v-if="state.current_element !== 'project'"
+            @click.stop="deleteElement()"
+            type="button"
+            class="ml-1 inline-flex items-center px-1 py-0.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-red-50 hover:bg-red-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500"
+          >
+            Delete Element
+          </button>
         </div>
         <div class="flex w-full items-center justify-start">
           <div class="text-sm font-light">Id:</div>
@@ -328,5 +336,10 @@ const changeAttribute = (key, value) => {
   add_attr.value = true
   attr_name.value = key
   attr_value.value = value
+}
+
+const deleteElement = () => {
+  project.value.remove(state.value.current_element)
+  state.value.current_element = ''
 }
 </script>

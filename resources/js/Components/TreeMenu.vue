@@ -37,6 +37,17 @@
           </svg>
         </button>
       </div>
+      <svg
+        class="w-4 h-4 text-red-600 cursor-pointer"
+        viewBox="0 0 24 24"
+        v-if="key_tree !== 'project' && key_tree === state.current_element"
+        @click.stop="deleteElement()"
+      >
+        <path
+          fill="currentColor"
+          d="M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19M8,9H16V19H8V9M15.5,4L14.5,3H9.5L8.5,4H5V6H19V4H15.5Z"
+        />
+      </svg>
     </div>
     <div v-if="showChildren">
       <tree-menu
@@ -62,6 +73,7 @@ export default {
 import { ref, computed, inject } from 'vue'
 
 const state = inject('state')
+const project = inject('project')
 
 const props = defineProps({
   key_tree: String,
@@ -85,6 +97,11 @@ const toggleChildren = () => {
 
 const changeElement = () => {
   state.value.current_element = props.key_tree
+}
+
+const deleteElement = () => {
+  project.value.remove(state.value.current_element)
+  state.value.current_element = ''
 }
 </script>
 
