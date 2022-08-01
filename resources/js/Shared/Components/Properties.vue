@@ -143,6 +143,7 @@
           >
             <option value="project">Root Project</option>
             <option value="html">HTML Tag</option>
+            <option value="head">HEAD Tag</option>
           </select>
         </div>
         <div v-if="element.type !== 'project'" class="flex flex-col w-full">

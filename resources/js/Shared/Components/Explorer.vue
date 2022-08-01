@@ -96,6 +96,21 @@
               </svg>
               <span class="ml-1">HTML</span>
             </button>
+            <button
+              @click.stop="addHead()"
+              :disabled="add_head_disabled"
+              type="button"
+              :class="add_head_disabled ? 'text-gray-300' : 'text-gray-600'"
+              class="inline-flex w-full px-1 py-0.5 border border-gray-300 shadow-sm text-xs rounded bg-white hover:bg-gray-50 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+            >
+              <svg class="w-4 h-4" viewBox="0 0 24 24">
+                <path
+                  fill="currentColor"
+                  d="M6,2H18A2,2 0 0,1 20,4V20A2,2 0 0,1 18,22H6A2,2 0 0,1 4,20V4A2,2 0 0,1 6,2M6,4V8H18V4H6Z"
+                />
+              </svg>
+              <span class="ml-1">head</span>
+            </button>
           </div>
           <div v-if="state.library === 'attributes'">
             <button
@@ -197,6 +212,11 @@ const add_html_disabled = computed(() => {
     project.value.find('html') !== undefined
   )
 })
+const add_head_disabled = computed(() => {
+  return (
+    state.value.current_element === '' || state.value.current_element !== 'html'
+  )
+})
 const add_attribute_disabled = computed(() => {
   return (
     state.value.current_element === '' ||
@@ -262,6 +282,28 @@ const addHtml = () => {
       if (project.value.insertNode('project', 'html', 'html')) {
         const html = project.value.find('html')
         html.type = 'html'
+        state.value.work_panel = ''
+        setTimeout(() => {
+          state.value.work_panel = 'PROJECT'
+        }, 10)
+      } else {
+        notify({
+          type: 'error',
+          title: 'Error',
+          text: 'You cannot add the attribute!',
+        })
+      }
+    }
+  }
+}
+
+const addHead = () => {
+  if (state.value.current_element === 'html') {
+    const head = project.value.find('head')
+    if (head === undefined) {
+      if (project.value.insertNode('html', 'head', 'head')) {
+        const head = project.value.find('head')
+        head.type = 'head'
         state.value.work_panel = ''
         setTimeout(() => {
           state.value.work_panel = 'PROJECT'
