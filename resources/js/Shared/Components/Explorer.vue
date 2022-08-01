@@ -48,8 +48,10 @@
         <div
           class="w-12 h-full flex-none flex flex-col items-center border-r border-r-gray-200 p-1"
         >
-          <div
-            class="cursor-pointer hover:text-sky-600"
+          <button
+            @click.stop="state.library = 'html5'"
+            title="HTML root tags library"
+            class="hover:text-sky-600"
             :class="
               state.library === 'html5' ? 'text-sky-600' : 'text-gray-500'
             "
@@ -60,7 +62,22 @@
                 d="M12,17.56L16.07,16.43L16.62,10.33H9.38L9.2,8.3H16.8L17,6.31H7L7.56,12.32H14.45L14.22,14.9L12,15.5L9.78,14.9L9.64,13.24H7.64L7.93,16.43L12,17.56M4.07,3H19.93L18.5,19.2L12,21L5.5,19.2L4.07,3Z"
               />
             </svg>
-          </div>
+          </button>
+          <button
+            @click.stop="state.library = 'attributes'"
+            title="HTML root attributes library"
+            class="hover:text-sky-600 mt-2"
+            :class="
+              state.library === 'attributes' ? 'text-sky-600' : 'text-gray-500'
+            "
+          >
+            <svg class="w-8 h-8" viewBox="0 0 24 24">
+              <path
+                fill="currentColor"
+                d="M5,3H7V5H5V10A2,2 0 0,1 3,12A2,2 0 0,1 5,14V19H7V21H5C3.93,20.73 3,20.1 3,19V15A2,2 0 0,0 1,13H0V11H1A2,2 0 0,0 3,9V5A2,2 0 0,1 5,3M19,3A2,2 0 0,1 21,5V9A2,2 0 0,0 23,11H24V13H23A2,2 0 0,0 21,15V19A2,2 0 0,1 19,21H17V19H19V14A2,2 0 0,1 21,12A2,2 0 0,1 19,10V5H17V3H19M12,15A1,1 0 0,1 13,16A1,1 0 0,1 12,17A1,1 0 0,1 11,16A1,1 0 0,1 12,15M8,15A1,1 0 0,1 9,16A1,1 0 0,1 8,17A1,1 0 0,1 7,16A1,1 0 0,1 8,15M16,15A1,1 0 0,1 17,16A1,1 0 0,1 16,17A1,1 0 0,1 15,16A1,1 0 0,1 16,15Z"
+              />
+            </svg>
+          </button>
         </div>
         <div class="flex-grow flex flex-col p-1">
           <div v-if="state.library === 'html5'">
@@ -86,6 +103,27 @@
                 />
               </svg>
               <span class="ml-1">HTML</span>
+            </button>
+          </div>
+          <div v-if="state.library === 'attributes'">
+            <button
+              @click.stop="addAttrLang()"
+              :disabled="state.current_element === 'project'"
+              type="button"
+              :class="
+                state.current_element !== 'project'
+                  ? 'text-gray-600'
+                  : 'text-gray-300'
+              "
+              class="inline-flex w-full px-1 py-0.5 border border-gray-300 shadow-sm text-xs rounded bg-white hover:bg-gray-50 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+            >
+              <svg class="w-4 h-4" viewBox="0 0 24 24">
+                <path
+                  fill="currentColor"
+                  d="M12.87,15.07L10.33,12.56L10.36,12.53C12.1,10.59 13.34,8.36 14.07,6H17V4H10V2H8V4H1V6H12.17C11.5,7.92 10.44,9.75 9,11.35C8.07,10.32 7.3,9.19 6.69,8H4.69C5.42,9.63 6.42,11.17 7.67,12.56L2.58,17.58L4,19L9,14L12.11,17.11L12.87,15.07M18.5,10H16.5L12,22H14L15.12,19H19.87L21,22H23L18.5,10M15.88,17L17.5,12.67L19.12,17H15.88Z"
+                />
+              </svg>
+              <span class="ml-1">lang=en</span>
             </button>
           </div>
         </div>
@@ -232,6 +270,17 @@ const addHtml = () => {
           text: 'You cannot add the attribute!',
         })
       }
+    }
+  }
+}
+
+const addAttrLang = () => {
+  if (state.value.current_element !== 'project') {
+    var element = project.value.find(state.value.current_element)
+    if (element !== undefined) {
+      var obj = {}
+      obj['lang'] = 'en'
+      element.attributes = { ...element.attributes, ...obj }
     }
   }
 }
