@@ -107,11 +107,15 @@
             </svg>
           </button>
         </div>
-        <div class="flex w-full items-center justify-start">
+        <div class="flex flex-col w-full">
           <div class="text-sm font-light">Id:</div>
-          <div class="flex-grow text-sm ml-1">
-            {{ element.key }}
-          </div>
+          <input
+            type="text"
+            maxlength="45"
+            v-model="element.key"
+            @keydown="checkKeyDownAlphaNumeric($event)"
+            class="ring-0 focus:ring-0 focus:outline-none w-full px-1 py-0 text-sm rounded-sm border border-gray-400 focus:border-sky-600 hover:border-sky-600"
+          />
         </div>
         <div class="flex flex-col w-full">
           <div class="text-sm font-light">Name:</div>
