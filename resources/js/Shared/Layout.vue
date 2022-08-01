@@ -24,6 +24,7 @@
       </div>
     </div>
   </div>
+  <notifications position="top right" />
 </template>
 
 <script setup>

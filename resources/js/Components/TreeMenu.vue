@@ -37,17 +37,18 @@
           </svg>
         </button>
       </div>
-      <svg
-        class="w-4 h-4 text-red-600 cursor-pointer"
-        viewBox="0 0 24 24"
-        v-if="key_tree !== 'project' && key_tree === state.current_element"
+      <button
         @click.stop="deleteElement()"
+        v-if="key_tree !== 'project' && key_tree === state.current_element"
+        title="Delete element"
       >
-        <path
-          fill="currentColor"
-          d="M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19M8,9H16V19H8V9M15.5,4L14.5,3H9.5L8.5,4H5V6H19V4H15.5Z"
-        />
-      </svg>
+        <svg class="w-5 h-5 text-red-600 cursor-pointer" viewBox="0 0 24 24">
+          <path
+            fill="currentColor"
+            d="M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19M8,9H16V19H8V9M15.5,4L14.5,3H9.5L8.5,4H5V6H19V4H15.5Z"
+          />
+        </svg>
+      </button>
     </div>
     <div v-if="showChildren">
       <tree-menu

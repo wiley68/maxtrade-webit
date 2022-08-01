@@ -74,7 +74,7 @@
               :class="
                 state.current_element === 'project' &&
                 project.find('html') === undefined
-                  ? 'text-gray-500'
+                  ? 'text-gray-600'
                   : 'text-gray-300'
               "
               class="inline-flex w-full px-1 py-0.5 border border-gray-300 shadow-sm text-xs rounded bg-white hover:bg-gray-50 focus:outline-none focus:ring-1 focus:ring-indigo-500"
@@ -218,11 +218,20 @@ const addHtml = () => {
   if (state.value.current_element === 'project') {
     const html = project.value.find('html')
     if (html === undefined) {
-      project.value.insertNode('project', 'html', 'html')
-      state.value.work_panel = ''
-      setTimeout(() => {
-        state.value.work_panel = 'PROJECT'
-      }, 10)
+      if (project.value.insertNode('project', 'html', 'html')) {
+        const html = project.value.find('html')
+        html.type = 'html'
+        state.value.work_panel = ''
+        setTimeout(() => {
+          state.value.work_panel = 'PROJECT'
+        }, 10)
+      } else {
+        notify({
+          type: 'error',
+          title: 'Error',
+          text: 'You cannot add the attribute!',
+        })
+      }
     }
   }
 }

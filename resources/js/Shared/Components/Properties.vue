@@ -92,12 +92,19 @@
         >
           <div class="flex-grow">{{ element.value }}</div>
           <button
-            v-if="state.current_element !== 'project'"
             @click.stop="deleteElement()"
-            type="button"
-            class="ml-1 inline-flex items-center px-1 py-0.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-red-50 hover:bg-red-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500"
+            v-if="state.current_element !== 'project'"
+            title="Delete element"
           >
-            Delete Element
+            <svg
+              class="w-5 h-5 text-red-600 cursor-pointer"
+              viewBox="0 0 24 24"
+            >
+              <path
+                fill="currentColor"
+                d="M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19M8,9H16V19H8V9M15.5,4L14.5,3H9.5L8.5,4H5V6H19V4H15.5Z"
+              />
+            </svg>
           </button>
         </div>
         <div class="flex w-full items-center justify-start">
@@ -124,7 +131,9 @@
           ></textarea>
         </div>
         <div class="flex flex-col w-full">
-          <div class="text-sm font-light">Parent:{{ element.parent }}</div>
+          <div class="text-sm font-light">
+            Parent:<span class="ml-1 font-medium">{{ element.parent }}</span>
+          </div>
         </div>
         <div class="flex flex-col w-full">
           <div class="text-sm font-light">Type:</div>
@@ -133,6 +142,7 @@
             v-model="element.type"
           >
             <option value="project">Root Project</option>
+            <option value="html">HTML Tag</option>
           </select>
         </div>
         <div v-if="element.type !== 'project'" class="flex flex-col w-full">
@@ -205,19 +215,27 @@
             </div>
           </div>
           <div class="w-full flex items-center justify-start my-1">
-            <button
-              @click.stop="addAttribute()"
-              type="button"
-              class="inline-flex items-center px-1 py-0.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-sky-50 hover:bg-sky-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500"
-            >
-              Save
+            <button @click.stop="addAttribute()" title="Add attribute">
+              <svg
+                class="w-6 h-6 text-gray-600 cursor-pointer"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill="currentColor"
+                  d="M17 3H5C3.89 3 3 3.9 3 5V19C3 20.1 3.89 21 5 21H19C20.1 21 21 20.1 21 19V7L17 3M19 19H5V5H16.17L19 7.83V19M12 12C10.34 12 9 13.34 9 15S10.34 18 12 18 15 16.66 15 15 13.66 12 12 12M6 6H15V10H6V6Z"
+                />
+              </svg>
             </button>
-            <button
-              @click.stop="deleteAttribute()"
-              type="button"
-              class="ml-1 inline-flex items-center px-1 py-0.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-red-50 hover:bg-red-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500"
-            >
-              Delete
+            <button @click.stop="deleteAttribute()" title="Delete attribute">
+              <svg
+                class="w-6 h-6 text-red-600 cursor-pointer"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill="currentColor"
+                  d="M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19M8,9H16V19H8V9M15.5,4L14.5,3H9.5L8.5,4H5V6H19V4H15.5Z"
+                />
+              </svg>
             </button>
           </div>
         </div>
@@ -254,7 +272,6 @@
       </div>
     </div>
   </div>
-  <notifications position="top right" />
 </template>
 
 <script setup>
