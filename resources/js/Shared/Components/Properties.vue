@@ -145,6 +145,7 @@
             <option value="html">HTML Tag</option>
             <option value="head">HEAD Tag</option>
             <option value="title">TITLE Tag</option>
+            <option value="meta">META Tag</option>
           </select>
         </div>
         <div v-if="element.type !== 'project'" class="flex flex-col w-full">

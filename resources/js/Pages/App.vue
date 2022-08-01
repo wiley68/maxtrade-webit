@@ -7,7 +7,7 @@
           :value="project"
           expanded
           copyable
-          :expand-depth="5"
+          :expand-depth="10"
           show-double-quotes
           show-array-index
         ></json-viewer>

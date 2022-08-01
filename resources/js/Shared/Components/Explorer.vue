@@ -123,6 +123,23 @@
               </svg>
               <span class="ml-1">title</span>
             </button>
+            <button
+              @click.stop="addMetaCharset()"
+              :disabled="add_metacharset_disabled"
+              type="button"
+              :class="
+                add_metacharset_disabled ? 'text-gray-300' : 'text-gray-600'
+              "
+              class="inline-flex w-full px-1 py-0.5 border border-gray-300 shadow-sm text-xs rounded bg-white hover:bg-gray-50 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+            >
+              <svg class="w-4 h-4" viewBox="0 0 24 24">
+                <path
+                  fill="currentColor"
+                  d="M14,12H15.5V14.82L17.94,16.23L17.19,17.53L14,15.69V12M4,2H18A2,2 0 0,1 20,4V10.1C21.24,11.36 22,13.09 22,15A7,7 0 0,1 15,22C13.09,22 11.36,21.24 10.1,20H4A2,2 0 0,1 2,18V4A2,2 0 0,1 4,2M4,15V18H8.67C8.24,17.09 8,16.07 8,15H4M4,8H10V5H4V8M18,8V5H12V8H18M4,13H8.29C8.63,11.85 9.26,10.82 10.1,10H4V13M15,10.15A4.85,4.85 0 0,0 10.15,15C10.15,17.68 12.32,19.85 15,19.85A4.85,4.85 0 0,0 19.85,15C19.85,12.32 17.68,10.15 15,10.15Z"
+                />
+              </svg>
+              <span class="ml-1">meta.charset</span>
+            </button>
           </div>
           <div v-if="state.library === 'attributes'">
             <button
@@ -226,12 +243,23 @@ const add_html_disabled = computed(() => {
 })
 const add_head_disabled = computed(() => {
   return (
-    state.value.current_element === '' || state.value.current_element !== 'html'
+    state.value.current_element === '' ||
+    state.value.current_element !== 'html' ||
+    project.value.find('head') !== undefined
   )
 })
 const add_title_disabled = computed(() => {
   return (
-    state.value.current_element === '' || state.value.current_element !== 'head'
+    state.value.current_element === '' ||
+    state.value.current_element !== 'head' ||
+    project.value.find('title') !== undefined
+  )
+})
+const add_metacharset_disabled = computed(() => {
+  return (
+    state.value.current_element === '' ||
+    state.value.current_element !== 'head' ||
+    project.value.find('meta.charset') !== undefined
   )
 })
 const add_attribute_disabled = computed(() => {
@@ -343,6 +371,31 @@ const addTitle = () => {
       if (project.value.insertNode('head', 'title', 'title')) {
         const title = project.value.find('title')
         title.type = 'title'
+        state.value.work_panel = ''
+        setTimeout(() => {
+          state.value.work_panel = 'PROJECT'
+        }, 10)
+      } else {
+        notify({
+          type: 'error',
+          title: 'Error',
+          text: 'You cannot add the attribute!',
+        })
+      }
+    }
+  }
+}
+
+const addMetaCharset = () => {
+  if (state.value.current_element === 'head') {
+    const meta = project.value.find('meta.charset')
+    if (meta === undefined) {
+      if (project.value.insertNode('head', 'meta.charset', 'meta.charset')) {
+        const meta = project.value.find('meta.charset')
+        meta.type = 'meta'
+        var obj = {}
+        obj['charset'] = 'utf-8'
+        meta.attributes = { ...meta.attributes, ...obj }
         state.value.work_panel = ''
         setTimeout(() => {
           state.value.work_panel = 'PROJECT'
