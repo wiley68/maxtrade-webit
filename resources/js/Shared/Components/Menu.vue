@@ -199,10 +199,10 @@
       </ul>
     </div>
     <div class="w-1/3 flex flex-col">
-      <div class="w-full text-sm font-medium text-gray-600 text-center">
-        {{ project.find('project').value }} -
-        <span class="text-gray-400"
-          >Maxtrade Webit [{{ $page.props.auth.user.name }}]</span
+      <div class="w-full text-sm text-gray-600 text-center">
+        <span class="font-medium">{{ project.find('project').value }}</span>
+        <span class="text-gray-400">
+          - Maxtrade Webit [{{ $page.props.auth.user.name }}]</span
         >
       </div>
       <div class="w-full text-xs text-gray-500 text-center truncate">
