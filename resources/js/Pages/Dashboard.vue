@@ -64,7 +64,9 @@
         </div>
         <div class="bg-gray-50 flex-grow flex flex-col text-sm pt-1">
           <div v-if="project.root.value.length !== 0" class="flex-grow px-1">
-            <div class="flex items-start w-full space-x-1">
+            <div
+              class="flex items-start w-full space-x-1 text-base border-b border-dotted border-gray-300 mb-1.5"
+            >
               <div class="font-medium w-20 flex-none">Name:</div>
               <div class="flex-grow font-medium text-sky-600">
                 {{ project.root.value }}
@@ -100,7 +102,7 @@
               </div>
             </div>
             <div
-              class="flex justify-center items-center border border-gray-200 mt-2 rounded h-64 shadow-lg bg-white"
+              class="flex justify-center items-center border border-gray-200 mt-3 rounded h-64 shadow-lg bg-white"
             >
               project
             </div>
