@@ -111,6 +111,18 @@
               </svg>
               <span class="ml-1">head</span>
             </button>
+            <button
+              @click.stop="addTitle()"
+              :disabled="add_title_disabled"
+              type="button"
+              :class="add_title_disabled ? 'text-gray-300' : 'text-gray-600'"
+              class="inline-flex w-full px-1 py-0.5 border border-gray-300 shadow-sm text-xs rounded bg-white hover:bg-gray-50 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+            >
+              <svg class="w-4 h-4" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M5,4V7H10.5V19H13.5V7H19V4H5Z" />
+              </svg>
+              <span class="ml-1">title</span>
+            </button>
           </div>
           <div v-if="state.library === 'attributes'">
             <button
@@ -217,6 +229,11 @@ const add_head_disabled = computed(() => {
     state.value.current_element === '' || state.value.current_element !== 'html'
   )
 })
+const add_title_disabled = computed(() => {
+  return (
+    state.value.current_element === '' || state.value.current_element !== 'head'
+  )
+})
 const add_attribute_disabled = computed(() => {
   return (
     state.value.current_element === '' ||
@@ -304,6 +321,28 @@ const addHead = () => {
       if (project.value.insertNode('html', 'head', 'head')) {
         const head = project.value.find('head')
         head.type = 'head'
+        state.value.work_panel = ''
+        setTimeout(() => {
+          state.value.work_panel = 'PROJECT'
+        }, 10)
+      } else {
+        notify({
+          type: 'error',
+          title: 'Error',
+          text: 'You cannot add the attribute!',
+        })
+      }
+    }
+  }
+}
+
+const addTitle = () => {
+  if (state.value.current_element === 'head') {
+    const title = project.value.find('title')
+    if (title === undefined) {
+      if (project.value.insertNode('head', 'title', 'title')) {
+        const title = project.value.find('title')
+        title.type = 'title'
         state.value.work_panel = ''
         setTimeout(() => {
           state.value.work_panel = 'PROJECT'
