@@ -83,17 +83,9 @@
           <div v-if="state.library === 'html5'">
             <button
               @click.stop="addHtml()"
-              :disabled="
-                state.current_element !== 'project' &&
-                project.find('html') === undefined
-              "
+              :disabled="add_html_disabled"
               type="button"
-              :class="
-                state.current_element === 'project' &&
-                project.find('html') === undefined
-                  ? 'text-gray-600'
-                  : 'text-gray-300'
-              "
+              :class="add_html_disabled ? 'text-gray-300' : 'text-gray-600'"
               class="inline-flex w-full px-1 py-0.5 border border-gray-300 shadow-sm text-xs rounded bg-white hover:bg-gray-50 focus:outline-none focus:ring-1 focus:ring-indigo-500"
             >
               <svg class="w-4 h-4" viewBox="0 0 24 24">
@@ -108,12 +100,10 @@
           <div v-if="state.library === 'attributes'">
             <button
               @click.stop="addAttrLang()"
-              :disabled="state.current_element === 'project'"
+              :disabled="add_attribute_disabled"
               type="button"
               :class="
-                state.current_element !== 'project'
-                  ? 'text-gray-600'
-                  : 'text-gray-300'
+                add_attribute_disabled ? 'text-gray-300' : 'text-gray-600'
               "
               class="inline-flex w-full px-1 py-0.5 border border-gray-300 shadow-sm text-xs rounded bg-white hover:bg-gray-50 focus:outline-none focus:ring-1 focus:ring-indigo-500"
             >
@@ -192,7 +182,7 @@
 </template>
 
 <script setup>
-import { inject, onMounted, ref } from 'vue'
+import { computed, inject, onMounted, ref } from 'vue'
 import TreeMenu from '@/Components/TreeMenu.vue'
 
 const state = inject('state')
@@ -200,6 +190,19 @@ const project = inject('project')
 const libraries = ref(null)
 const elements = ref(null)
 const separator = ref(null)
+
+const add_html_disabled = computed(() => {
+  return (
+    state.value.current_element !== 'project' ||
+    project.value.find('html') !== undefined
+  )
+})
+const add_attribute_disabled = computed(() => {
+  return (
+    state.value.current_element === '' ||
+    state.value.current_element === 'project'
+  )
+})
 
 function dragElement(element) {
   var md
