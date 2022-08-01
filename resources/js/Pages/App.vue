@@ -108,6 +108,7 @@ import { Inertia } from '@inertiajs/inertia'
 import ModalBlank from '@/Components/ModalBlank.vue'
 import { Tree } from '@/Components/project'
 import JsonViewer from 'vue-json-viewer'
+import { notify } from '@kyvg/vue3-notification'
 
 const state = inject('state')
 const project = inject('project')
@@ -142,7 +143,11 @@ const saveProject = () => {
   })
   form.post('/project/save', {
     onSuccess: () => {
-      alert('You have successfully saved your changes.')
+      notify({
+        type: 'success',
+        title: 'Message',
+        text: 'You have successfully saved your changes.',
+      })
     },
   })
 }
