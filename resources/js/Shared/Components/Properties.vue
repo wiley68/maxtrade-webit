@@ -142,7 +142,8 @@
               state.current_element === 'html' ||
               state.current_element === 'head' ||
               state.current_element === 'title' ||
-              element.type === 'meta'
+              element.type === 'meta' ||
+              element.type === 'link'
             "
             class="ring-0 focus:ring-0 focus:outline-none w-full px-1 py-0 text-sm rounded-sm border border-gray-400 focus:border-sky-600 disabled:border-gray-400 hover:border-sky-600"
             v-model="element.type"
@@ -152,6 +153,7 @@
             <option value="head">HEAD Tag</option>
             <option value="title">TITLE Tag</option>
             <option value="meta">META Tag</option>
+            <option value="link">LINK Tag</option>
           </select>
         </div>
         <div v-if="element.type !== 'project'" class="flex flex-col w-full">
@@ -218,7 +220,7 @@
               <input
                 v-model="attr_value"
                 type="text"
-                maxlength="45"
+                maxlength="245"
                 class="ring-0 focus:ring-0 focus:outline-none w-full px-1 py-0 text-sm rounded-sm border border-gray-400 focus:border-sky-600 hover:border-sky-600"
               />
             </div>

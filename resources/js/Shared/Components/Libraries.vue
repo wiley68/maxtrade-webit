@@ -216,6 +216,43 @@
             <span class="ml-1">add</span>
           </button>
         </div>
+        <button
+          @click.stop="custom_link_div = !custom_link_div"
+          :disabled="add_link_disabled"
+          type="button"
+          :class="add_link_disabled ? 'text-gray-300' : 'text-gray-600'"
+          class="inline-flex w-full px-1 py-0.5 border border-gray-300 shadow-sm text-xs rounded bg-white hover:bg-gray-50 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+        >
+          <svg class="w-4 h-4 flex-none" viewBox="0 0 24 24">
+            <path
+              fill="currentColor"
+              d="M10.59,13.41C11,13.8 11,14.44 10.59,14.83C10.2,15.22 9.56,15.22 9.17,14.83C7.22,12.88 7.22,9.71 9.17,7.76V7.76L12.71,4.22C14.66,2.27 17.83,2.27 19.78,4.22C21.73,6.17 21.73,9.34 19.78,11.29L18.29,12.78C18.3,11.96 18.17,11.14 17.89,10.36L18.36,9.88C19.54,8.71 19.54,6.81 18.36,5.64C17.19,4.46 15.29,4.46 14.12,5.64L10.59,9.17C9.41,10.34 9.41,12.24 10.59,13.41M13.41,9.17C13.8,8.78 14.44,8.78 14.83,9.17C16.78,11.12 16.78,14.29 14.83,16.24V16.24L11.29,19.78C9.34,21.73 6.17,21.73 4.22,19.78C2.27,17.83 2.27,14.66 4.22,12.71L5.71,11.22C5.7,12.04 5.83,12.86 6.11,13.65L5.64,14.12C4.46,15.29 4.46,17.19 5.64,18.36C6.81,19.54 8.71,19.54 9.88,18.36L13.41,14.83C14.59,13.66 14.59,11.76 13.41,10.59C13,10.2 13,9.56 13.41,9.17Z"
+            />
+          </svg>
+          <span class="ml-1">link</span>
+        </button>
+        <div v-if="custom_link_div" class="flex items-center w-full">
+          <input
+            type="text"
+            v-model="custom_link_id"
+            placeholder="link id ..."
+            class="ring-0 focus:ring-0 focus:outline-none w-full px-1 py-0 text-sm rounded-sm border border-gray-400 focus:border-sky-600 hover:border-sky-600"
+          />
+          <button
+            @click.stop="addLink()"
+            type="button"
+            :class="add_link_disabled ? 'text-gray-300' : 'text-gray-600'"
+            class="ml-1 inline-flex px-1 py-0.5 border border-gray-300 shadow-sm text-xs rounded bg-white hover:bg-gray-50 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+          >
+            <svg class="w-4 h-4 flex-none" viewBox="0 0 24 24">
+              <path
+                fill="currentColor"
+                d="M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M13,7H11V11H7V13H11V17H13V13H17V11H13V7Z"
+              />
+            </svg>
+            <span class="ml-1">add</span>
+          </button>
+        </div>
       </div>
       <div v-if="state.library === 'attributes'">
         <button
@@ -246,6 +283,8 @@ const state = inject('state')
 const project = inject('project')
 const custom_meta_div = ref(false)
 const custom_meta_id = ref('')
+const custom_link_div = ref(false)
+const custom_link_id = ref('')
 
 const props = defineProps({
   libraries: Object,
@@ -310,6 +349,12 @@ const add_metakeywords_disabled = computed(() => {
 })
 
 const add_meta_disabled = computed(() => {
+  return (
+    state.value.current_element === '' || state.value.current_element !== 'head'
+  )
+})
+
+const add_link_disabled = computed(() => {
   return (
     state.value.current_element === '' || state.value.current_element !== 'head'
   )
@@ -456,6 +501,57 @@ const addMeta = (meta_id) => {
         })
       }
     }
+  }
+}
+
+const addLink = () => {
+  if (custom_link_id.value.length > 0) {
+    if (project.value.find(custom_link_id.value) === undefined) {
+      if (state.value.current_element === 'head') {
+        if (
+          project.value.insertNode(
+            'head',
+            custom_link_id.value,
+            'link.' + custom_link_id.value
+          )
+        ) {
+          const link = project.value.find(custom_link_id.value)
+          link.type = 'link'
+          var obj = {}
+          obj['href'] = ''
+          obj['rel'] = ''
+          obj['type'] = ''
+          link.attributes = { ...link.attributes, ...obj }
+          custom_link_id.value = ''
+          custom_link_div.value = false
+          state.value.work_panel = ''
+          setTimeout(() => {
+            state.value.work_panel = 'PROJECT'
+          }, 10)
+        } else {
+          notify({
+            type: 'error',
+            title: 'Error',
+            text: 'You cannot add the attribute!',
+          })
+        }
+      }
+    } else {
+      notify({
+        type: 'error',
+        title: 'Error',
+        text:
+          'The link id ("' +
+          custom_link_id.value +
+          '") is already used in your project. Please choose another id!',
+      })
+    }
+  } else {
+    notify({
+      type: 'error',
+      title: 'Error',
+      text: 'You must enter a link id!',
+    })
   }
 }
 
