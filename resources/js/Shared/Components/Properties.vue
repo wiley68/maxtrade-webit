@@ -107,15 +107,10 @@
             </svg>
           </button>
         </div>
-        <div class="flex flex-col w-full">
-          <div class="text-sm font-light">Id:</div>
-          <input
-            type="text"
-            maxlength="45"
-            v-model="element.key"
-            @keydown="checkKeyDownAlphaNumeric($event)"
-            class="ring-0 focus:ring-0 focus:outline-none w-full px-1 py-0 text-sm rounded-sm border border-gray-400 focus:border-sky-600 hover:border-sky-600"
-          />
+        <div class="flex w-full">
+          <div class="text-sm font-light">
+            Id:<span class="font-medium ml-1">{{ element.key }}</span>
+          </div>
         </div>
         <div class="flex flex-col w-full">
           <div class="text-sm font-light">Name:</div>
@@ -142,7 +137,14 @@
         <div class="flex flex-col w-full">
           <div class="text-sm font-light">Type:</div>
           <select
-            class="ring-0 focus:ring-0 focus:outline-none w-full px-1 py-0 text-sm rounded-sm border border-gray-400 focus:border-sky-600 hover:border-sky-600"
+            :disabled="
+              state.current_element === 'project' ||
+              state.current_element === 'html' ||
+              state.current_element === 'head' ||
+              state.current_element === 'title' ||
+              element.type === 'meta'
+            "
+            class="ring-0 focus:ring-0 focus:outline-none w-full px-1 py-0 text-sm rounded-sm border border-gray-400 focus:border-sky-600 disabled:border-gray-400 hover:border-sky-600"
             v-model="element.type"
           >
             <option value="project">Root Project</option>
@@ -258,7 +260,7 @@
             :key="`${key}-${index}`"
             @click.stop="changeAttribute(key, value)"
           >
-            {{ key }}={{ value }}
+            "{{ key }}"="{{ value }}"
           </button>
         </div>
         <div

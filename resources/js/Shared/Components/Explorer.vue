@@ -124,7 +124,7 @@
               <span class="ml-1">title</span>
             </button>
             <button
-              @click.stop="addMetaCharset()"
+              @click.stop="addMeta('charset')"
               :disabled="add_metacharset_disabled"
               type="button"
               :class="
@@ -141,7 +141,7 @@
               <span class="ml-1">meta.charset</span>
             </button>
             <button
-              @click.stop="addMetaViewport()"
+              @click.stop="addMeta('viewport')"
               :disabled="add_metaviewport_disabled"
               type="button"
               :class="
@@ -276,14 +276,14 @@ const add_metacharset_disabled = computed(() => {
   return (
     state.value.current_element === '' ||
     state.value.current_element !== 'head' ||
-    project.value.find('meta.charset') !== undefined
+    project.value.find('charset') !== undefined
   )
 })
 const add_metaviewport_disabled = computed(() => {
   return (
     state.value.current_element === '' ||
     state.value.current_element !== 'head' ||
-    project.value.find('meta.viewport') !== undefined
+    project.value.find('viewport') !== undefined
   )
 })
 const add_attribute_disabled = computed(() => {
@@ -410,16 +410,27 @@ const addTitle = () => {
   }
 }
 
-const addMetaCharset = () => {
+const addMeta = (meta_id) => {
   if (state.value.current_element === 'head') {
-    const meta = project.value.find('meta.charset')
+    const meta = project.value.find(meta_id)
     if (meta === undefined) {
-      if (project.value.insertNode('head', 'meta.charset', 'meta.charset')) {
-        const meta = project.value.find('meta.charset')
+      if (project.value.insertNode('head', meta_id, 'meta.' + meta_id)) {
+        const meta = project.value.find(meta_id)
         meta.type = 'meta'
         var obj = {}
-        obj['charset'] = 'utf-8'
-        meta.attributes = { ...meta.attributes, ...obj }
+        switch (meta_id) {
+          case 'charset':
+            obj[meta_id] = 'utf-8'
+            meta.attributes = { ...meta.attributes, ...obj }
+            break
+          case 'viewport':
+            obj['name'] = meta_id
+            obj['content'] = 'width=device-width, initial-scale=1'
+            meta.attributes = { ...meta.attributes, ...obj }
+            break
+          default:
+            break
+        }
         state.value.work_panel = ''
         setTimeout(() => {
           state.value.work_panel = 'PROJECT'
