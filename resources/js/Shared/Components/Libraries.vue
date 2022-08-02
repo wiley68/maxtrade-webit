@@ -179,6 +179,43 @@
           </svg>
           <span class="ml-1">meta.keywords</span>
         </button>
+        <button
+          @click.stop="custom_meta_div = !custom_meta_div"
+          :disabled="add_meta_disabled"
+          type="button"
+          :class="add_meta_disabled ? 'text-gray-300' : 'text-gray-600'"
+          class="inline-flex w-full px-1 py-0.5 border border-gray-300 shadow-sm text-xs rounded bg-white hover:bg-gray-50 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+        >
+          <svg class="w-4 h-4" viewBox="0 0 24 24">
+            <path
+              fill="currentColor"
+              d="M14,12H15.5V14.82L17.94,16.23L17.19,17.53L14,15.69V12M4,2H18A2,2 0 0,1 20,4V10.1C21.24,11.36 22,13.09 22,15A7,7 0 0,1 15,22C13.09,22 11.36,21.24 10.1,20H4A2,2 0 0,1 2,18V4A2,2 0 0,1 4,2M4,15V18H8.67C8.24,17.09 8,16.07 8,15H4M4,8H10V5H4V8M18,8V5H12V8H18M4,13H8.29C8.63,11.85 9.26,10.82 10.1,10H4V13M15,10.15A4.85,4.85 0 0,0 10.15,15C10.15,17.68 12.32,19.85 15,19.85A4.85,4.85 0 0,0 19.85,15C19.85,12.32 17.68,10.15 15,10.15Z"
+            />
+          </svg>
+          <span class="ml-1">meta</span>
+        </button>
+        <div v-if="custom_meta_div" class="flex items-center w-full">
+          <input
+            type="text"
+            v-model="custom_meta_id"
+            placeholder="meta id ..."
+            class="ring-0 focus:ring-0 focus:outline-none w-full px-1 py-0 text-sm rounded-sm border border-gray-400 focus:border-sky-600 hover:border-sky-600"
+          />
+          <button
+            @click.stop="addMetaCustom()"
+            type="button"
+            :class="add_meta_disabled ? 'text-gray-300' : 'text-gray-600'"
+            class="ml-1 inline-flex px-1 py-0.5 border border-gray-300 shadow-sm text-xs rounded bg-white hover:bg-gray-50 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+          >
+            <svg class="w-4 h-4 flex-none" viewBox="0 0 24 24">
+              <path
+                fill="currentColor"
+                d="M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M13,7H11V11H7V13H11V17H13V13H17V11H13V7Z"
+              />
+            </svg>
+            <span class="ml-1">add</span>
+          </button>
+        </div>
       </div>
       <div v-if="state.library === 'attributes'">
         <button
@@ -202,10 +239,13 @@
 </template>
 
 <script setup>
-import { inject, computed } from 'vue'
+import { inject, computed, ref } from 'vue'
+import { notify } from '@kyvg/vue3-notification'
 
 const state = inject('state')
 const project = inject('project')
+const custom_meta_div = ref(false)
+const custom_meta_id = ref('')
 
 const props = defineProps({
   libraries: Object,
@@ -266,6 +306,12 @@ const add_metakeywords_disabled = computed(() => {
     state.value.current_element === '' ||
     state.value.current_element !== 'head' ||
     project.value.find('keywords') !== undefined
+  )
+})
+
+const add_meta_disabled = computed(() => {
+  return (
+    state.value.current_element === '' || state.value.current_element !== 'head'
   )
 })
 
@@ -342,7 +388,32 @@ const addTitle = () => {
   }
 }
 
+const addMetaCustom = () => {
+  if (custom_meta_id.value.length > 0) {
+    if (project.value.find(custom_meta_id.value) === undefined) {
+      addMeta(custom_meta_id.value)
+    } else {
+      notify({
+        type: 'error',
+        title: 'Error',
+        text:
+          'The meta id ("' +
+          custom_meta_id.value +
+          '") is already used in your project. Please choose another id!',
+      })
+    }
+  } else {
+    notify({
+      type: 'error',
+      title: 'Error',
+      text: 'You must enter a meta id!',
+    })
+  }
+}
+
 const addMeta = (meta_id) => {
+  custom_meta_id.value = ''
+  custom_meta_div.value = false
   if (state.value.current_element === 'head') {
     const meta = project.value.find(meta_id)
     if (meta === undefined) {
