@@ -36,7 +36,7 @@ class AppController extends Controller
         $project->save();
         $project_name = 'Untitled_' . $project->id;
         $project->name = $project_name;
-        $project->project = '{"root":{"key":"project","value":"'.$project_name.'","description":"","parent":null,"type":"project","innerText":"","innerHTML":"","attributes":[],"children":[]}}';
+        $project->project = '{"root":{"key":"project","value":"' . $project_name . '","description":"","parent":null,"type":"project","innerText":"","innerHTML":"","attributes":[],"children":[]}}';
         $project->save();
 
         return back();
@@ -72,7 +72,6 @@ class AppController extends Controller
         $project = Project::find($request->id);
         $project->name = $request->name;
         $project->user_id = $request->user_id;
-        $project->created_at = $request->created_at;
         $project->updated_at = $request->updated_at;
         $project->type = $request->type;
         $project->project = $request->project;
